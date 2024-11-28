@@ -1,35 +1,57 @@
-const iconMenu = document.querySelector(".icon-menu");
-const navLinks = document.querySelector(".nav-links");
-const iconMoon = document.querySelector(".icon-moon");
-const captiveTitle = document.querySelector(".captive-title");
+// Hamburger Menu
+const navMenu = document.querySelector(".nav-menu");
+const navLink = document.querySelectorAll(".nav-link");
+const iconMenu = document.querySelector("#icon-menu");
+const shopBtn = document.querySelector("#shop-btn");
 
 iconMenu.addEventListener("click", (e) => {
-  const currentValue = e.target.getAttribute("name");
-  const newValue = currentValue === "menu" ? "close" : "menu";
-  e.target.setAttribute("name", newValue);
+  e.preventDefault();
+  navMenu.classList.toggle("left-[0]");
+  // iconMenu.classList.toggle("ri-close-large-line");
 
-  if (newValue == "close") {
-    navLinks.classList.remove("hidden");
-    navLinks.classList.add("block");
+  const currentValue = e.target.getAttribute("class");
+  const newValue =
+    currentValue === "ri-menu-line" ? "ri-close-large-line" : "ri-menu-line";
+  e.target.setAttribute("class", newValue);
+
+  if (newValue == "ri-close-large-line") {
+    shopBtn.classList.remove("hidden");
+    shopBtn.classList.add("flex");
   } else {
-    navLinks.classList.add("hidden");
-    navLinks.classList.remove("block");
+    shopBtn.classList.add("hidden");
+    shopBtn.classList.remove("flex");
   }
 });
 
-iconMoon.addEventListener("click", (e) => {
-  const currentValue = e.target.getAttribute("name");
-  const newValue = currentValue === "moon" ? "sunny" : "moon";
-  e.target.setAttribute("name", newValue);
+navLink.forEach((link) => {
+  link.addEventListener("click", () => {
+    navMenu.classList.toggle("left-[0]");
 
-  // if(newValue == 'close') {
-  //   navLinks.classList.remove('hidden');
-  //   navLinks.classList.add('block');
-  // }else{
-  //   navLinks.classList.add('hidden');
-  //   navLinks.classList.remove('block');
-  // }
+    const currentValue = iconMenu.getAttribute("class");
+    const newValue =
+      currentValue === "ri-menu-line" ? "ri-close-large-line" : "ri-menu-line";
+    iconMenu.setAttribute("class", newValue);
+
+    if (newValue == "ri-close-large-line") {
+      shopBtn.classList.remove("hidden");
+      shopBtn.classList.add("flex");
+    } else {
+      shopBtn.classList.add("hidden");
+      shopBtn.classList.remove("flex");
+    }
+  });
 });
+
+//  Dark mode
+const iconDark = document.querySelector("#icon-dark");
+
+iconDark.addEventListener("click", (e) => {
+  e.preventDefault();
+  iconDark.classList.toggle("ri-sun-fill");
+});
+
+// Title to Span
+const captiveTitle = document.querySelector(".captive-title");
 
 function titleToSpan(someTextToSpan) {
   const tab = someTextToSpan.textContent.trim().split("");
@@ -96,111 +118,129 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-zignnnBtn.addEventListener('mouseover', () => {
-  gsap.to(
-    emoji1,
-    {
-      visibility : "visible",
-      scale: 4,
-      duration: 2,
-      x: 350,
-      y: -50,
-      rotation: 360,
-      opacity: 0,
-      display: "inline-block",
-    }
-  );
-  gsap.to(
-    emoji2,
-    {
-      visibility : "visible",
-      scale: 4,
-      duration: 2,
-      x: 400,
-      rotation: 360,
-      opacity: 0,
-      display: "inline-block",
-    }
-  );
-  gsap.to(
-    emoji3,
-    {
-      visibility : "visible",
-      scale: 4,
-      duration: 2,
-      x: 310,
-      y: 50,
-      rotation: 360,
-      opacity: 0,
-      display: "inline-block",
-    }
-  );
+zignnnBtn.addEventListener("mouseover", () => {
+  gsap.to(emoji1, {
+    visibility: "visible",
+    scale: 4,
+    duration: 2,
+    x: 350,
+    y: -50,
+    rotation: 360,
+    opacity: 0,
+    display: "inline-block",
+  });
+  gsap.to(emoji2, {
+    visibility: "visible",
+    scale: 4,
+    duration: 2,
+    x: 400,
+    rotation: 360,
+    opacity: 0,
+    display: "inline-block",
+  });
+  gsap.to(emoji3, {
+    visibility: "visible",
+    scale: 4,
+    duration: 2,
+    x: 310,
+    y: 50,
+    rotation: 360,
+    opacity: 0,
+    display: "inline-block",
+  });
 });
 
-zignnnBtn.addEventListener('mouseleave', () => {
-  gsap.to(
-    emoji1,
-    {
-      visibility : "hidden",
-      scale: 0,
-      x: 0,
-      y: 0,
-      opacity: 1,
-      duration: 1,
-    }
-  );
-  gsap.to(
-    emoji2,
-    {
-      visibility : "hidden",
-      scale: 0,
-      x: 0,
-      y: 0,
-      opacity: 1,
-      duration: 1,
-    }
-  );
-  gsap.to(
-    emoji3,
-    {
-      visibility : "hidden",
-      scale: 0,
-      x: 0,
-      y: 0,
-      opacity: 1,
-      duration: 1,
-      // rotation: 360,
-      // duration: 0.1,
-      // display: "inline-block",
-    }
-  );
-})
+zignnnBtn.addEventListener("mouseleave", () => {
+  gsap.to(emoji1, {
+    visibility: "hidden",
+    scale: 0,
+    x: 0,
+    y: 0,
+    opacity: 1,
+    duration: 1,
+  });
+  gsap.to(emoji2, {
+    visibility: "hidden",
+    scale: 0,
+    x: 0,
+    y: 0,
+    opacity: 1,
+    duration: 1,
+  });
+  gsap.to(emoji3, {
+    visibility: "hidden",
+    scale: 0,
+    x: 0,
+    y: 0,
+    opacity: 1,
+    duration: 1,
+    // rotation: 360,
+    // duration: 0.1,
+    // display: "inline-block",
+  });
+});
 
+// Animation de la section des domaines d'expertise (le defilement vertical)
 gsap.registerPlugin(ScrollTrigger);
 
 // let tl = gsap.timeline({
 //   scrollTrigger: {
-
 let tl = gsap.timeline();
-tl.to(
-  ".domain", {
-  scrollTrigger: {
-    trigger: '.expertise-domains',
-    pin: true, // pin the trigger element while active
-    start: 'center center', // when the top of the trigger hits the top of the viewport
-    // end: '+=2000', // end after scrolling 500px beyond the start
-    scrub: 2,
-  },
-  x: -1910,
-});
 
-// tl.to(
-//   "header-nav", {
+function verticalPinScroll() {
+  gsap.timeline().to(".expertise-domains", {
+    scrollTrigger: {
+      trigger: ".expertises",
+      pin: true, // pin the trigger element while active
+      start: "center center", // when the top of the trigger hits the top of the viewport
+      end: "+=2000", // end after scrolling 500px beyond the start
+      scrub: 2, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
+    },
+    x: -1910,
+    // ease: "bounce.out",
+  });
+}
+
+// tl.to(".domain", {
 //   scrollTrigger: {
-//     trigger: '.expertise-domains',
+//     trigger: ".expertise-domains",
 //     pin: true, // pin the trigger element while active
-//     start: 'top top', // when the top of the trigger hits the top of the viewport
-//     end: '+=2000', // end after scrolling 500px beyond the start
-//     scrub: 1, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
-//   }, 
+//     start: "center center", // when the top of the trigger hits the top of the viewport
+//     end: "+=2000", // end after scrolling 500px beyond the start
+//     scrub: 2, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
+//   },
+//   x: -1910,
 // });
+
+// Animation du loader
+const preLoader = document.querySelector("#pre-loader");
+const principalContent = document.querySelector("#principal-content");
+
+tl.to(".loader-bar", {
+  width: "100%",
+  duration: 1,
+  ease: "power1.in",
+})
+  .to(".loader-percentage", {
+    textContent: "100%",
+    duration: 1,
+    snap: { textContent: 1 },
+  })
+  .to("#pre-loader", {
+    opacity: 0,
+    duration: 0.8,
+    onComplete: () => {
+      preLoader.style.display = "none";
+      principalContent.classList.remove("hidden");
+
+      // Animation d'entree du contenu
+      gsap.from(principalContent, {
+        opacity: 0,
+        // y: 50,
+        duration: 1,
+        onComplete: () => {
+          verticalPinScroll();
+        },
+      });
+    },
+  });

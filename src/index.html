@@ -8,35 +8,34 @@
       href="../img/ZignnnIt-favicon.svg"
       type="image/png"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.4.0/remixicon.min.css"
+    />
     <link href="./output.css" rel="stylesheet" />
     <title>ZignnnIt</title>
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
   </head>
-  <body class="bg-gray-100 h-screen">
+  <body class="h-screen m-0 p-0">
     <!-- Preloader -->
-    <div id="preloader">
-      <div class="loader-container">
-        <div class="loader-bar"></div>
-        <div class="loader-percentage">0%</div>
+    <!-- <div id="pre-loader" class="fixed top-0 left-0 w-[100%] h-[100%] bg-[#000] flex justify-center items-center z-[9999]">
+      <div class="loader-container text-center text-white">
+        <div class="loader-bar w-80 h-3 bg-[#F7B700] relative overflow-hidden rounded-xl after:content-[''] after:absolute after:left-0 after:top-0 after:h-[100%] after:w-0 after:bg-white after:rounded-xl"></div>
+        <div class="loader-percentage mt-3 text-7xl">0%</div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Content -->
-    <div>
+    <div id="principal-content" class="">
+      <!-- class="hidden" -->
+
       <!-- Navbar -->
       <header
-        class="bg-white shadow-md w-auto header-nav z-10 fixed top-0 left-0 right-0"
+        id="navbar"
+        class="bg-white fixed shadow-md w-full z-50 top-0 left-0 header-nav"
       >
         <nav
-          class="flex items-center justify-between text-lg w-[90%] px-40 mx-auto"
+          class="container flex items-center justify-between text-lg h-20 sm:h-24"
         >
           <div>
             <svg
@@ -103,60 +102,75 @@
             </svg>
           </div>
           <div
-            class="nav-links md:static md:min-h-fit absolute bg-white min-h-[35vh] top-24 hidden md:w-auto w-full left-0 md:flex items-center px-7 ml-auto"
+            class="nav-menu absolute top-0 left-[-100%] bg-white/95 min-h-[80vh] w-full flex items-center justify-center backdrop-blur-sm duration-300 overflow-hidden xl:static xl:min-h-fit xl:w-auto"
           >
-            <ul class="flex md:flex-row flex-col md:items-center gap-3">
+            <ul class="flex flex-col items-center gap-8 xl:flex-row">
               <li>
-                <a href="#" class="hover:bg-[#F6EEDD] px-3 py-3 rounded-lg"
+                <a
+                  href="#home"
+                  class="nav-link hover:bg-[#F6EEDD] p-3 rounded-lg"
                   >Home</a
                 >
               </li>
               <li>
                 <a
                   href="#services"
-                  class="hover:bg-[#F6EEDD] px-3 py-3 rounded-lg"
+                  class="nav-link hover:bg-[#F6EEDD] p-3 rounded-lg"
                   >Services</a
                 >
               </li>
               <li>
-                <a href="#" class="hover:bg-[#F6EEDD] px-3 py-3 rounded-lg"
+                <a
+                  href="#projects"
+                  class="nav-link hover:bg-[#F6EEDD] p-3 rounded-lg"
                   >Projects</a
                 >
               </li>
               <li>
                 <a
                   href="#about-us"
-                  class="hover:bg-[#F6EEDD] px-3 py-3 rounded-lg"
+                  class="nav-link hover:bg-[#F6EEDD] p-3 rounded-lg"
                   >About</a
                 >
               </li>
               <li>
-                <a href="#" class="hover:bg-[#F6EEDD] px-3 py-3 rounded-lg"
+                <a href="#" class="nav-link hover:bg-[#F6EEDD] p-3 rounded-lg"
                   >Pricing</a
                 >
               </li>
               <li>
-                <a href="#" class="hover:bg-[#F6EEDD] px-3 py-3 rounded-lg"
+                <a href="#" class="nav-link hover:bg-[#F6EEDD] p-3 rounded-lg"
                   >Contact</a
                 >
               </li>
             </ul>
+
+            <!-- Ajouter quelques elements graphiques -->
+            <!-- <div class="absolute bottom-0 -rigth-10 opacity-90 lg:hidden">
+              <img src="" alt="icon_photoshop" class="w-32" />
+            </div>
+
+            <div class="absolute -top-5 -left-5-10 rotate-90 opacity-90 lg:hidden">
+              <img src="" alt="icon_illustrator" class="w-32" />
+            </div> -->
           </div>
-          <div class="flex items-center gap-4">
-            <ion-icon
-              name="moon"
-              class="icon-moon text-4xl cursor-pointer"
-            ></ion-icon>
-            <button
-              type="button"
-              class="bg-[#F7B700] text-[#202020] px-10 py-3 font-bold rounded-lg hover:bg-[#E9AD00]"
-            >
-              Shop
-            </button>
-            <ion-icon
-              name="menu"
-              class="icon-menu text-4xl cursor-pointer md:hidden"
-            ></ion-icon>
+          <div class="flex gap-4 items-center">
+            <div class="text-xl sm:text-3xl cursor-pointer z-50">
+              <i class="ri-moon-fill" id="icon-dark"></i>
+            </div>
+
+            <div class="hidden lg:flex z-50" id="shop-btn">
+              <button
+                type="button"
+                class="bg-[#F7B700] text-[#202020] px-5 py-3 font-bold rounded-lg hover:bg-[#E9AD00]"
+              >
+                Shop
+              </button>
+            </div>
+
+            <div class="text-xl sm:text-3xl cursor-pointer z-50 xl:hidden">
+              <i class="ri-menu-line" id="icon-menu"></i>
+            </div>
           </div>
         </nav>
       </header>
@@ -211,7 +225,10 @@
       </section>
 
       <!--Expertise -->
-      <div class="bg-white py-24 sm:py-32 overflow-hidden" id="services">
+      <div
+        class="bg-white py-24 sm:py-32 overflow-hidden expertises"
+        id="services"
+      >
         <div class="mx-auto px-6 lg:px-40 w-[90%]">
           <h2
             class="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl"
