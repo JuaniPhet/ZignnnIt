@@ -1691,11 +1691,6 @@ body{
   filter: none;
 }
 
-.focus\:bg-\[\#F7B700\]:focus{
-  --tw-bg-opacity: 1;
-  background-color: rgb(247 183 0 / var(--tw-bg-opacity, 1));
-}
-
 .focus\:text-opacity-80:focus{
   --tw-text-opacity: 0.8;
 }
@@ -1714,10 +1709,6 @@ body{
 
 .focus\:-outline-offset-2:focus{
   outline-offset: -2px;
-}
-
-.focus\:outline-indigo-600:focus{
-  outline-color: #4f46e5;
 }
 
 .focus\:outline-amber-500:focus{
@@ -1761,10 +1752,6 @@ body{
 
 .has-\[input\:focus-within\]\:-outline-offset-2:has(input:focus-within){
   outline-offset: -2px;
-}
-
-.has-\[input\:focus-within\]\:outline-indigo-600:has(input:focus-within){
-  outline-color: #4f46e5;
 }
 
 .has-\[input\:focus-within\]\:outline-amber-500:has(input:focus-within){
