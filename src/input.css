@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 body {
-    @apply bg-gray-100 text-[#202020] font-Urbanist tracking-wider;
+    @apply bg-white text-[#202020] font-Urbanist tracking-wider;
 }
 
 .nav-link {
