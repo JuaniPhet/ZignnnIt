@@ -878,6 +878,10 @@ video {
   height: 100vh;
 }
 
+.h-12{
+  height: 3rem;
+}
+
 .min-h-\[80vh\]{
   min-height: 80vh;
 }
@@ -1181,6 +1185,11 @@ video {
 
 .bg-white\/95{
   background-color: rgb(255 255 255 / 0.95);
+}
+
+.bg-\[\#FFDB8A\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 219 138 / var(--tw-bg-opacity, 1));
 }
 
 .bg-gradient-to-b{
