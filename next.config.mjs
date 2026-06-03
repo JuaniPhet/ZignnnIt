@@ -8,6 +8,7 @@ const nextConfig = {
       },
     ],
   },
-};
+}; // I should remove that unspash exception after removed the unsplash imag e in stats component
 
 export default nextConfig;
+

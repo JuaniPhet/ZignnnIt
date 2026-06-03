@@ -1,10 +1,9 @@
 "use client"
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -54,99 +53,117 @@ const projectsList = [
 ];
 
 export default function Projects() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const scrollSectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const triggerRef = useRef<HTMLDivElement>(null);
+  const scrollTrackRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    if (!scrollSectionRef.current || !containerRef.current) return;
+  useEffect(() => {
+    if (!sectionRef.current || !triggerRef.current || !scrollTrackRef.current) return;
 
-    const scrollSection = scrollSectionRef.current;
-    
-    // Horizontal scroll timeline
-    gsap.to(scrollSection, {
-      x: () => -(scrollSection.scrollWidth - window.innerWidth + 120),
+    const scrollTrack = scrollTrackRef.current;
+
+    // Calculate how far we need to scroll
+    const getScrollAmount = () => {
+      return -(scrollTrack.scrollWidth - window.innerWidth);
+    };
+
+    const tween = gsap.to(scrollTrack, {
+      x: getScrollAmount,
       ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        pin: true,
-        scrub: 1,
-        start: "top top",
-        end: () => `+=${scrollSection.scrollWidth - window.innerWidth + 120}`,
-        invalidateOnRefresh: true,
-      }
     });
-  }, { scope: containerRef });
+
+    const scrollTriggerInstance = ScrollTrigger.create({
+      trigger: triggerRef.current,
+      start: "top top",
+      end: () => `+=${scrollTrack.scrollWidth - window.innerWidth}`,
+      pin: true,
+      animation: tween,
+      scrub: 2,
+      invalidateOnRefresh: true,
+      anticipatePin: 1,
+    });
+
+    return () => {
+      scrollTriggerInstance.kill();
+      tween.kill();
+    };
+  }, []);
 
   return (
-    <div ref={containerRef} className="bg-background pt-24 expertises min-h-screen flex flex-col justify-center overflow-hidden" id="projects">
-      <div className="container mx-auto px-4 w-full mb-10">
-        <h2 className="text-pretty text-4xl font-extralight text-foreground sm:text-5xl">
-          Projects
-        </h2>
-        <p className="mt-2 text-2xl text-muted-foreground">
-          Take a look at missions we&apos;ve successfully completed.
-        </p>
-      </div>
+    <section ref={sectionRef} id="projects">
+      <div ref={triggerRef} className="overflow-hidden">
+        <div className="bg-background pt-24 pb-10 min-h-screen flex flex-col justify-center">
+          <div className="container mx-auto px-4 w-full mb-10">
+            <h2 className="text-pretty text-4xl font-extralight text-foreground sm:text-5xl">
+              Projects
+            </h2>
+            <p className="mt-2 text-2xl text-muted-foreground">
+              Take a look at missions we&apos;ve successfully completed.
+            </p>
+          </div>
 
-      <div 
-        ref={scrollSectionRef} 
-        className="flex px-4 sm:px-10 gap-x-12 w-max items-start expertise-domains pb-10"
-      >
-        {projectsList.map((project, idx) => (
-          <article 
-            key={idx} 
-            className="flex flex-col justify-between domain w-[85vw] sm:w-[500px] md:w-[600px] flex-shrink-0"
+          <div 
+            ref={scrollTrackRef} 
+            className="flex px-4 sm:px-10 gap-x-12 will-change-transform"
+            style={{ width: "max-content" }}
           >
-            <div className="bg-amber-100 dark:bg-amber-950/20 rounded-2xl w-full h-64 sm:h-80 md:h-96 shadow-xl relative overflow-hidden group">
-              <Image 
-                src={project.image} 
-                alt={project.title} 
-                fill 
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-            <div className="mt-6">
-              <div className="flex flex-wrap gap-4 justify-between items-center">
-                <h3 className="text-2xl sm:text-3xl font-semibold text-foreground">
-                  {project.title}
-                </h3>
-                
-                {/* Tools logos */}
-                <div className="flex gap-2 h-8">
-                  {project.tools.map((tool, tIdx) => (
-                    <div key={tIdx} className="h-full relative w-8">
-                      <Image 
-                        src={tool.src} 
-                        alt={tool.alt} 
-                        fill 
-                        className="object-contain dark:brightness-200 dark:contrast-100"
-                      />
+            {projectsList.map((project, idx) => (
+              <article 
+                key={idx} 
+                className="flex flex-col justify-between w-[85vw] sm:w-[500px] md:w-[600px] flex-shrink-0"
+              >
+                <div className="bg-amber-100 dark:bg-amber-950/20 rounded-2xl w-full h-64 sm:h-80 md:h-96 shadow-xl relative overflow-hidden group">
+                  <Image 
+                    src={project.image} 
+                    alt={project.title} 
+                    fill 
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="mt-6">
+                  <div className="flex flex-wrap gap-4 justify-between items-center">
+                    <h3 className="text-2xl sm:text-3xl font-semibold text-foreground">
+                      {project.title}
+                    </h3>
+                    
+                    {/* Tools logos */}
+                    <div className="flex gap-2 h-8">
+                      {project.tools.map((tool, tIdx) => (
+                        <div key={tIdx} className="h-full relative w-8">
+                          <Image 
+                            src={tool.src} 
+                            alt={tool.alt} 
+                            fill 
+                            className="object-contain dark:brightness-200 dark:contrast-100"
+                          />
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
 
-                <div>
-                  <a 
-                    href={project.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
-                    <button 
-                      type="button"
-                      className="bg-primary text-primary-foreground px-5 py-2 font-bold rounded-lg hover:bg-amber-600 transition-colors"
-                    >
-                      Voir plus
-                    </button>
-                  </a>
+                    <div>
+                      <a 
+                        href={project.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                      >
+                        <button 
+                          type="button"
+                          className="bg-primary text-primary-foreground px-5 py-2 font-bold rounded-lg hover:bg-amber-600 transition-colors"
+                        >
+                          Voir plus
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                  <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
+                    {project.description}
+                  </p>
                 </div>
-              </div>
-              <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
-                {project.description}
-              </p>
-            </div>
-          </article>
-        ))}
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
