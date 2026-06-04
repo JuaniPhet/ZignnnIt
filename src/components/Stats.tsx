@@ -29,15 +29,15 @@ export default function Stats() {
                     <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
                         <div className="flex flex-col-reverse gap-1 border-l-2 border-amber-500 pl-4">
                             <dt className="text-lg text-gray-300">Projects delivered</dt>
-                            <dd className="text-5xl sm:text-6xl font-semibold text-white">50+</dd>
+                            <dd className="text-5xl sm:text-6xl font-semibold text-white">60+</dd>
                         </div>
                         <div className="flex flex-col-reverse gap-1 border-l-2 border-amber-500 pl-4">
                             <dt className="text-lg text-gray-300">Happy Clients</dt>
-                            <dd className="text-5xl sm:text-6xl font-semibold text-white">40+</dd>
+                            <dd className="text-5xl sm:text-6xl font-semibold text-white">43+</dd>
                         </div>
                         <div className="flex flex-col-reverse gap-1 border-l-2 border-amber-500 pl-4">
                             <dt className="text-lg text-gray-300">Experience in the field</dt>
-                            <dd className="text-5xl sm:text-6xl font-semibold text-white">5 years</dd>
+                            <dd className="text-5xl sm:text-6xl font-semibold text-white">6 years</dd>
                         </div>
                         <div className="flex flex-col-reverse gap-1 border-l-2 border-amber-500 pl-4">
                             <dt className="text-lg text-gray-300">Creativity guaranteed</dt>

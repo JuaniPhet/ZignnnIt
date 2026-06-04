@@ -26,7 +26,7 @@ export default function Navbar() {
       <nav className="container mx-auto flex items-center justify-between text-lg h-20 sm:h-24 px-4">
         <Link href={pathname === "/" ? "#home" : "/"}>
           <div className="cursor-pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" width="254" height="98" viewBox="0 0 254 98" fill="none" className="w-32 -mt-3 dark:invert">
+            <svg xmlns="http://www.w3.org/2000/svg" width="254" height="98" viewBox="0 0 254 98" fill="none" className="w-32 -mt-3 text-foreground">
               <path d="M0 0H52V30H0V0Z" fill="#F7B700" />
               <path d="M254 51.9727H244.276V72.2255C244.276 74.1032 244.79 75.2656 245.818 75.7127C246.668 76.0704 247.763 76.2492 249.104 76.2492C250.446 76.2492 251.921 75.8915 253.531 75.1762H254V80.1388C252.122 81.1224 250.11 81.6142 247.964 81.6142C241.437 81.6142 238.173 78.6634 238.173 72.762V51.9727H231.802V51.5703L244.276 39.365V46.7418H254V51.9727Z" fill="currentColor" />
               <path d="M218.664 80.9436V34H225.639V80.9436H218.664Z" fill="currentColor" />
@@ -77,9 +77,9 @@ export default function Navbar() {
 
           {/* Shop button */}
           <div className="hidden lg:flex z-50">
-            <button type="button" className="bg-primary text-primary-foreground px-5 py-3 font-bold rounded-lg hover:bg-amber-600 transition-colors">
+            <Link href="/shop" className="bg-primary text-primary-foreground px-5 py-3 font-bold rounded-lg hover:bg-amber-600 transition-colors">
               Shop
-            </button>
+            </Link>
           </div>
 
           {/* Hamburger Menu Icon */}

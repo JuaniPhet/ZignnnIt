@@ -15,6 +15,10 @@ export default function Hero() {
     return { char, isSpace: false, index };
   });
 
+  // Determine which characters are the word "creative" (indices 9-16 in the string)
+  const creativeStart = titleText.indexOf("creative");
+  const creativeEnd = creativeStart + "creative".length;
+
   useGSAP(() => {
     // Captive title letters animation
     gsap.fromTo(
@@ -33,18 +37,38 @@ export default function Hero() {
       }
     );
 
-    // We help you to text animation
-    const tl = gsap.timeline();
-    tl.to(".we-help-you-to", {
-      x: 10,
-      skewX: 1.1,
-      duration: 1,
-      delay: 1.2,
-    }).to(".we-help-you-to", {
-      x: 0,
-      skewX: 0,
-      duration: 1,
+    // Entrance timeline for subtitle, CTA, and illustration
+    const entranceTl = gsap.timeline({ delay: 0.5 });
+
+    entranceTl
+      .fromTo(
+        ".we-help-you-to",
+        { autoAlpha: 0, y: 30 },
+        { autoAlpha: 1, y: 0, duration: 0.8, ease: "power2.out" }
+      )
+      .fromTo(
+        ".hero-cta",
+        { autoAlpha: 0, y: 20 },
+        { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" },
+        "-=0.3"
+      )
+      .fromTo(
+        ".hero-illustration",
+        { autoAlpha: 0, x: 60, scale: 0.95 },
+        { autoAlpha: 1, x: 0, scale: 1, duration: 1, ease: "power2.out" },
+        "-=0.5"
+      );
+
+    // Subtle float animation for the illustration
+    gsap.to(".hero-illustration", {
+      y: -12,
+      duration: 3,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+      delay: 1.5,
     });
+
   }, { scope: containerRef });
 
   const handleCtaMouseEnter = () => {
@@ -119,26 +143,30 @@ export default function Hero() {
 
       <div className="flex flex-col lg:flex-row justify-between items-center container mx-auto w-full px-4 gap-8">
         <div className="flex-1 text-left">
-          <h1 className="text-4xl sm:text-6xl font-bold my-10 text-foreground min-h-[150px] leading-tight">
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold my-10 text-foreground min-h-[150px] leading-[1.1] tracking-tight">
             {characters.map((item) => (
               <span
                 key={item.index}
-                className="captive-letter inline-block"
+                className={`captive-letter inline-block ${
+                  item.index >= creativeStart && item.index < creativeEnd
+                    ? "bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 bg-clip-text text-transparent"
+                    : ""
+                }`}
               >
                 {item.char}
               </span>
             ))}
           </h1>
-          <h2 className="text-xl sm:text-2xl font-medium my-8 text-muted-foreground we-help-you-to leading-relaxed">
+          <h2 className="invisible text-lg sm:text-xl lg:text-2xl font-light my-8 text-muted-foreground we-help-you-to leading-relaxed tracking-wide">
             We craft bespoke digital and visual <br />experiences to{" "}
-            <b className="text-foreground">elevate your business</b>, <br />blending creativity with
+            <b className="text-foreground font-semibold">elevate your business</b>, <br />blending creativity with
             impact.
           </h2>
           <button
             type="button"
             onMouseEnter={handleCtaMouseEnter}
             onMouseLeave={handleCtaMouseLeave}
-            className="bg-primary text-primary-foreground text-lg px-6 py-4 font-bold rounded-lg hover:bg-amber-600 transition-colors my-4 zignnn-btn relative flex items-center gap-2"
+            className="invisible hero-cta bg-primary text-primary-foreground text-base sm:text-lg px-6 py-4 font-bold rounded-lg hover:bg-amber-600 transition-colors my-4 zignnn-btn relative flex items-center gap-2"
           >
             <span>Ready to zignnn your project ? ✒️</span>
             <span className="absolute left-0 top-0 pointer-events-none opacity-0 invisible emoji-1 text-2xl">😄</span>
@@ -146,7 +174,7 @@ export default function Hero() {
             <span className="absolute left-0 top-0 pointer-events-none opacity-0 invisible emoji-3 text-2xl">😃</span>
           </button>
         </div>
-        <div className="w-full lg:w-5/12 max-w-md lg:max-w-none">
+        <div className="invisible hero-illustration w-full lg:w-5/12 max-w-md lg:max-w-none">
           <Image
             src="/img/vector2@4x-8.png"
             alt="computer illustration"
