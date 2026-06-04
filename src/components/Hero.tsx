@@ -7,7 +7,7 @@ import { useGSAP } from "@gsap/react";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleText = "We're a creative Agency";
+  const titleText = "We are a creative Agency";
 
   // Split title text into characters, replacing spaces with non-breaking spaces
   const characters = titleText.split("").map((char, index) => {
@@ -143,24 +143,22 @@ export default function Hero() {
 
       <div className="flex flex-col lg:flex-row justify-between items-center container mx-auto w-full px-4 gap-8">
         <div className="flex-1 text-left">
-          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold my-10 text-foreground min-h-[150px] leading-[1.1] tracking-tight">
+          <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold my-10 text-foreground min-h-[150px] leading-[1.1] tracking-tight">
             {characters.map((item) => (
               <span
                 key={item.index}
-                className={`captive-letter inline-block ${
-                  item.index >= creativeStart && item.index < creativeEnd
-                    ? "bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 bg-clip-text text-transparent"
-                    : ""
-                }`}
+                className={`captive-letter inline-block ${item.index >= creativeStart && item.index < creativeEnd
+                  ? "text-amber-500"
+                  : ""
+                  }`}
               >
                 {item.char}
               </span>
             ))}
           </h1>
           <h2 className="invisible text-lg sm:text-xl lg:text-2xl font-light my-8 text-muted-foreground we-help-you-to leading-relaxed tracking-wide">
-            We craft bespoke digital and visual <br />experiences to{" "}
-            <b className="text-foreground font-semibold">elevate your business</b>, <br />blending creativity with
-            impact.
+            Digital and visual experiences that{" "}
+            <b className="text-foreground font-semibold">elevate your business</b>.
           </h2>
           <button
             type="button"

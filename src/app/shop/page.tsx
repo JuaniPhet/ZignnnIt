@@ -137,7 +137,7 @@ export default function ShopPage() {
           {/* Title */}
           <h1 className="shop-title invisible text-5xl sm:text-7xl lg:text-8xl font-bold text-foreground tracking-tight leading-tight">
             Design
-            <span className="bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 bg-clip-text text-transparent"> Templates</span>
+            <span className="text-amber-500"> Templates</span>
           </h1>
 
           {/* Subtitle */}

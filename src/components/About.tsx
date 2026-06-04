@@ -55,22 +55,17 @@ export default function About() {
         </div>
         <div className="container mx-auto px-4 w-full text-center max-w-4xl">
           <h1 className="invisible about-title text-4xl sm:text-5xl lg:text-6xl font-bold pb-8 text-foreground leading-[1.2] tracking-tight">
-            Bringing Your Ideas to Life with <span className="bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 bg-clip-text text-transparent">Creativity and Innovation</span>
+            Bringing Your Ideas to Life with <span className="text-amber-500">Creativity and Innovation</span>
           </h1>
           <p className="invisible about-text text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed font-light">
-            In a world where user experience and tailored digital solutions make
-            all the difference, <b className="text-foreground font-semibold">ZignnnIt</b> has established itself as a key
-            player in graphic design, UI/UX, and web and mobile development.
+            <b className="text-foreground font-semibold">ZignnnIt</b> is a key
+            player in graphic design, UI/UX, and web & mobile development.
+            We combine creativity and technical expertise to transform your ideas into
+            impactful digital experiences.
             <br /><br />
-            By combining creativity, technical expertise, and a deep
-            understanding of business needs, we transform your ideas into
-            impactful visual and digital experiences. Through our agile and
-            collaborative approach, we support our clients at every stage of
-            their projects—from conception to launch—with a constant focus on
-            quality and innovation. <br /><br />
-            With <b className="text-foreground font-semibold">ZignnnIt</b>, don’t let your projects sit on hold due to a
-            lack of suitable solutions. Together, let’s build unique products
-            that inspire, engage, and shape the future of your business.
+            From conception to launch, we support our clients with a constant focus on
+            quality and innovation. Together, let&apos;s build products
+            that inspire and shape the future of your business.
           </p>
         </div>
       </div>
