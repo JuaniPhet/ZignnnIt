@@ -57,11 +57,11 @@ export default function TechStack() {
   };
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className="overflow-hidden relative stack-container w-full py-10 bg-background"
     >
-      <div 
+      <div
         ref={scrollRef}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -69,11 +69,9 @@ export default function TechStack() {
       >
         {items.map((tool, index) => (
           <div key={index} className="h-full w-auto relative flex-shrink-0">
-            <Image 
-              src={tool.src} 
+            <img
+              src={tool.src}
               alt={tool.alt}
-              width={100}
-              height={56}
               className="h-full w-auto object-contain grayscale dark:brightness-200 dark:contrast-100 hover:filter-none opacity-50 hover:opacity-100 transition-all duration-300"
             />
           </div>

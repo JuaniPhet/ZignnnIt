@@ -13,6 +13,7 @@ export default function About() {
               src="/img/setup-odc.jpg"
               alt="setup a ODC"
               fill
+              sizes="(max-width: 768px) 100vw, 1200px"
               className="object-cover"
             />
           </div>

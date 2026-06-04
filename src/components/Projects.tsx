@@ -117,8 +117,15 @@ export default function Projects() {
                     src={project.image} 
                     alt={project.title} 
                     fill 
+                    sizes="(max-width: 640px) 85vw, (max-width: 768px) 500px, 600px"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
+                  {/* Overlay for description on hover */}
+                  <div className="absolute inset-0 bg-black/80 flex items-center justify-center p-6 sm:p-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
+                    <p className="text-white text-base sm:text-lg text-center leading-relaxed font-light">
+                      {project.description}
+                    </p>
+                  </div>
                 </div>
                 <div className="mt-6">
                   <div className="flex flex-wrap gap-4 justify-between items-center">
@@ -129,14 +136,12 @@ export default function Projects() {
                     {/* Tools logos */}
                     <div className="flex gap-2 h-8">
                       {project.tools.map((tool, tIdx) => (
-                        <div key={tIdx} className="h-full relative w-8">
-                          <Image 
-                            src={tool.src} 
-                            alt={tool.alt} 
-                            fill 
-                            className="object-contain dark:brightness-200 dark:contrast-100"
-                          />
-                        </div>
+                        <img 
+                          key={tIdx}
+                          src={tool.src} 
+                          alt={tool.alt} 
+                          className="h-full w-auto object-contain dark:brightness-200 dark:contrast-100"
+                        />
                       ))}
                     </div>
 
@@ -155,9 +160,6 @@ export default function Projects() {
                       </a>
                     </div>
                   </div>
-                  <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
-                    {project.description}
-                  </p>
                 </div>
               </article>
             ))}

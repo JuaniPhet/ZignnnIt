@@ -7,8 +7,8 @@ import { useGSAP } from "@gsap/react";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleText = "We are a creative Agency";
-  
+  const titleText = "We're a creative Agency";
+
   // Split title text into characters, replacing spaces with non-breaking spaces
   const characters = titleText.split("").map((char, index) => {
     if (char === " ") return { char: "\u00A0", isSpace: true, index };
@@ -91,12 +91,12 @@ export default function Hero() {
   };
 
   return (
-    <section 
-      ref={containerRef} 
-      className="flex min-h-screen items-center relative overflow-hidden pt-20" 
+    <section
+      ref={containerRef}
+      className="flex min-h-screen items-center relative overflow-hidden pt-20 isolate"
       id="home"
     >
-      <div 
+      <div
         className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
         aria-hidden="true"
       >
@@ -107,21 +107,22 @@ export default function Hero() {
           }}
         ></div>
       </div>
-      
-      <Image 
-        alt="Hero Grid" 
-        src="/img/rb_56040.png" 
+
+      <Image
+        alt="Hero Grid"
+        src="/img/rb_56040.png"
         fill
+        sizes="100vw"
         priority
-        className="-z-10 object-cover opacity-10" 
+        className="-z-10 object-cover opacity-10"
       />
 
       <div className="flex flex-col lg:flex-row justify-between items-center container mx-auto w-full px-4 gap-8">
         <div className="flex-1 text-left">
           <h1 className="text-4xl sm:text-6xl font-bold my-10 text-foreground min-h-[150px] leading-tight">
             {characters.map((item) => (
-              <span 
-                key={item.index} 
+              <span
+                key={item.index}
                 className="captive-letter inline-block"
               >
                 {item.char}
@@ -133,7 +134,7 @@ export default function Hero() {
             <b className="text-foreground">elevate your business</b>, <br />blending creativity with
             impact.
           </h2>
-          <button 
+          <button
             type="button"
             onMouseEnter={handleCtaMouseEnter}
             onMouseLeave={handleCtaMouseLeave}
@@ -146,16 +147,18 @@ export default function Hero() {
           </button>
         </div>
         <div className="w-full lg:w-5/12 max-w-md lg:max-w-none">
-          <Image 
-            src="/img/vector2@4x-8.png" 
-            alt="computer illustration" 
-            width={600} 
-            height={500} 
+          <Image
+            src="/img/vector2@4x-8.png"
+            alt="computer illustration"
+            width={600}
+            height={500}
             className="w-full h-auto"
+            style={{ height: "auto" }}
+            priority
           />
         </div>
       </div>
-      
+
       <div className="w-96 h-96 bg-amber-200/20 dark:bg-amber-950/20 rounded-full absolute -z-10 top-96 right-0 blur-3xl"></div>
     </section>
   );
