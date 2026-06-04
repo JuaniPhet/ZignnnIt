@@ -24,18 +24,18 @@ export default function About() {
       { autoAlpha: 0, y: 50, scale: 0.95 },
       { autoAlpha: 1, y: 0, scale: 1, duration: 1, ease: "power3.out" }
     )
-    .fromTo(
-      ".about-title",
-      { autoAlpha: 0, y: 30 },
-      { autoAlpha: 1, y: 0, duration: 0.8, ease: "power2.out" },
-      "-=0.5"
-    )
-    .fromTo(
-      ".about-text",
-      { autoAlpha: 0, y: 30 },
-      { autoAlpha: 1, y: 0, duration: 0.8, ease: "power2.out" },
-      "-=0.6"
-    );
+      .fromTo(
+        ".about-title",
+        { autoAlpha: 0, y: 30 },
+        { autoAlpha: 1, y: 0, duration: 0.8, ease: "power2.out" },
+        "-=0.5"
+      )
+      .fromTo(
+        ".about-text",
+        { autoAlpha: 0, y: 30 },
+        { autoAlpha: 1, y: 0, duration: 0.8, ease: "power2.out" },
+        "-=0.6"
+      );
   }, { scope: containerRef });
 
   return (
