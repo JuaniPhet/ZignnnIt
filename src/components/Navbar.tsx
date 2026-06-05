@@ -61,6 +61,15 @@ export default function Navbar() {
             <li>
               <Link href="/contact" className="nav-link hover:bg-amber-100 dark:hover:bg-amber-950 p-3 rounded-lg" onClick={() => setIsOpen(false)}>Contact</Link>
             </li>
+            <li className="xl:hidden">
+              <Link
+                href="/shop"
+                className="bg-primary text-primary-foreground px-5 py-3 font-bold rounded-lg hover:bg-amber-600 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Shop
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -76,7 +85,7 @@ export default function Navbar() {
           </button>
 
           {/* Shop button */}
-          <div className="hidden lg:flex z-50">
+          <div className="hidden xl:flex z-50">
             <Link href="/shop" className="bg-primary text-primary-foreground px-5 py-3 font-bold rounded-lg hover:bg-amber-600 transition-colors">
               Shop
             </Link>
