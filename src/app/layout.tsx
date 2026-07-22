@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("min-h-screen bg-background text-foreground font-Urbanist antialiased", urbanist.variable)}>
+      <body className={cn("min-h-screen bg-background text-foreground font-urbanist antialiased", urbanist.variable)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
