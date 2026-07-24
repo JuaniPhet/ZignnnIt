@@ -33,7 +33,7 @@ export const allProjects: Project[] = [
   },
   {
     title: "ZignnnIt",
-    image: "/img/zignnnit_img.png",
+    image: "/img/zignnnit_img.jpeg",
     tools: [
       { src: "/img/tools/html5.png", alt: "Html 5" },
       { src: "/img/tools/css3.png", alt: "Css 3" },
