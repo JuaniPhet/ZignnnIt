@@ -44,27 +44,27 @@ export default function Navbar() {
         <div className={`nav-menu absolute xl:static top-0 ${isOpen ? "left-[0]" : "left-[-100%]"} bg-background/95 min-h-[80vh] xl:min-h-fit w-full xl:w-auto flex items-center justify-center backdrop-blur-sm duration-300 z-40 border-b xl:border-none`}>
           <ul className="flex flex-col xl:flex-row items-center gap-8">
             <li>
-              <Link href={getLinkHref("#home")} className="nav-link hover:bg-amber-100 dark:hover:bg-amber-950 p-3 rounded-lg" onClick={() => setIsOpen(false)}>Home</Link>
+              <Link href={getLinkHref("#home")} className="nav-link hover:bg-secondary hover:text-secondary-foreground p-3 rounded-lg" onClick={() => setIsOpen(false)}>Home</Link>
             </li>
             <li>
-              <Link href={getLinkHref("#services")} className="nav-link hover:bg-amber-100 dark:hover:bg-amber-950 p-3 rounded-lg" onClick={() => setIsOpen(false)}>Services</Link>
+              <Link href={getLinkHref("#about-us")} className="nav-link hover:bg-secondary hover:text-secondary-foreground p-3 rounded-lg" onClick={() => setIsOpen(false)}>About</Link>
             </li>
             <li>
-              <Link href={getLinkHref("#projects")} className="nav-link hover:bg-amber-100 dark:hover:bg-amber-950 p-3 rounded-lg" onClick={() => setIsOpen(false)}>Projects</Link>
+              <Link href={getLinkHref("#services")} className="nav-link hover:bg-secondary hover:text-secondary-foreground p-3 rounded-lg" onClick={() => setIsOpen(false)}>Services</Link>
             </li>
             <li>
-              <Link href={getLinkHref("#about-us")} className="nav-link hover:bg-amber-100 dark:hover:bg-amber-950 p-3 rounded-lg" onClick={() => setIsOpen(false)}>About</Link>
+              <Link href={getLinkHref("#projects")} className="nav-link hover:bg-secondary hover:text-secondary-foreground p-3 rounded-lg" onClick={() => setIsOpen(false)}>Projects</Link>
             </li>
             {/* <li>
               <Link href={getLinkHref("#pricing")} className="nav-link hover:bg-amber-100 dark:hover:bg-amber-950 p-3 rounded-lg" onClick={() => setIsOpen(false)}>Pricing</Link>
             </li> */}
             <li>
-              <Link href="/contact" className="nav-link hover:bg-amber-100 dark:hover:bg-amber-950 p-3 rounded-lg" onClick={() => setIsOpen(false)}>Contact</Link>
+              <Link href="/contact" className="nav-link hover:bg-secondary hover:text-secondary-foreground p-3 rounded-lg" onClick={() => setIsOpen(false)}>Contact</Link>
             </li>
             <li className="xl:hidden">
               <Link
                 href="/shop"
-                className="bg-primary text-primary-foreground px-5 py-3 font-bold rounded-lg hover:bg-amber-600 transition-colors"
+                className="bg-primary text-primary-foreground px-5 py-3 font-bold rounded-lg hover:brightness-110 active:scale-[0.97] transition-all duration-200"
                 onClick={() => setIsOpen(false)}
               >
                 Shop
@@ -86,7 +86,7 @@ export default function Navbar() {
 
           {/* Shop button */}
           <div className="hidden xl:flex z-50">
-            <Link href="/shop" className="bg-primary text-primary-foreground px-5 py-3 font-bold rounded-lg hover:bg-amber-600 transition-colors">
+            <Link href="/shop" className="bg-primary text-primary-foreground px-5 py-3 font-bold rounded-lg hover:brightness-110 active:scale-[0.97] transition-all duration-200">
               Shop
             </Link>
           </div>

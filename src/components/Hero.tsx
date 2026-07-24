@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import Link from "next/link";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -20,6 +21,13 @@ export default function Hero() {
   const creativeEnd = creativeStart + "creative".length;
 
   useGSAP(() => {
+    // Badge entrance
+    gsap.fromTo(
+      ".hero-badge",
+      { autoAlpha: 0, y: -20, scale: 0.9 },
+      { autoAlpha: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.7)" }
+    );
+
     // Captive title letters animation
     gsap.fromTo(
       ".captive-letter",
@@ -32,7 +40,7 @@ export default function Hero() {
         duration: 1,
         repeat: -1,
         repeatDelay: 5,
-        stagger: 0.05,
+        stagger: 0.04,
         display: "inline-block",
       }
     );
@@ -47,7 +55,7 @@ export default function Hero() {
         { autoAlpha: 1, y: 0, duration: 0.8, ease: "power2.out" }
       )
       .fromTo(
-        ".hero-cta",
+        ".hero-cta-group",
         { autoAlpha: 0, y: 20 },
         { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" },
         "-=0.3"
@@ -61,12 +69,23 @@ export default function Hero() {
 
     // Subtle float animation for the illustration
     gsap.to(".hero-illustration", {
-      y: -12,
-      duration: 3,
+      y: -14,
+      duration: 3.5,
       ease: "sine.inOut",
       repeat: -1,
       yoyo: true,
       delay: 1.5,
+    });
+
+    // Subtle pulse on the glow behind CTA
+    gsap.to(".cta-glow", {
+      scale: 1.15,
+      opacity: 0.6,
+      duration: 2,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+      delay: 1,
     });
 
   }, { scope: containerRef });
@@ -117,9 +136,10 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="flex min-h-screen items-center relative overflow-hidden pt-20 isolate"
+      className="flex min-h-screen items-center relative overflow-hidden pt-24 pb-16 sm:pt-28 lg:pt-20 lg:pb-0 isolate"
       id="home"
     >
+      {/* Background gradient blob - top */}
       <div
         className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
         aria-hidden="true"
@@ -132,6 +152,7 @@ export default function Hero() {
         ></div>
       </div>
 
+      {/* Background grid pattern */}
       <Image
         alt="Hero Grid"
         src="/img/rb_56040.png"
@@ -141,14 +162,25 @@ export default function Hero() {
         className="-z-10 object-cover opacity-10"
       />
 
-      <div className="flex flex-col lg:flex-row justify-between items-center container mx-auto w-full px-4 gap-8">
-        <div className="flex-1 text-left">
-          <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold my-10 text-foreground min-h-[150px] leading-[1.1] tracking-tight">
+      {/* Main content */}
+      <div className="flex flex-col lg:flex-row justify-between items-center container mx-auto w-full px-4 sm:px-6 gap-10 lg:gap-16">
+
+        {/* Left column - Text content */}
+        <div className="flex-1 text-left max-w-2xl">
+
+          {/* Badge */}
+          <div className="invisible hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-secondary-foreground text-sm font-semibold mb-6 sm:mb-8 border border-border/50 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            Creative Digital Agency
+          </div>
+
+          {/* Title */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-[1.08] tracking-tight">
             {characters.map((item) => (
               <span
                 key={item.index}
                 className={`captive-letter inline-block ${item.index >= creativeStart && item.index < creativeEnd
-                  ? "text-amber-500"
+                  ? "text-primary"
                   : ""
                   }`}
               >
@@ -156,36 +188,77 @@ export default function Hero() {
               </span>
             ))}
           </h1>
-          <h2 className="invisible text-lg sm:text-xl lg:text-2xl font-light my-8 text-muted-foreground we-help-you-to leading-relaxed tracking-wide">
+
+          {/* Subtitle */}
+          <h2 className="invisible we-help-you-to text-base sm:text-lg md:text-xl lg:text-2xl font-light mt-6 sm:mt-8 mb-8 sm:mb-10 text-muted-foreground leading-relaxed tracking-wide max-w-xl">
             Digital and visual experiences that{" "}
             <b className="text-foreground font-semibold">elevate your business</b>.
           </h2>
-          <button
-            type="button"
-            onMouseEnter={handleCtaMouseEnter}
-            onMouseLeave={handleCtaMouseLeave}
-            className="invisible hero-cta bg-primary text-primary-foreground text-base sm:text-lg px-6 py-4 font-bold rounded-lg hover:bg-amber-600 transition-colors my-4 zignnn-btn relative flex items-center gap-2"
-          >
-            <span>Ready to zignnn your project ? ✒️</span>
-            <span className="absolute left-0 top-0 pointer-events-none opacity-0 invisible emoji-1 text-2xl">😄</span>
-            <span className="absolute left-0 top-0 pointer-events-none opacity-0 invisible emoji-2 text-2xl">✨</span>
-            <span className="absolute left-0 top-0 pointer-events-none opacity-0 invisible emoji-3 text-2xl">😃</span>
-          </button>
+
+          {/* CTA Group */}
+          <div className="invisible hero-cta-group flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="relative">
+              {/* CTA Glow effect */}
+              <div className="cta-glow absolute -inset-1 bg-primary/30 rounded-xl blur-lg opacity-40"></div>
+              <Link href="/contact">
+                <button
+                  type="button"
+                  onMouseEnter={handleCtaMouseEnter}
+                  onMouseLeave={handleCtaMouseLeave}
+                  className="relative bg-primary text-primary-foreground text-sm sm:text-base px-6 sm:px-8 py-3.5 sm:py-4 font-bold rounded-xl hover:brightness-110 active:scale-[0.98] transition-all duration-200 shadow-lg shadow-primary/25 flex items-center gap-2 cursor-pointer"
+                >
+                  <span>Ready to zignnn your project ? ✒️</span>
+                  <span className="absolute left-0 top-0 pointer-events-none opacity-0 invisible emoji-1 text-2xl">😄</span>
+                  <span className="absolute left-0 top-0 pointer-events-none opacity-0 invisible emoji-2 text-2xl">✨</span>
+                  <span className="absolute left-0 top-0 pointer-events-none opacity-0 invisible emoji-3 text-2xl">😃</span>
+                </button>
+              </Link>
+            </div>
+
+            {/* Secondary link */}
+            <a
+              href="#services"
+              className="text-muted-foreground hover:text-foreground text-sm sm:text-base font-medium transition-colors duration-200 flex items-center gap-1.5 group"
+            >
+              Discover our services
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="group-hover:translate-x-1 transition-transform duration-200"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+          </div>
         </div>
-        <div className="invisible hero-illustration w-full lg:w-5/12 max-w-md lg:max-w-none">
+
+        {/* Right column - Illustration */}
+        <div className="invisible hero-illustration w-full sm:w-4/5 md:w-3/5 lg:w-5/12 max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl flex-shrink-0">
           <Image
             src="/img/vector2@4x-8.png"
             alt="computer illustration"
             width={600}
             height={500}
-            className="w-full h-auto"
+            className="w-full h-auto drop-shadow-2xl"
             style={{ height: "auto" }}
             priority
           />
         </div>
       </div>
 
-      <div className="w-96 h-96 bg-amber-200/20 dark:bg-amber-950/20 rounded-full absolute -z-10 top-96 right-0 blur-3xl"></div>
+      {/* Bottom-right ambient glow */}
+      <div className="w-72 h-72 sm:w-96 sm:h-96 bg-amber-200/20 dark:bg-amber-950/20 rounded-full absolute -z-10 bottom-20 right-0 blur-3xl"></div>
+
+      {/* Bottom-left subtle glow */}
+      <div className="w-48 h-48 sm:w-64 sm:h-64 bg-primary/10 rounded-full absolute -z-10 bottom-10 left-[-5rem] blur-3xl"></div>
     </section>
   );
 }
