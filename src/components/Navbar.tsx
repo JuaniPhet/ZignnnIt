@@ -22,7 +22,9 @@ export default function Navbar() {
   };
 
   return (
-    <header id="navbar" className="bg-background fixed shadow-md w-full z-50 top-0 left-0 header-nav border-b">
+    <header id="navbar" className="bg-background/95 backdrop-blur-md fixed shadow-lg shadow-amber-500/10 dark:shadow-amber-500/5 w-full z-50 top-0 left-0 header-nav border-b border-amber-500/20">
+      {/* Gold-amber gradient line at the bottom border */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber-500/60 to-transparent"></div>
       <nav className="container mx-auto flex items-center justify-between text-lg h-20 sm:h-24 px-4">
         <Link href={pathname === "/" ? "#home" : "/"}>
           <div className="cursor-pointer">
@@ -53,7 +55,7 @@ export default function Navbar() {
               <Link href={getLinkHref("#services")} className="nav-link hover:bg-secondary hover:text-secondary-foreground p-3 rounded-lg" onClick={() => setIsOpen(false)}>Services</Link>
             </li>
             <li>
-              <Link href={getLinkHref("#projects")} className="nav-link hover:bg-secondary hover:text-secondary-foreground p-3 rounded-lg" onClick={() => setIsOpen(false)}>Projects</Link>
+              <Link href="/projects" className="nav-link hover:bg-secondary hover:text-secondary-foreground p-3 rounded-lg" onClick={() => setIsOpen(false)}>Projects</Link>
             </li>
             {/* <li>
               <Link href={getLinkHref("#pricing")} className="nav-link hover:bg-amber-100 dark:hover:bg-amber-950 p-3 rounded-lg" onClick={() => setIsOpen(false)}>Pricing</Link>

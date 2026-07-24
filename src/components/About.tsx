@@ -43,9 +43,9 @@ export default function About() {
       {/* Notre environnement de travail */}
       <div className="bg-[#F6EEDD] dark:bg-amber-950/20 mt-24 py-16 overflow-hidden">
         <div className="container mx-auto px-4 w-full">
-          <div className="invisible about-image relative w-full h-[50vh] sm:h-[60vh] md:h-[80vh] rounded-[30px] sm:rounded-[70px] overflow-hidden mb-12 shadow-lg">
+          <div className="invisible about-image relative w-full aspect-[16/9] md:h-[60vh] lg:h-[80vh] rounded-[20px] md:rounded-[70px] overflow-hidden mb-8 md:mb-12 shadow-lg">
             <Image
-              src="/img/setup-odc.jpg"
+              src="/img/setup-dev.jpeg"
               alt="setup a ODC"
               fill
               sizes="(max-width: 768px) 100vw, 1200px"

@@ -65,7 +65,7 @@ export default function TechStack() {
         ref={scrollRef}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="flex h-14 gap-24 w-max cursor-pointer"
+        className="flex h-10 sm:h-14 gap-8 sm:gap-16 lg:gap-24 w-max cursor-pointer"
       >
         {items.map((tool, index) => (
           <div key={index} className="h-full w-auto relative flex-shrink-0">

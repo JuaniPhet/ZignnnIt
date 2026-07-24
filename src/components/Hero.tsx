@@ -196,21 +196,31 @@ export default function Hero() {
           </h2>
 
           {/* CTA Group */}
-          <div className="invisible hero-cta-group flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <div className="relative">
+          <div className="invisible hero-cta-group flex flex-col md:flex-row items-stretch md:items-center gap-4 w-full md:w-auto">
+            <div className="relative w-full md:w-auto">
               {/* CTA Glow effect */}
               <div className="cta-glow absolute -inset-1 bg-primary/30 rounded-xl blur-lg opacity-40"></div>
-              <Link href="/contact">
+              <Link href="/contact" className="w-full block">
                 <button
                   type="button"
-                  onMouseEnter={handleCtaMouseEnter}
-                  onMouseLeave={handleCtaMouseLeave}
-                  className="relative bg-primary text-primary-foreground text-sm sm:text-base px-6 sm:px-8 py-3.5 sm:py-4 font-bold rounded-xl hover:brightness-110 active:scale-[0.98] transition-all duration-200 shadow-lg shadow-primary/25 flex items-center gap-2 cursor-pointer"
+                  className="relative w-full md:w-auto bg-primary text-primary-foreground text-sm sm:text-sm md:text-base px-3 sm:px-6 md:px-8 py-3.5 sm:py-4 font-bold rounded-xl hover:brightness-110 active:scale-[0.98] transition-all duration-200 shadow-lg shadow-primary/25 flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer text-center group whitespace-nowrap"
                 >
-                  <span>Ready to zignnn your project ? ✒️</span>
-                  <span className="absolute left-0 top-0 pointer-events-none opacity-0 invisible emoji-1 text-2xl">😄</span>
-                  <span className="absolute left-0 top-0 pointer-events-none opacity-0 invisible emoji-2 text-2xl">✨</span>
-                  <span className="absolute left-0 top-0 pointer-events-none opacity-0 invisible emoji-3 text-2xl">😃</span>
+                  <span>Ready to zignnn your project ?</span>
+                  {/* <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform duration-300 flex-shrink-0"
+                  >
+                    <path d="M12 20h9" />
+                    <path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z" />
+                  </svg> */}
                 </button>
               </Link>
             </div>
@@ -218,7 +228,7 @@ export default function Hero() {
             {/* Secondary link */}
             <a
               href="#services"
-              className="text-muted-foreground hover:text-foreground text-sm sm:text-base font-medium transition-colors duration-200 flex items-center gap-1.5 group"
+              className="w-full md:w-auto text-muted-foreground hover:text-foreground text-sm sm:text-base font-medium transition-colors duration-200 flex items-center justify-center md:justify-start gap-1.5 group py-3 px-6 rounded-xl border md:border-none border-border/50 text-center"
             >
               Discover our services
               <svg
@@ -241,7 +251,7 @@ export default function Hero() {
         </div>
 
         {/* Right column - Illustration */}
-        <div className="invisible hero-illustration w-full sm:w-4/5 md:w-3/5 lg:w-5/12 max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl flex-shrink-0">
+        <div className="invisible hero-illustration hidden lg:block w-5/12 max-w-lg xl:max-w-xl flex-shrink-0">
           <Image
             src="/img/vector2@4x-8.png"
             alt="computer illustration"
@@ -259,6 +269,6 @@ export default function Hero() {
 
       {/* Bottom-left subtle glow */}
       <div className="w-48 h-48 sm:w-64 sm:h-64 bg-primary/10 rounded-full absolute -z-10 bottom-10 left-[-5rem] blur-3xl"></div>
-    </section>
+    </section >
   );
 }

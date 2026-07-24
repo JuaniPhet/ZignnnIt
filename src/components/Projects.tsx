@@ -2,56 +2,13 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { featuredProjects } from "@/lib/projects";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const projectsList = [
-  {
-    title: "Lumax",
-    image: "/img/lumax_identity.png",
-    tools: [
-      { src: "/img/tools/ai.png", alt: "Illustrator" },
-      { src: "/img/tools/ps.png", alt: "Photoshop" }
-    ],
-    link: "https://drive.google.com/file/d/1qWO4bgiAeg4e2IQuQLAvj-CxLUGkoTez/view?usp=sharing",
-    description: "A modern visual identity for Lumax — logo, stationery, and branding crafted with precision."
-  },
-  {
-    title: "Profinder",
-    image: "/img/profinder.png",
-    tools: [
-      { src: "/img/tools/figma.png", alt: "Figma" }
-    ],
-    link: "https://www.figma.com/design/n5ZAKBrEqYaqXhaqX5QZMR/ProFinder?node-id=0-1&t=aqo6HehkOGyaAy93-1",
-    description: "An intuitive platform connecting professionals with clients through a sleek, engaging interface."
-  },
-  {
-    title: "ZignnnIt",
-    image: "/img/zignnnit_img.png",
-    tools: [
-      { src: "/img/tools/html5.png", alt: "Html 5" },
-      { src: "/img/tools/css3.png", alt: "Css 3" },
-      { src: "/img/tools/JavaScript-logo.png", alt: "Javascript" },
-      { src: "/img/tools/Tailwind_CSS_Logo.png", alt: "Tailwindcss" },
-      { src: "/img/tools/vs_code.png", alt: "Vs Code" }
-    ],
-    link: "#",
-    description: "Our own digital presence — creativity, innovation, and cutting-edge technology in one platform."
-  },
-  {
-    title: "BMI Calculator",
-    image: "/img/bmi_calculator.jpg",
-    tools: [
-      { src: "/img/tools/flutter.png", alt: "Flutter" },
-      { src: "/img/tools/vs_code.png", alt: "VS Code" }
-    ],
-    link: "https://www.linkedin.com/posts/japhetseumo_flutter-caparledev-generativeia-activity-7231597137422159872-eqgv?utm_source=share&utm_medium=member_android",
-    description: "A user-friendly Flutter app for health insights and personalized BMI recommendations."
-  }
-];
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -124,24 +81,29 @@ export default function Projects() {
             className="flex px-4 sm:px-10 gap-x-12 will-change-transform"
             style={{ width: "max-content" }}
           >
-            {projectsList.map((project, idx) => (
+            {featuredProjects.map((project, idx) => (
               <article
                 key={idx}
-                className="flex flex-col justify-between w-[85vw] sm:w-[500px] md:w-[600px] flex-shrink-0"
+                className="flex flex-col justify-between w-[85vw] sm:w-[500px] md:w-[600px] flex-shrink-0 group"
               >
-                <div className="bg-amber-100 dark:bg-amber-950/20 rounded-2xl w-full h-64 sm:h-80 md:h-96 shadow-xl relative overflow-hidden group">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 640px) 85vw, (max-width: 768px) 500px, 600px"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  {/* Overlay for description on hover */}
-                  <div className="absolute inset-0 bg-black/80 flex items-center justify-center p-6 sm:p-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
-                    <p className="text-white text-base sm:text-lg text-center leading-relaxed font-light">
-                      {project.description}
-                    </p>
+                <div className="relative rounded-2xl w-full aspect-[16/9]">
+                  {/* Fine glowing gradient line border */}
+                  <div className="absolute -inset-[1px] bg-gradient-to-r from-amber-500/40 via-primary to-amber-500/40 rounded-2xl opacity-50 group-hover:opacity-100 blur-[1px] group-hover:blur-[3px] transition-all duration-500"></div>
+
+                  <div className="relative bg-amber-100 dark:bg-amber-950/20 rounded-2xl w-full h-full shadow-xl overflow-hidden flex items-center justify-center p-1">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 640px) 85vw, (max-width: 768px) 500px, 600px"
+                      className="object-contain transition-transform duration-500 group-hover:scale-105"
+                    />
+                    {/* Overlay for description on hover */}
+                    <div className="absolute inset-0 bg-black/80 flex items-center justify-center p-6 sm:p-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
+                      <p className="text-white text-base sm:text-lg text-center leading-relaxed font-light">
+                        {project.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <div className="mt-6">
@@ -170,7 +132,7 @@ export default function Projects() {
                       >
                         <button
                           type="button"
-                          className="bg-primary text-primary-foreground px-5 py-2 font-bold rounded-lg hover:bg-amber-600 transition-colors text-sm sm:text-base"
+                          className="bg-primary text-primary-foreground px-5 py-2 font-bold rounded-lg hover:brightness-110 transition-all text-sm sm:text-base cursor-pointer"
                         >
                           Voir plus
                         </button>
@@ -180,6 +142,43 @@ export default function Projects() {
                 </div>
               </article>
             ))}
+
+            {/* "See all projects" CTA card */}
+            <Link
+              href="/projects"
+              className="flex flex-col items-center justify-center w-[85vw] sm:w-[500px] md:w-[600px] flex-shrink-0 group relative"
+            >
+              {/* Fine glowing gradient line border */}
+              <div className="absolute -inset-[1px] bg-gradient-to-r from-amber-500/40 via-primary to-amber-500/40 rounded-2xl opacity-50 group-hover:opacity-100 blur-[1px] group-hover:blur-[3px] transition-all duration-500"></div>
+
+              <div className="relative bg-secondary/90 dark:bg-card/90 backdrop-blur-sm rounded-2xl w-full aspect-[16/9] shadow-xl flex flex-col items-center justify-center gap-4 sm:gap-6 transition-all duration-300">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110 border border-primary/20 shadow-sm">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-primary w-6 h-6 sm:w-9 sm:h-9 group-hover:translate-x-1 transition-transform duration-300"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                </div>
+                <div className="text-center px-6">
+                  <h3 className="text-xl sm:text-3xl font-bold text-foreground tracking-tight">
+                    See all projects
+                  </h3>
+                  <p className="mt-1 sm:mt-2 text-xs sm:text-base text-muted-foreground font-light">
+                    Explore our complete portfolio
+                  </p>
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
       </div>

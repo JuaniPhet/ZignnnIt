@@ -11,18 +11,22 @@ export default function Footer() {
   };
 
   return (
-    <footer className="py-12 bg-gradient-to-r from-[#F6EEDD] to-[#F2F2F2] dark:from-zinc-900 dark:to-zinc-950 border-t border-border">
-      <div className="container mx-auto px-4 w-full">
-        <div className="flex flex-col xl:flex-row items-center justify-between text-center xl:text-left gap-8">
+    <footer className="relative bg-background border-t border-border/60 py-12 sm:py-16 overflow-hidden">
+      {/* Top gold-amber gradient border highlight */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber-500/40 to-transparent"></div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4">
+      <div className="container mx-auto px-4 sm:px-6 w-full">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 pb-10 border-b border-border/40">
+
+          {/* Logo & Tagline */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-3">
             <Link href={pathname === "/" ? "#home" : "/"}>
               <div className="cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="254" height="98" viewBox="0 0 254 98" fill="none" className="w-auto h-9 -mt-2 text-foreground">
+                <svg xmlns="http://www.w3.org/2000/svg" width="254" height="98" viewBox="0 0 254 98" fill="none" className="w-auto h-9 text-foreground">
                   <path d="M0 0H52V30H0V0Z" fill="#F7B700" />
                   <path d="M254 51.9727H244.276V72.2255C244.276 74.1032 244.79 75.2656 245.818 75.7127C246.668 76.0704 247.763 76.2492 249.104 76.2492C250.446 76.2492 251.921 75.8915 253.531 75.1762H254V80.1388C252.122 81.1224 250.11 81.6142 247.964 81.6142C241.437 81.6142 238.173 78.6634 238.173 72.762V51.9727H231.802V51.5703L244.276 39.365V46.7418H254V51.9727Z" fill="currentColor" />
                   <path d="M218.664 80.9436V34H225.639V80.9436H218.664Z" fill="currentColor" />
-                  <path d="M210.703 59.9195V80.9435H203.729V61.6296C203.729 60.1319 203.36 58.7683 202.622 57.5388C201.907 56.3094 200.935 55.337 199.705 54.6216C198.498 53.8839 197.135 53.5151 195.614 53.5151C194.139 53.5151 192.787 53.8839 191.557 54.6216C190.328 55.337 189.344 56.3094 188.606 57.5388C187.869 58.7683 187.5 60.1319 187.5 61.6296V80.9435H180.525V47.4124H187.5V50.9667C188.662 49.5808 190.093 48.4854 191.792 47.6807C193.491 46.8759 195.324 46.4736 197.291 46.4736C199.772 46.4736 202.03 47.0771 204.064 48.2842C206.099 49.4914 207.708 51.112 208.893 53.1463C210.1 55.1805 210.703 57.4382 210.703 59.9195Z" fill="currentColor" />
+                  <path d="M210.703 59.9195V80.9435H203.729V61.6296C203.729 60.1319 203.36 58.7683 202.622 57.5388C201.907 56.3094 199.705 55.337 199.705 54.6216C198.498 53.8839 197.135 53.5151 195.614 53.5151C194.139 53.5151 192.787 53.8839 191.557 54.6216C190.328 55.337 189.344 56.3094 188.606 57.5388C187.869 58.7683 187.5 60.1319 187.5 61.6296V80.9435H180.525V47.4124H187.5V50.9667C188.662 49.5808 190.093 48.4854 191.792 47.6807C193.491 46.8759 195.324 46.4736 197.291 46.4736C199.772 46.4736 202.03 47.0771 204.064 48.2842C206.099 49.4914 207.708 51.112 208.893 53.1463C210.1 55.1805 210.703 57.4382 210.703 59.9195Z" fill="currentColor" />
                   <path d="M173.832 59.9195V80.9435H166.858V61.6296C166.858 60.1319 166.489 58.7683 165.751 57.5388C165.036 56.3094 164.064 55.337 162.834 54.6216C161.627 53.8839 160.263 53.5151 158.743 53.5151C157.268 53.5151 155.916 53.8839 154.686 54.6216C153.457 55.337 152.473 56.3094 151.735 57.5388C150.998 58.7683 150.629 60.1319 150.629 61.6296V80.9435H143.654V47.4124H150.629V50.9667C151.791 49.5808 153.222 48.4854 154.921 47.6807C156.62 46.8759 158.453 46.4736 160.42 46.4736C162.901 46.4736 165.159 47.0771 167.193 48.2842C169.227 49.4914 170.837 51.112 172.022 53.1463C173.229 55.1805 173.832 57.4382 173.832 59.9195Z" fill="currentColor" />
                   <path d="M136.961 59.9195V80.9435H129.987V61.6296C129.987 60.1319 129.618 58.7683 128.88 57.5388C128.165 56.3094 127.193 55.337 125.963 54.6216C124.756 53.8839 123.392 53.5151 121.872 53.5151C120.397 53.5151 119.044 53.8839 117.815 54.6216C116.585 55.337 115.602 56.3094 114.864 57.5388C114.127 58.7683 113.758 60.1319 113.758 61.6296V80.9435H106.783V47.4124H113.758V50.9667C114.92 49.5808 116.351 48.4854 118.05 47.6807C119.749 46.8759 121.582 46.4736 123.549 46.4736C126.03 46.4736 128.288 47.0771 130.322 48.2842C132.356 49.4914 133.966 51.112 135.151 53.1463C136.358 55.1805 136.961 57.4382 136.961 59.9195Z" fill="currentColor" />
                   <path d="M91.7618 47.4124H98.7363V81.8154C98.7363 84.1178 98.2445 86.2415 97.2609 88.1863C96.2997 90.1311 94.992 91.8076 93.3378 93.2159C91.6836 94.6466 89.7835 95.7531 87.6375 96.5355C85.5139 97.3179 83.2896 97.7091 80.9648 97.7091C78.6176 97.7091 76.3599 97.2061 74.1915 96.2002C72.0232 95.2166 70.1119 93.8754 68.4577 92.1765C66.8259 90.4776 65.6076 88.5551 64.8028 86.4091L71.2073 83.5255C71.6543 84.9114 72.3697 86.1409 73.3533 87.2139C74.3592 88.2869 75.5216 89.1363 76.8405 89.7622C78.1817 90.3882 79.5565 90.7011 80.9648 90.7011C82.3508 90.7011 83.6808 90.4776 84.955 90.0305C86.2516 89.6058 87.4028 89.0022 88.4087 88.2198C89.437 87.4374 90.2529 86.4985 90.8565 85.4032C91.4601 84.3078 91.7618 83.1119 91.7618 81.8154V76.1486C90.6665 77.8475 89.2582 79.2223 87.5369 80.2729C85.8157 81.3012 83.815 81.8154 81.5348 81.8154C79.1653 81.8154 76.9299 81.3571 74.8286 80.4406C72.7273 79.5241 70.8831 78.2611 69.296 76.6516C67.7089 75.0197 66.4682 73.142 65.574 71.0183C64.6799 68.8947 64.2328 66.6146 64.2328 64.178C64.2328 61.7414 64.6799 59.4613 65.574 57.3377C66.4682 55.1917 67.7089 53.3139 69.296 51.7044C70.8831 50.0726 72.7273 48.7984 74.8286 47.8819C76.9299 46.9654 79.1653 46.5071 81.5348 46.5071C83.815 46.5071 85.8157 47.0324 87.5369 48.0831C89.2582 49.1114 90.6665 50.4861 91.7618 52.2074V47.4124ZM81.6019 75.0756C83.5467 75.0756 85.2456 74.5838 86.6986 73.6002C88.1516 72.5943 89.2805 71.2642 90.0853 69.61C90.89 67.9558 91.2924 66.1452 91.2924 64.178C91.2924 62.1661 90.8788 60.3443 90.0517 58.7124C89.247 57.0582 88.1181 55.7393 86.6651 54.7558C85.2121 53.7498 83.5244 53.2469 81.6019 53.2469C79.7242 53.2469 78.0029 53.7386 76.4381 54.7222C74.8957 55.7058 73.6662 57.0247 72.7497 58.6789C71.8332 60.3331 71.3749 62.1661 71.3749 64.178C71.3749 66.1899 71.8332 68.0229 72.7497 69.6771C73.6886 71.3313 74.9292 72.6502 76.4716 73.6338C78.0364 74.595 79.7465 75.0756 81.6019 75.0756Z" fill="currentColor" />
@@ -31,48 +35,65 @@ export default function Footer() {
                 </svg>
               </div>
             </Link>
-            <p className="text-xs text-zinc-500 dark:text-zinc-500 tracking-wide">
-              © {new Date().getFullYear()} ZignnnIt
+            <p className="text-xs text-muted-foreground font-light tracking-wide max-w-sm">
+              Creative digital and visual experiences to elevate your business.
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-6">
-            <ul className="flex items-center gap-6">
-              {/* <li>
-                <Link href={getLinkHref("#pricing")} className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-primary transition-colors">
-                  Pricing
-                </Link>
-              </li> */}
-              <li>
-                <Link href="/contact" className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-primary transition-colors font-light">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop" className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-primary transition-colors font-light">
-                  Shop
-                </Link>
-              </li>
-            </ul>
+          {/* Navigation Links */}
+          {/* <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+            <li>
+              <Link href={getLinkHref("#home")} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link href={getLinkHref("#about-us")} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                About
+              </Link>
+            </li>
+            <li>
+              <Link href={getLinkHref("#services")} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                Services
+              </Link>
+            </li>
+            <li>
+              <Link href="/projects" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                Projects
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link href="/shop" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                Shop
+              </Link>
+            </li>
+          </ul> */}
 
-            <div className="hidden sm:block w-px h-6 bg-zinc-300 dark:bg-zinc-800"></div>
-
-            <div>
-              <a
-                href="https://www.linkedin.com/in/japhetseumo"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button
-                  type="button"
-                  className="bg-primary text-primary-foreground px-5 py-3 font-bold rounded-lg hover:bg-amber-600 transition-colors text-sm"
-                >
-                  LinkedIn
-                </button>
-              </a>
-            </div>
+          {/* Social CTA */}
+          <div className="flex items-center gap-3">
+            <a
+              href="https://www.linkedin.com/in/japhetseumo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200"
+            >
+              <i className="ri-linkedin-fill text-lg"></i>
+              <span>LinkedIn</span>
+            </a>
           </div>
+        </div>
 
+        {/* Bottom bar */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-muted-foreground font-light gap-4">
+          <p>© {new Date().getFullYear()} ZignnnIt. All rights reserved.</p>
+          <p className="flex items-center gap-1">
+            Crafted with passion by <span className="font-semibold text-foreground">ZignnnIt</span>
+          </p>
         </div>
       </div>
     </footer>
