@@ -48,7 +48,7 @@ export default function ContactPage() {
               {/* Glass Card */}
               <div className="relative bg-secondary/80 dark:bg-card/90 backdrop-blur-md rounded-3xl p-6 sm:p-10 md:p-12 shadow-2xl">
                 <form
-                  action="https://formsubmit.co/contact.jscreativ@gmail.com"
+                  action="https://formsubmit.co/zignnnit@gmail.com"
                   method="POST"
                   className="space-y-6"
                 >
@@ -118,8 +118,16 @@ export default function ContactPage() {
                           className="appearance-none bg-transparent py-3 pl-4 pr-8 text-sm font-medium text-muted-foreground border-r border-border focus:outline-none cursor-pointer"
                         >
                           <option className="bg-background text-foreground">CMR (+237)</option>
-                          <option className="bg-background text-foreground">US (+1)</option>
-                          <option className="bg-background text-foreground">EU (+33)</option>
+                          <option className="bg-background text-foreground">USA (+1)</option>
+                          <option className="bg-background text-foreground">FRA (+33)</option>
+                          <option className="bg-background text-foreground">ESP (+34)</option>
+                          <option className="bg-background text-foreground">DEU (+49)</option>
+                          <option className="bg-background text-foreground">CHE (+41)</option>
+                          <option className="bg-background text-foreground">ITA (+39)</option>
+                          <option className="bg-background text-foreground">GBR (+44)</option>
+                          <option className="bg-background text-foreground">CAN (+1)</option>
+                          <option className="bg-background text-foreground">AUS (+61)</option>
+                          <option className="bg-background text-foreground">IND (+91)</option>
                         </select>
                         <input
                           type="text"
