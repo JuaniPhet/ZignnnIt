@@ -1,9 +1,62 @@
 "use client"
 
+import { useState, type FormEvent } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+type FormStatus = "idle" | "loading" | "success" | "error";
+
 export default function ContactPage() {
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (status === "loading") return;
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const value = (key: string) => String(formData.get(key) ?? "").trim();
+
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: value("first-name"),
+          lastName: value("last-name"),
+          company: value("company"),
+          email: value("email"),
+          country: value("country"),
+          phone: value("phone-number"),
+          message: value("message"),
+          website: value("website"),
+        }),
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result?.error || "Something went wrong. Please try again.");
+      }
+
+      setStatus("success");
+      form.reset();
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(
+        err instanceof Error && err.message
+          ? err.message
+          : "Something went wrong. Please try again."
+      );
+    }
+  }
+
+  const isLoading = status === "loading";
+
   return (
     <>
       <Navbar />
@@ -48,10 +101,15 @@ export default function ContactPage() {
               {/* Glass Card */}
               <div className="relative bg-secondary/80 dark:bg-card/90 backdrop-blur-md rounded-3xl p-6 sm:p-10 md:p-12 shadow-2xl">
                 <form
-                  action="https://formsubmit.co/zignnnit@gmail.com"
-                  method="POST"
+                  onSubmit={handleSubmit}
+                  aria-busy={isLoading}
                   className="space-y-6"
                 >
+                  {/* Honeypot anti-spam : caché aux humains, ignoré par les lecteurs d'écran */}
+                  <div className="hidden" aria-hidden="true">
+                    <label htmlFor="website">Website</label>
+                    <input type="text" name="website" id="website" tabIndex={-1} autoComplete="off" />
+                  </div>
                   <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
                     <div>
                       <label htmlFor="first-name" className="block text-sm font-semibold text-foreground mb-2">
@@ -62,6 +120,8 @@ export default function ContactPage() {
                         name="first-name"
                         id="first-name"
                         autoComplete="given-name"
+                        maxLength={100}
+                        required
                         placeholder="John"
                         className="block w-full rounded-xl bg-background/80 border border-border px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm"
                       />
@@ -75,6 +135,7 @@ export default function ContactPage() {
                         name="last-name"
                         id="last-name"
                         autoComplete="family-name"
+                        maxLength={100}
                         placeholder="Doe"
                         className="block w-full rounded-xl bg-background/80 border border-border px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm"
                       />
@@ -88,6 +149,7 @@ export default function ContactPage() {
                         name="company"
                         id="company"
                         autoComplete="organization"
+                        maxLength={150}
                         placeholder="Your company or agency"
                         className="block w-full rounded-xl bg-background/80 border border-border px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm"
                       />
@@ -101,6 +163,8 @@ export default function ContactPage() {
                         name="email"
                         id="email"
                         autoComplete="email"
+                        maxLength={254}
+                        required
                         placeholder="john.doe@example.com"
                         className="block w-full rounded-xl bg-background/80 border border-border px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm"
                       />
@@ -130,9 +194,11 @@ export default function ContactPage() {
                           <option className="bg-background text-foreground">IND (+91)</option>
                         </select>
                         <input
-                          type="text"
+                          type="tel"
                           name="phone-number"
                           id="phone-number"
+                          autoComplete="tel-national"
+                          maxLength={30}
                           className="block min-w-0 grow py-3 px-4 text-base text-foreground bg-transparent placeholder:text-muted-foreground/60 focus:outline-none"
                           placeholder="690-000-000"
                         />
@@ -146,6 +212,9 @@ export default function ContactPage() {
                         name="message"
                         id="message"
                         rows={4}
+                        minLength={10}
+                        maxLength={5000}
+                        required
                         placeholder="Tell us about your project requirements..."
                         className="block w-full rounded-xl bg-background/80 border border-border px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm resize-y"
                       ></textarea>
@@ -154,9 +223,23 @@ export default function ContactPage() {
                   <div className="pt-4">
                     <button
                       type="submit"
-                      className="w-full rounded-xl bg-primary text-primary-foreground py-4 text-center text-lg font-bold shadow-lg shadow-primary/25 hover:brightness-110 active:scale-[0.98] transition-all duration-200 cursor-pointer flex items-center justify-center gap-2.5 group"
+                      id="contact-submit"
+                      disabled={isLoading}
+                      className="w-full rounded-xl bg-primary text-primary-foreground py-4 text-center text-lg font-bold shadow-lg shadow-primary/25 hover:brightness-110 active:scale-[0.98] transition-all duration-200 cursor-pointer flex items-center justify-center gap-2.5 group disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100 disabled:hover:brightness-100"
                     >
-                      <span>Let&apos;s talk</span>
+                      <span>{isLoading ? "Sending..." : "Let\u2019s talk"}</span>
+                      {isLoading ? (
+                        <svg
+                          className="w-5 h-5 animate-spin"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                        </svg>
+                      ) : (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -172,7 +255,28 @@ export default function ContactPage() {
                         <line x1="22" y1="2" x2="11" y2="13"></line>
                         <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                       </svg>
+                      )}
                     </button>
+                  </div>
+
+                  <div aria-live="polite">
+                    {status === "success" && (
+                      <p
+                        id="contact-success"
+                        className="rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-600 dark:text-emerald-400"
+                      >
+                        Thank you! Your message has been sent. We&apos;ll get back to you within 24 hours.
+                      </p>
+                    )}
+                    {status === "error" && (
+                      <p
+                        id="contact-error"
+                        role="alert"
+                        className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm font-medium text-red-600 dark:text-red-400"
+                      >
+                        {errorMessage}
+                      </p>
+                    )}
                   </div>
                 </form>
               </div>
@@ -189,7 +293,7 @@ export default function ContactPage() {
                 </svg>
               </div>
               <h3 className="font-semibold text-foreground text-base mb-1">Email Us</h3>
-              <p className="text-sm text-muted-foreground font-light break-all px-2">zignnnit@gmail.com</p>
+              <p className="text-sm text-muted-foreground font-light break-all px-2">contact@zignnnit.com</p>
             </div>
 
             <div className="flex flex-col items-center p-5 sm:p-6 rounded-2xl bg-secondary/40 border border-border/50 text-center w-full">
