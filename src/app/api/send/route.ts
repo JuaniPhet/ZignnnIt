@@ -69,6 +69,41 @@ function validate(body: Record<string, unknown>): { data?: ContactPayload; error
   return { data };
 }
 
+async function verifyTurnstileToken(token: string, ip?: string | null): Promise<boolean> {
+  const secretKey = process.env.TURNSTILE_SECRET_KEY;
+  // Si la clé secrète n'est pas encore configurée, on ne bloque pas pour permettre le dev
+  if (!secretKey) {
+    return true;
+  }
+
+  if (!token) {
+    return false;
+  }
+
+  try {
+    const formData = new URLSearchParams();
+    formData.append("secret", secretKey);
+    formData.append("response", token);
+    if (ip) {
+      formData.append("remoteip", ip);
+    }
+
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
+
+    const result = await res.json();
+    return Boolean(result.success);
+  } catch (err) {
+    console.error("[api/send] Turnstile verification failed:", err);
+    return false;
+  }
+}
+
 export async function POST(request: Request) {
   let body: Record<string, unknown>;
   try {
@@ -83,6 +118,17 @@ export async function POST(request: Request) {
   // On répond « succès » sans rien envoyer pour ne pas renseigner le bot.
   if (str(body.website)) {
     return NextResponse.json({ success: true }, { status: 200 });
+  }
+
+  // Vérification Cloudflare Turnstile anti-bot
+  const turnstileToken = str(body.turnstileToken);
+  const clientIp = request.headers.get("x-forwarded-for")?.split(",")[0].trim() || request.headers.get("x-real-ip");
+  const isHuman = await verifyTurnstileToken(turnstileToken, clientIp);
+  if (!isHuman) {
+    return NextResponse.json(
+      { error: "Security check failed. Please refresh and try again." },
+      { status: 400 }
+    );
   }
 
   const { data, error } = validate(body);

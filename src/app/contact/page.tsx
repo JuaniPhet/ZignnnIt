@@ -1,18 +1,32 @@
 "use client"
 
-import { useState, type FormEvent } from "react";
+import { useCallback, useState, type FormEvent } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Turnstile from "@/components/Turnstile";
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileReset, setTurnstileReset] = useState(0);
+
+  const handleTurnstileVerify = useCallback((token: string) => setTurnstileToken(token), []);
+  const handleTurnstileExpire = useCallback(() => setTurnstileToken(""), []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (status === "loading") return;
+
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      setStatus("error");
+      setErrorMessage("Please wait for the security check to complete, then try again.");
+      return;
+    }
 
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -34,6 +48,7 @@ export default function ContactPage() {
           phone: value("phone-number"),
           message: value("message"),
           website: value("website"),
+          turnstileToken,
         }),
       });
 
@@ -52,6 +67,9 @@ export default function ContactPage() {
           ? err.message
           : "Something went wrong. Please try again."
       );
+    } finally {
+      // A Turnstile token is single-use: get a fresh one for the next submission.
+      setTurnstileReset((n) => n + 1);
     }
   }
 
@@ -220,6 +238,13 @@ export default function ContactPage() {
                       ></textarea>
                     </div>
                   </div>
+                  <Turnstile
+                    siteKey={TURNSTILE_SITE_KEY}
+                    onVerify={handleTurnstileVerify}
+                    onExpire={handleTurnstileExpire}
+                    resetSignal={turnstileReset}
+                    className="flex justify-center min-h-[65px]"
+                  />
                   <div className="pt-4">
                     <button
                       type="submit"
