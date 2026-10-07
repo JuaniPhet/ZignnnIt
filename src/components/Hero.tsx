@@ -163,7 +163,8 @@ export default function Hero() {
       />
 
       {/* Main content */}
-      <div className="flex flex-col lg:flex-row justify-between items-center container mx-auto w-full px-4 sm:px-6 gap-10 lg:gap-16">
+      <div className="px-4 sm:px-6 lg:px-8 w-full">
+        <div className="flex flex-col lg:flex-row justify-between items-center container mx-auto max-w-7xl w-full gap-10 lg:gap-16">
 
         {/* Left column - Text content */}
         <div className="flex-1 text-left max-w-2xl">
@@ -262,6 +263,7 @@ export default function Hero() {
             priority
           />
         </div>
+      </div>
       </div>
 
       {/* Bottom-right ambient glow */}

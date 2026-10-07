@@ -42,31 +42,35 @@ export default function About() {
     <div id="about-us" ref={containerRef}>
       {/* Notre environnement de travail */}
       <div className="bg-[#F6EEDD] dark:bg-amber-950/20 mt-24 py-16 overflow-hidden">
-        <div className="container mx-auto px-4 w-full">
-          <div className="invisible about-image relative w-full aspect-[16/9] md:h-[60vh] lg:h-[80vh] rounded-[20px] md:rounded-[70px] overflow-hidden mb-8 md:mb-12 shadow-lg">
-            <Image
-              src="/img/setup-dev.jpeg"
-              alt="setup a ODC"
-              fill
-              sizes="(max-width: 768px) 100vw, 1200px"
-              className="object-cover transition-transform duration-700 hover:scale-105"
-            />
+        <div className="px-4 sm:px-6 lg:px-8 w-full">
+          <div className="container mx-auto max-w-7xl w-full">
+            <div className="invisible about-image relative w-full aspect-[16/9] md:h-[60vh] lg:h-[80vh] rounded-[20px] md:rounded-[70px] overflow-hidden mb-8 md:mb-12 shadow-lg">
+              <Image
+                src="/img/setup-dev.jpeg"
+                alt="setup a ODC"
+                fill
+                sizes="(max-width: 768px) 100vw, 1200px"
+                className="object-cover transition-transform duration-700 hover:scale-105"
+              />
+            </div>
           </div>
         </div>
-        <div className="container mx-auto px-4 w-full text-center max-w-4xl">
-          <h1 className="invisible about-title text-4xl sm:text-5xl lg:text-6xl font-bold pb-8 text-foreground leading-[1.2] tracking-tight">
-            Bringing Your Ideas to Life with <span className="text-amber-500">Creativity and Innovation</span>
-          </h1>
-          <p className="invisible about-text text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed font-light">
-            <b className="text-foreground font-semibold">ZignnnIt</b> is a key
-            player in graphic design, UI/UX, and web & mobile development.
-            We combine creativity and technical expertise to transform your ideas into
-            impactful digital experiences.
-            <br /><br />
-            From conception to launch, we support our clients with a constant focus on
-            quality and innovation. Together, let&apos;s build products
-            that inspire and shape the future of your business.
-          </p>
+        <div className="px-4 sm:px-6 lg:px-8 w-full">
+          <div className="container mx-auto w-full text-center max-w-4xl">
+            <h1 className="invisible about-title text-4xl sm:text-5xl lg:text-6xl font-bold pb-8 text-foreground leading-[1.2] tracking-tight">
+              Bringing Your Ideas to Life with <span className="text-amber-500">Creativity and Innovation</span>
+            </h1>
+            <p className="invisible about-text text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed font-light">
+              <b className="text-foreground font-semibold">ZignnnIt</b> is a key
+              player in graphic design, UI/UX, and web & mobile development.
+              We combine creativity and technical expertise to transform your ideas into
+              impactful digital experiences.
+              <br /><br />
+              From conception to launch, we support our clients with a constant focus on
+              quality and innovation. Together, let&apos;s build products
+              that inspire and shape the future of your business.
+            </p>
+          </div>
         </div>
       </div>
     </div>

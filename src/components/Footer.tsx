@@ -15,7 +15,8 @@ export default function Footer() {
       {/* Top gold-amber gradient border highlight */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber-500/40 to-transparent"></div>
 
-      <div className="container mx-auto px-4 sm:px-6 w-full">
+      <div className="px-4 sm:px-6 lg:px-8 w-full">
+        <div className="container mx-auto max-w-7xl w-full">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 pb-10 border-b border-border/40">
 
           {/* Logo & Tagline */}
@@ -94,6 +95,7 @@ export default function Footer() {
           <p className="flex items-center gap-1">
             Crafted with passion by <span className="font-semibold text-foreground">ZignnnIt</span>
           </p>
+        </div>
         </div>
       </div>
     </footer>

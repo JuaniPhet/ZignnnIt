@@ -84,50 +84,52 @@ export default function Services() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} className="pt-40 container mx-auto px-4 w-full" id="services">
-      <div className="invisible services-heading">
-        <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground tracking-tight leading-[1.1]">
-          Our <span className="text-amber-500">Services</span>
-        </h2>
-        <p className="pt-4 pb-10 text-lg sm:text-xl text-muted-foreground font-light tracking-wide">
-          Grow your business with our expertise.
-        </p>
-      </div>
+    <section ref={sectionRef} className="pt-40 px-4 sm:px-6 lg:px-8 w-full" id="services">
+      <div className="container mx-auto max-w-7xl w-full">
+        <div className="invisible services-heading">
+          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground tracking-tight leading-[1.1]">
+            Our <span className="text-amber-500">Services</span>
+          </h2>
+          <p className="pt-4 pb-10 text-lg sm:text-xl text-muted-foreground font-light tracking-wide">
+            Grow your business with our expertise.
+          </p>
+        </div>
 
-      <Accordion className="w-full services-accordion">
-        {services.map((service) => (
-          <AccordionItem
-            key={service.value}
-            value={service.value}
-            className="invisible services-item border-b border-border py-4"
-          >
-            <AccordionTrigger className="text-3xl sm:text-4xl lg:text-5xl text-muted-foreground hover:text-foreground font-extralight hover:no-underline duration-300 py-6 transition-colors [&[data-state=open]]:text-foreground [&[data-state=open]]:font-semibold">
-              {service.title}
-            </AccordionTrigger>
-            <AccordionContent>
-              <div className="flex flex-col md:flex-row items-start justify-center gap-8 py-6">
-                <div className="relative w-full md:w-1/2 h-60 rounded-2xl overflow-hidden shadow-md">
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                    className="object-cover transition-transform duration-500 hover:scale-105"
-                  />
+        <Accordion className="w-full services-accordion">
+          {services.map((service) => (
+            <AccordionItem
+              key={service.value}
+              value={service.value}
+              className="invisible services-item border-b border-border py-4"
+            >
+              <AccordionTrigger className="text-3xl sm:text-4xl lg:text-5xl text-muted-foreground hover:text-foreground font-extralight hover:no-underline duration-300 py-6 transition-colors [&[data-state=open]]:text-foreground [&[data-state=open]]:font-semibold">
+                {service.title}
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="flex flex-col md:flex-row items-start justify-center gap-8 py-6">
+                  <div className="relative w-full md:w-1/2 h-60 rounded-2xl overflow-hidden shadow-md">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                      className="object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                  </div>
+                  <div className="w-full md:w-1/2 flex flex-col justify-center">
+                    <h3 className="text-xl sm:text-2xl font-medium text-foreground mb-4">
+                      {service.quote}
+                    </h3>
+                    <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-light">
+                      {service.description}
+                    </p>
+                  </div>
                 </div>
-                <div className="w-full md:w-1/2 flex flex-col justify-center">
-                  <h3 className="text-xl sm:text-2xl font-medium text-foreground mb-4">
-                    {service.quote}
-                  </h3>
-                  <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-light">
-                    {service.description}
-                  </p>
-                </div>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
     </section>
   );
 }

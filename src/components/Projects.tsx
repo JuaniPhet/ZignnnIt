@@ -67,24 +67,30 @@ export default function Projects() {
     <section ref={sectionRef} id="projects">
       <div ref={triggerRef} className="overflow-hidden">
         <div className="bg-background pt-24 pb-10 min-h-screen flex flex-col justify-center">
-          <div className="invisible projects-heading container mx-auto px-4 w-full mb-10">
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground tracking-tight leading-[1.1]">
-              Our <span className="text-amber-500">Projects</span>
-            </h2>
-            <p className="mt-3 text-lg sm:text-xl text-muted-foreground font-light tracking-wide">
-              Missions we&apos;ve successfully completed.
-            </p>
+          <div className="px-4 sm:px-6 lg:px-8 w-full mb-8 sm:mb-10">
+            <div className="invisible projects-heading container mx-auto max-w-7xl w-full">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground tracking-tight leading-[1.1]">
+                Our <span className="text-amber-500">Projects</span>
+              </h2>
+              <p className="mt-2 sm:mt-3 text-base sm:text-lg lg:text-xl text-muted-foreground font-light tracking-wide">
+                Missions we&apos;ve successfully completed.
+              </p>
+            </div>
           </div>
 
           <div
             ref={scrollTrackRef}
-            className="flex px-4 sm:px-10 gap-x-12 will-change-transform"
-            style={{ width: "max-content" }}
+            className="flex gap-x-6 lg:gap-x-12 will-change-transform"
+            style={{
+              width: "max-content",
+              paddingLeft: "max(1rem, calc((100vw - 1280px) / 2 + 2rem))",
+              paddingRight: "max(1rem, calc((100vw - 1280px) / 2 + 2rem))",
+            }}
           >
             {featuredProjects.map((project, idx) => (
               <article
                 key={idx}
-                className="flex flex-col justify-between w-[85vw] sm:w-[500px] md:w-[600px] flex-shrink-0 group"
+                className="flex flex-col justify-between w-[calc(100vw-2rem)] lg:w-[500px] xl:w-[600px] flex-shrink-0 group"
               >
                 <div className="relative rounded-2xl w-full aspect-[16/9]">
                   {/* Fine glowing gradient line border */}
@@ -97,7 +103,7 @@ export default function Projects() {
                         src={project.image}
                         alt={project.title}
                         fill
-                        sizes="(max-width: 640px) 85vw, (max-width: 768px) 500px, 600px"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 500px, 600px"
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
@@ -109,15 +115,15 @@ export default function Projects() {
                     </div>
                   </div>
                 </div>
-                <div className="mt-6 flex flex-col gap-4">
+                <div className="mt-5 sm:mt-6 flex flex-col gap-3 sm:gap-4">
                   {/* Top row: Title (left) & Tools (right) */}
-                  <div className="flex justify-between items-center gap-4">
-                    <h3 className="text-2xl sm:text-3xl font-semibold text-foreground tracking-tight">
+                  <div className="flex flex-wrap sm:flex-nowrap justify-between items-center gap-2 sm:gap-4">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-foreground tracking-tight">
                       {project.title}
                     </h3>
 
                     {/* Tools logos */}
-                    <div className="flex gap-2 h-8">
+                    <div className="flex gap-2 h-6 sm:h-7 lg:h-8">
                       {project.tools.map((tool, tIdx) => (
                         <img
                           key={tIdx}
@@ -154,13 +160,13 @@ export default function Projects() {
             {/* "See all projects" CTA card */}
             <Link
               href="/projects"
-              className="flex flex-col items-center justify-center w-[85vw] sm:w-[500px] md:w-[600px] flex-shrink-0 group relative"
+              className="flex flex-col items-center justify-center w-[calc(100vw-2rem)] lg:w-[500px] xl:w-[600px] flex-shrink-0 group relative"
             >
               {/* Fine glowing gradient line border */}
               <div className="absolute -inset-[1px] bg-gradient-to-r from-amber-500/40 via-primary to-amber-500/40 rounded-2xl opacity-50 group-hover:opacity-100 blur-[1px] group-hover:blur-[3px] transition-all duration-500"></div>
 
               <div className="relative bg-secondary/90 dark:bg-card/90 backdrop-blur-sm rounded-2xl w-full aspect-[16/9] shadow-xl flex flex-col items-center justify-center gap-4 sm:gap-6 transition-all duration-300">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110 border border-primary/20 shadow-sm">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-full bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110 border border-primary/20 shadow-sm">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="32"
@@ -171,17 +177,17 @@ export default function Projects() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-primary w-6 h-6 sm:w-9 sm:h-9 group-hover:translate-x-1 transition-transform duration-300"
+                    className="text-primary w-6 h-6 sm:w-7 sm:h-7 lg:w-9 lg:h-9 group-hover:translate-x-1 transition-transform duration-300"
                   >
                     <path d="M5 12h14" />
                     <path d="m12 5 7 7-7 7" />
                   </svg>
                 </div>
-                <div className="text-center px-6">
-                  <h3 className="text-xl sm:text-3xl font-bold text-foreground tracking-tight">
+                <div className="text-center px-4 sm:px-6">
+                  <h3 className="text-lg sm:text-2xl lg:text-3xl font-bold text-foreground tracking-tight">
                     See all projects
                   </h3>
-                  <p className="mt-1 sm:mt-2 text-xs sm:text-base text-muted-foreground font-light">
+                  <p className="mt-1 sm:mt-2 text-xs sm:text-sm lg:text-base text-muted-foreground font-light">
                     Explore our complete portfolio
                   </p>
                 </div>

@@ -54,7 +54,8 @@ export default function Stats() {
         className="absolute inset-0 -z-10 size-full object-cover object-right md:object-center opacity-30"
       />
 
-      <div className="container mx-auto px-4 w-full">
+      <div className="px-4 sm:px-6 lg:px-8 w-full">
+        <div className="container mx-auto max-w-7xl w-full">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2 className="invisible stats-title text-5xl sm:text-7xl lg:text-8xl font-bold text-white tracking-tight leading-[1.1]">
             Work with <span className="text-amber-400">us</span>
@@ -86,6 +87,7 @@ export default function Stats() {
               <dd className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white">100%</dd>
             </div>
           </dl>
+        </div>
         </div>
       </div>
     </div>
