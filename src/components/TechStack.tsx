@@ -28,6 +28,7 @@ const toolsList: ToolItem[] = [
   { src: "/img/tools/typescript.svg", alt: "TypeScript" },
   { src: "/img/tools/react.svg", alt: "React" },
   { src: "/img/tools/nextjs.svg", alt: "Next.js", invertDark: true },
+  { src: "/img/tools/shadcn-ui.svg", alt: "Shadcn UI", invertDark: true },
   { src: "/img/tools/tailwindcss.svg", alt: "Tailwind CSS" },
   { src: "/img/tools/bootstrap.svg", alt: "Bootstrap" },
   { src: "/img/tools/gsap.svg", alt: "GSAP" },
@@ -101,9 +102,8 @@ export default function TechStack() {
             <img
               src={tool.src}
               alt={tool.alt}
-              className={`h-full w-auto object-contain grayscale hover:filter-none opacity-50 hover:opacity-100 transition-all duration-300 ${
-                tool.invertDark ? "dark:invert" : "dark:brightness-200 dark:contrast-100"
-              }`}
+              className={`h-full w-auto object-contain grayscale hover:filter-none opacity-50 hover:opacity-100 transition-all duration-300 ${tool.invertDark ? "dark:invert" : "dark:brightness-200 dark:contrast-100"
+                }`}
             />
           </div>
         ))}

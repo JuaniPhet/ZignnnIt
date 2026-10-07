@@ -26,6 +26,20 @@ export const allProjects: Project[] = [
     description: "A comprehensive brand identity and graphic guidelines crafted for Kasastay, a modern property rental and real estate company in Cameroon."
   },
   {
+    title: "Pasteefy",
+    category: "Web Development",
+    image: "/img/projects/pasteefy_banner.jpg",
+    tools: [
+      { src: "/img/tools/nextjs.svg", alt: "Next.js" },
+      { src: "/img/tools/typescript.svg", alt: "TypeScript" },
+      { src: "/img/tools/vercel.svg", alt: "Vercel" },
+      { src: "/img/tools/adobe-illustrator.svg", alt: "Illustrator" },
+      { src: "/img/tools/google-antigravity.svg", alt: "Google Antigravity" }
+    ],
+    link: "https://pasteefy.zignnnit.com",
+    description: "An intuitive social media text formatter and styling tool designed to craft engaging, beautifully formatted posts."
+  },
+  {
     title: "Evers Beauty",
     category: "Graphic Design",
     image: "/img/projects/evers_beauty_banner.jpg",
@@ -36,6 +50,20 @@ export const allProjects: Project[] = [
     ],
     link: "https://drive.google.com/file/d/13J9NVaTTrp9GI1ood0e-pqjA8c251wtZ/view?usp=drive_link",
     description: "A comprehensive visual identity and brand style guide crafted for Evers Beauty, a modern aesthetics and wellness institute."
+  },
+  {
+    title: "Gaëlle & Joël",
+    category: "Web Development",
+    image: "/img/projects/gaelle-joel_weeding.jpg",
+    tools: [
+      { src: "/img/tools/nextjs.svg", alt: "Next.js" },
+      { src: "/img/tools/shadcn-ui.svg", alt: "shadcn/ui" },
+      { src: "/img/tools/gsap.svg", alt: "GSAP" },
+      { src: "/img/tools/framer.svg", alt: "Framer" },
+      { src: "/img/tools/google-antigravity.svg", alt: "Google Antigravity" }
+    ],
+    link: "https://gaelle-joel.vercel.app",
+    description: "A personalized digital wedding invitation and interactive e-ticket platform crafted for an unforgettable celebration."
   },
   {
     title: "NovaSup",
