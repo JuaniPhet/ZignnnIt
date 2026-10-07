@@ -47,14 +47,17 @@ export default function ProjectsPage() {
                     {/* Fine glowing gradient line border */}
                     <div className="absolute -inset-[1px] bg-gradient-to-r from-amber-500/40 via-primary to-amber-500/40 rounded-2xl opacity-50 group-hover:opacity-100 blur-[1px] group-hover:blur-[3px] transition-all duration-500"></div>
 
-                    <div className="relative bg-amber-100 dark:bg-amber-950/20 rounded-2xl w-full h-full shadow-lg overflow-hidden flex items-center justify-center p-1">
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                        className="object-contain transition-transform duration-500 group-hover:scale-105"
-                      />
+                    <div className="relative bg-amber-100 dark:bg-amber-950/20 rounded-2xl w-full h-full shadow-lg overflow-hidden flex items-center justify-center">
+                      {/* Fixed-ratio image frame: guarantees the same amber top/bottom band on every project */}
+                      <div className="relative w-full aspect-[1.89/1]">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
                       {/* Overlay on hover */}
                       <div className="absolute inset-0 bg-black/75 flex items-center justify-center p-6 sm:p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
                         <p className="text-white text-sm sm:text-base text-center leading-relaxed font-light">
@@ -88,7 +91,7 @@ export default function ProjectsPage() {
                       {project.description}
                     </p>
 
-                    <div className="mt-4">
+                    <div className="mt-4 flex items-center gap-3">
                       <a
                         href={project.link}
                         target="_blank"
@@ -101,6 +104,9 @@ export default function ProjectsPage() {
                           Voir plus
                         </button>
                       </a>
+                      <span className="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/25 tracking-wide">
+                        {project.category}
+                      </span>
                     </div>
                   </div>
                 </article>

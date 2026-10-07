@@ -20,28 +20,28 @@ const services = [
     title: "Graphic Design",
     quote: "\u201CTransforming ideas into captivating visuals.\u201D",
     description: "We bring your brand to life with unique, impactful designs\u2014from logos to marketing materials\u2014crafted with precision and attention to detail.",
-    image: "/img/graphic_design.jpg",
+    image: "/img/services/graphic_design.jpg",
   },
   {
     value: "ui-ux-design",
     title: "UI UX Design",
     quote: "\u201CIntuitive interfaces, delightful experiences.\u201D",
     description: "Our UI/UX team crafts visually appealing, user-friendly interfaces that drive engagement and satisfaction across every screen.",
-    image: "/img/ui_ux_design.jpg",
+    image: "/img/services/ui_ux_design.jpg",
   },
   {
     value: "web-development",
     title: "Web Development",
     quote: "\u201CWebsites that inspire and perform.\u201D",
     description: "Dynamic, responsive websites tailored to your business goals\u2014built for performance, security, and scalability.",
-    image: "/img/web_dev.jpg",
+    image: "/img/services/web_dev.jpg",
   },
   {
     value: "mobile-development",
     title: "Mobile Development",
     quote: "\u201CMobile solutions for a connected world.\u201D",
     description: "Custom iOS and Android apps optimized for performance and usability, from concept to market launch.",
-    image: "/img/mobile_dev.jpg",
+    image: "/img/services/mobile_dev.jpg",
   },
 ];
 

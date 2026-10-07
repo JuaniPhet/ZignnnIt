@@ -90,14 +90,17 @@ export default function Projects() {
                   {/* Fine glowing gradient line border */}
                   <div className="absolute -inset-[1px] bg-gradient-to-r from-amber-500/40 via-primary to-amber-500/40 rounded-2xl opacity-50 group-hover:opacity-100 blur-[1px] group-hover:blur-[3px] transition-all duration-500"></div>
 
-                  <div className="relative bg-amber-100 dark:bg-amber-950/20 rounded-2xl w-full h-full shadow-xl overflow-hidden flex items-center justify-center p-1">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      sizes="(max-width: 640px) 85vw, (max-width: 768px) 500px, 600px"
-                      className="object-contain transition-transform duration-500 group-hover:scale-105"
-                    />
+                  <div className="relative bg-amber-100 dark:bg-amber-950/20 rounded-2xl w-full h-full shadow-xl overflow-hidden flex items-center justify-center">
+                    {/* Fixed-ratio image frame: guarantees the same amber top/bottom band on every project, whatever the source image ratio */}
+                    <div className="relative w-full aspect-[1.89/1]">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        sizes="(max-width: 640px) 85vw, (max-width: 768px) 500px, 600px"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
                     {/* Overlay for description on hover */}
                     <div className="absolute inset-0 bg-black/80 flex items-center justify-center p-6 sm:p-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
                       <p className="text-white text-base sm:text-lg text-center leading-relaxed font-light">
@@ -106,8 +109,9 @@ export default function Projects() {
                     </div>
                   </div>
                 </div>
-                <div className="mt-6">
-                  <div className="flex flex-wrap gap-4 justify-between items-center">
+                <div className="mt-6 flex flex-col gap-4">
+                  {/* Top row: Title (left) & Tools (right) */}
+                  <div className="flex justify-between items-center gap-4">
                     <h3 className="text-2xl sm:text-3xl font-semibold text-foreground tracking-tight">
                       {project.title}
                     </h3>
@@ -123,21 +127,25 @@ export default function Projects() {
                         />
                       ))}
                     </div>
+                  </div>
 
-                    <div>
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                  {/* Bottom row: Button 'Voir plus' and Category Tag */}
+                  <div className="flex items-center gap-3">
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <button
+                        type="button"
+                        className="bg-primary text-primary-foreground px-5 py-2 font-bold rounded-lg hover:brightness-110 transition-all text-sm sm:text-base cursor-pointer"
                       >
-                        <button
-                          type="button"
-                          className="bg-primary text-primary-foreground px-5 py-2 font-bold rounded-lg hover:brightness-110 transition-all text-sm sm:text-base cursor-pointer"
-                        >
-                          Voir plus
-                        </button>
-                      </a>
-                    </div>
+                        Voir plus
+                      </button>
+                    </a>
+                    <span className="inline-flex items-center text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/25 tracking-wide">
+                      {project.category}
+                    </span>
                   </div>
                 </div>
               </article>
