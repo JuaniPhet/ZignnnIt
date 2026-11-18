@@ -41,7 +41,7 @@ export default function About() {
   return (
     <div id="about-us" ref={containerRef}>
       {/* Notre environnement de travail */}
-      <div className="bg-cream dark:bg-amber/5 mt-24 py-16 overflow-hidden">
+      <div className="bg-cream dark:bg-amber/5 mt-6 sm:mt-10 py-16 overflow-hidden">
         <div className="px-4 sm:px-6 lg:px-8 w-full">
           <div className="container mx-auto max-w-7xl w-full">
             <div className="invisible about-image relative w-full aspect-[16/9] md:h-[60vh] lg:h-[80vh] rounded-[20px] md:rounded-[70px] overflow-hidden mb-8 md:mb-12 shadow-lg">

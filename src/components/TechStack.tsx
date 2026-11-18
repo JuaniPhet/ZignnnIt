@@ -89,7 +89,7 @@ export default function TechStack() {
   return (
     <div
       ref={containerRef}
-      className="overflow-hidden relative stack-container w-full py-10 bg-background"
+      className="overflow-hidden relative stack-container w-full py-6 sm:py-8 bg-background"
     >
       <div
         ref={scrollRef}

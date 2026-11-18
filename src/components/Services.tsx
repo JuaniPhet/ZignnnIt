@@ -84,7 +84,7 @@ export default function Services() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} className="pt-40 px-4 sm:px-6 lg:px-8 w-full" id="services">
+    <section ref={sectionRef} className="pt-24 lg:pt-32 px-4 sm:px-6 lg:px-8 w-full" id="services">
       <div className="container mx-auto max-w-7xl w-full">
         <div className="invisible services-heading">
           <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground">
