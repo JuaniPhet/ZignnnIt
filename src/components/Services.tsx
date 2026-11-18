@@ -20,13 +20,17 @@ const services = [
     title: "Graphic Design",
     quote: "\u201CTransforming ideas into captivating visuals.\u201D",
     description: "We bring your brand to life with unique, impactful designs\u2014from logos to marketing materials\u2014crafted with precision and attention to detail.",
+    deliverables: ["Logo & visual identity", "Brand guidelines", "Print & marketing materials", "Social media kits"],
+    timeline: "1–3 weeks",
     image: "/img/services/graphic_design.jpg",
   },
   {
     value: "ui-ux-design",
-    title: "UI UX Design",
+    title: "UI/UX Design",
     quote: "\u201CIntuitive interfaces, delightful experiences.\u201D",
     description: "Our UI/UX team crafts visually appealing, user-friendly interfaces that drive engagement and satisfaction across every screen.",
+    deliverables: ["User research & user flows", "Wireframes", "High-fidelity mockups", "Interactive Figma prototype"],
+    timeline: "2–4 weeks",
     image: "/img/services/ui_ux_design.jpg",
   },
   {
@@ -34,6 +38,8 @@ const services = [
     title: "Web Development",
     quote: "\u201CWebsites that inspire and perform.\u201D",
     description: "Dynamic, responsive websites tailored to your business goals\u2014built for performance, security, and scalability.",
+    deliverables: ["Showcase websites & landing pages", "Web apps & dashboards", "SEO & performance optimization", "Deployment & hosting setup"],
+    timeline: "2–8 weeks",
     image: "/img/services/web_dev.jpg",
   },
   {
@@ -41,6 +47,8 @@ const services = [
     title: "Mobile Development",
     quote: "\u201CMobile solutions for a connected world.\u201D",
     description: "Custom iOS and Android apps optimized for performance and usability, from concept to market launch.",
+    deliverables: ["iOS & Android apps (Flutter)", "App UI design", "API & back-end integration", "App Store & Play Store publishing"],
+    timeline: "6–12 weeks",
     image: "/img/services/mobile_dev.jpg",
   },
 ];
@@ -102,7 +110,8 @@ export default function Services() {
               value={service.value}
               className="invisible services-item border-b border-border py-4"
             >
-              <AccordionTrigger className="text-3xl sm:text-4xl lg:text-5xl text-muted-foreground hover:text-foreground hover:no-underline duration-300 py-6 transition-colors [&[data-state=open]]:text-foreground [&[data-state=open]]:font-semibold">
+              {/* Base UI exposes the open state through aria-expanded (not Radix's data-state). */}
+              <AccordionTrigger className="font-sans font-semibold tracking-tight leading-tight text-3xl sm:text-4xl lg:text-5xl text-foreground hover:text-amber-deep aria-expanded:text-amber-deep dark:hover:text-amber dark:aria-expanded:text-amber hover:no-underline duration-300 py-6 transition-colors">
                 {service.title}
               </AccordionTrigger>
               <AccordionContent>
@@ -117,11 +126,24 @@ export default function Services() {
                     />
                   </div>
                   <div className="w-full md:w-1/2 flex flex-col justify-center">
-                    <h3 className="font-sans font-semibold tracking-normal leading-snug text-xl sm:text-2xl text-foreground mb-4">
+                    <p className="font-semibold leading-snug text-xl sm:text-2xl text-foreground">
                       {service.quote}
-                    </h3>
+                    </p>
                     <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                       {service.description}
+                    </p>
+                    <p className="text-sm font-semibold uppercase tracking-wider text-foreground !mb-2">Deliverables</p>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 mb-5">
+                      {service.deliverables.map((item) => (
+                        <li key={item} className="flex items-start gap-2 text-base text-muted-foreground">
+                          <i className="ri-check-line text-amber-deep dark:text-amber text-lg leading-6" aria-hidden="true"></i>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="inline-flex self-start items-center gap-2 rounded-full bg-amber/15 border border-amber/30 px-3 py-1.5 text-sm text-foreground">
+                      <i className="ri-time-line" aria-hidden="true"></i>
+                      <span>Indicative timeline: <b className="font-semibold">{service.timeline}</b></span>
                     </p>
                   </div>
                 </div>
