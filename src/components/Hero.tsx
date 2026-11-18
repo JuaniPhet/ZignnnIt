@@ -4,13 +4,14 @@ import { useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import SplitTitle from "@/components/SplitTitle";
 import HeroIllustration from "@/components/hero/HeroIllustration";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleText = "We are a creative Agency";
+  const t = useTranslations("hero");
 
   useGSAP(() => {
     // Badge entrance
@@ -136,7 +137,7 @@ export default function Hero() {
 
       {/* Background grid pattern */}
       <Image
-        alt="Hero Grid"
+        alt=""
         src="/img/rb_56040.png"
         fill
         sizes="100vw"
@@ -154,21 +155,22 @@ export default function Hero() {
           {/* Badge */}
           <div className="invisible hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-secondary-foreground text-sm font-semibold mb-6 sm:mb-8 border border-border/50 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-            Creative Digital Agency
+            {t("badge")}
           </div>
 
           {/* Title */}
           <SplitTitle
-            text={titleText}
-            highlight="creative"
+            text={t("title")}
+            highlight={t("highlight")}
             letterClassName="captive-letter"
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-foreground"
+            className="text-[clamp(2.5rem,5.6vw,5rem)] leading-[1.02] font-extrabold text-foreground"
           />
 
           {/* Subtitle */}
           <p className="invisible we-help-you-to text-base sm:text-lg md:text-xl lg:text-2xl mt-6 sm:mt-8 mb-8 sm:mb-10 text-muted-foreground leading-relaxed max-w-xl">
-            Digital and visual experiences that{" "}
-            <b className="text-foreground font-semibold">elevate your business</b>.
+            {t.rich("subtitle", {
+              b: (chunks) => <b className="text-foreground font-semibold">{chunks}</b>,
+            })}
           </p>
 
           {/* CTA Group */}
@@ -176,28 +178,11 @@ export default function Hero() {
             <div className="relative w-full md:w-auto">
               {/* CTA Glow effect */}
               <div className="cta-glow absolute -inset-1 bg-primary/30 rounded-xl blur-lg opacity-40"></div>
-              <Link href="/contact" className="w-full block">
-                <button
-                  type="button"
-                  className="relative w-full md:w-auto bg-primary text-primary-foreground text-sm sm:text-sm md:text-base px-3 sm:px-6 md:px-8 py-3.5 sm:py-4 font-semibold rounded-xl hover:brightness-110 active:scale-[0.98] transition-all duration-200 shadow-lg shadow-primary/25 flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer text-center group whitespace-nowrap"
-                >
-                  <span>Ready to zignnn your project ?</span>
-                  {/* <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform duration-300 flex-shrink-0"
-                  >
-                    <path d="M12 20h9" />
-                    <path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z" />
-                  </svg> */}
-                </button>
+              <Link
+                href="/contact"
+                className="relative w-full md:w-auto bg-primary text-primary-foreground text-sm sm:text-sm md:text-base px-3 sm:px-6 md:px-8 py-3.5 sm:py-4 font-semibold rounded-xl hover:brightness-110 active:scale-[0.98] transition-all duration-200 shadow-lg shadow-primary/25 flex items-center justify-center gap-1.5 sm:gap-2 text-center whitespace-nowrap"
+              >
+                {t("cta")}
               </Link>
             </div>
 
@@ -206,7 +191,7 @@ export default function Hero() {
               href="#services"
               className="w-full md:w-auto text-muted-foreground hover:text-foreground text-sm sm:text-base font-medium transition-colors duration-200 flex items-center justify-center md:justify-start gap-1.5 group py-3 px-6 rounded-xl border md:border-none border-border/50 text-center"
             >
-              Discover our services
+              {t("secondary")}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -229,7 +214,7 @@ export default function Hero() {
         {/* Right column - Illustration */}
         {/* Animated vector illustration: below the CTAs on mobile (~90% wide, centered), right column from lg */}
         <div className="invisible hero-illustration w-[90%] max-w-[520px] mx-auto lg:mx-0 lg:w-1/2 lg:max-w-2xl flex-shrink-0">
-          <HeroIllustration />
+          <HeroIllustration title={t("illustrationTitle")} />
         </div>
       </div>
       </div>

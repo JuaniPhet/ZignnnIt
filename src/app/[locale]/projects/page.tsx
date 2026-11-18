@@ -1,14 +1,33 @@
-"use client"
-
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { hasLocale } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { allProjects } from "@/lib/projects";
+import { routing } from "@/i18n/routing";
+import { pageAlternates } from "@/i18n/metadata";
 
-export default function ProjectsPage() {
+type PageProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) return {};
+  const t = await getTranslations({ locale, namespace: "metadata.projects" });
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: pageAlternates(locale, "/projects"),
+  };
+}
+
+// Server component: no interactivity here, so no client JavaScript is shipped for it.
+export default async function ProjectsPage({ params }: PageProps) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
+  const t = await getTranslations("projects");
+
   return (
-    <>
-      <Navbar />
       <main className="pt-24 min-h-screen bg-background">
         <div className="isolate px-4 sm:px-6 py-16 sm:py-24 lg:px-8 relative">
           {/* Background gradient blob */}
@@ -27,10 +46,10 @@ export default function ProjectsPage() {
           {/* Page header */}
           <div className="mx-auto max-w-2xl text-center mb-16 sm:mb-20">
             <h1 className="text-balance text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground">
-              Our <span className="text-primary">Projects</span>
+              {t.rich("title", { hl: (chunks) => <span className="text-primary">{chunks}</span> })}
             </h1>
             <p className="mt-4 text-lg sm:text-xl text-muted-foreground">
-              A showcase of missions we&apos;ve successfully completed — from branding to full-stack development.
+              {t("pageSubtitle")}
             </p>
           </div>
 
@@ -61,7 +80,7 @@ export default function ProjectsPage() {
                       {/* Overlay on hover */}
                       <div className="absolute inset-0 bg-black/75 flex items-center justify-center p-6 sm:p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
                         <p className="text-white text-sm sm:text-base text-center leading-relaxed">
-                          {project.description}
+                          {project.description[locale]}
                         </p>
                       </div>
                     </div>
@@ -88,7 +107,7 @@ export default function ProjectsPage() {
                     </div>
 
                     <p className="mt-2 text-sm text-muted-foreground leading-relaxed line-clamp-2">
-                      {project.description}
+                      {project.description[locale]}
                     </p>
 
                     <div className="mt-4 flex items-center gap-3">
@@ -96,16 +115,12 @@ export default function ProjectsPage() {
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
+                        className="bg-primary text-primary-foreground px-5 py-2 font-semibold rounded-lg hover:brightness-110 active:scale-[0.97] transition-all duration-200 text-sm"
                       >
-                        <button
-                          type="button"
-                          className="bg-primary text-primary-foreground px-5 py-2 font-semibold rounded-lg hover:brightness-110 active:scale-[0.97] transition-all duration-200 text-sm"
-                        >
-                          Voir plus
-                        </button>
+                        {t("viewProject")}
                       </a>
                       <span className="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-full bg-amber/15 text-carbon dark:text-amber border border-amber/30">
-                        {project.category}
+                        {t(`categories.${project.category}`)}
                       </span>
                     </div>
                   </div>
@@ -115,7 +130,5 @@ export default function ProjectsPage() {
           </div>
         </div>
       </main>
-      <Footer />
-    </>
   );
 }

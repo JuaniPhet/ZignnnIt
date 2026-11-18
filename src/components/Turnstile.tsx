@@ -7,6 +7,7 @@ import { useTheme } from "next-themes";
 type TurnstileRenderOptions = {
   sitekey: string;
   theme?: "light" | "dark" | "auto";
+  language?: string;
   callback?: (token: string) => void;
   "expired-callback"?: () => void;
   "error-callback"?: () => void;
@@ -30,6 +31,8 @@ type TurnstileProps = {
   onExpire: () => void;
   /** Increment to reset the widget (tokens are single-use). */
   resetSignal?: number;
+  /** Widget language (e.g. "en", "fr"); defaults to the browser language. */
+  language?: string;
   className?: string;
 };
 
@@ -37,7 +40,7 @@ type TurnstileProps = {
  * Cloudflare Turnstile widget (explicit rendering, no extra dependency).
  * The widget follows the site theme (next-themes) rather than the OS theme.
  */
-export default function Turnstile({ siteKey, onVerify, onExpire, resetSignal = 0, className }: TurnstileProps) {
+export default function Turnstile({ siteKey, onVerify, onExpire, resetSignal = 0, language = "auto", className }: TurnstileProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
   const [scriptReady, setScriptReady] = useState(false);
@@ -60,6 +63,7 @@ export default function Turnstile({ siteKey, onVerify, onExpire, resetSignal = 0
     const widgetId = window.turnstile.render(containerRef.current, {
       sitekey: siteKey,
       theme,
+      language,
       callback: (token) => onVerifyRef.current(token),
       "expired-callback": () => onExpireRef.current(),
       "error-callback": () => onExpireRef.current(),
@@ -71,7 +75,7 @@ export default function Turnstile({ siteKey, onVerify, onExpire, resetSignal = 0
       widgetIdRef.current = null;
       onExpireRef.current();
     };
-  }, [scriptReady, siteKey, theme]);
+  }, [scriptReady, siteKey, theme, language]);
 
   // Reset on demand (after each submission).
   useEffect(() => {

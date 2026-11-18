@@ -5,11 +5,13 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslations } from "next-intl";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations("about");
 
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -47,7 +49,7 @@ export default function About() {
             <div className="invisible about-image relative w-full aspect-[16/9] md:h-[60vh] lg:h-[80vh] rounded-[20px] md:rounded-[70px] overflow-hidden mb-8 md:mb-12 shadow-lg">
               <Image
                 src="/img/setup-dev.jpeg"
-                alt="setup a ODC"
+                alt={t("imageAlt")}
                 fill
                 sizes="(max-width: 768px) 100vw, 1200px"
                 className="object-cover transition-transform duration-700 hover:scale-105"
@@ -57,19 +59,13 @@ export default function About() {
         </div>
         <div className="px-4 sm:px-6 lg:px-8 w-full">
           <div className="container mx-auto w-full text-center max-w-4xl">
-            <h1 className="invisible about-title text-4xl sm:text-5xl lg:text-6xl font-bold pb-8 text-foreground">
-              Bringing Your Ideas to Life with <span className="text-amber">Creativity and Innovation</span>
-            </h1>
-            <p className="invisible about-text text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed">
-              <b className="text-foreground font-semibold">ZignnnIt</b> is a key
-              player in graphic design, UI/UX, and web & mobile development.
-              We combine creativity and technical expertise to transform your ideas into
-              impactful digital experiences.
-              <br /><br />
-              From conception to launch, we support our clients with a constant focus on
-              quality and innovation. Together, let&apos;s build products
-              that inspire and shape the future of your business.
-            </p>
+            <h2 className="invisible about-title text-4xl sm:text-5xl lg:text-6xl font-bold pb-8 text-foreground">
+              {t.rich("title", { hl: (chunks) => <span className="text-amber">{chunks}</span> })}
+            </h2>
+            <div className="invisible about-text text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed space-y-6">
+              <p>{t.rich("p1", { b: (chunks) => <b className="text-foreground font-semibold">{chunks}</b> })}</p>
+              <p>{t("p2")}</p>
+            </div>
           </div>
         </div>
       </div>

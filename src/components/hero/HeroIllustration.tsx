@@ -10,10 +10,11 @@ import "./hero-animations.css";
  * - clipPath/mask/gradient ids are prefixed `zg-` to avoid clashes with other SVGs.
  * - initZgHero drives the clock, screen story, lamp and parallax; its cleanup
  *   (returned from the effect) stops the loop and listeners on unmount.
- * - memo: the SVG never needs to re-render, so React never resets the attributes
+ * - title: translated accessible name (the language comes from the page).
+ * - memo: the SVG only re-renders if the title changes, so React never resets the attributes
  *   the animation script writes on each frame.
  */
-function HeroIllustration() {
+function HeroIllustration({ title }: { title: string }) {
   const ref = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
@@ -23,7 +24,7 @@ function HeroIllustration() {
 
   return (
     <svg ref={ref} id="zg-hero" className="block w-full h-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1720 1220" role="img" aria-labelledby="zg-hero-title">
-      <title id="zg-hero-title">Creative desk: screen with a design app, steaming cup, lamp, clock and cactus</title>
+      <title id="zg-hero-title">{title}</title>
       <style>{`
         #zg-hero{--zg-outline:#2A2623;--zg-carbon:#1C1A18;--zg-carbon2:#3A3430;--zg-amber:#F59E0B;--zg-amber-l:#FCD34D;--zg-amber-d:#D97706;--zg-cream:#FAF7F2;--zg-light:#ECE6DC;--zg-gray:#8F8882;--zg-sage:#8AA37B;--zg-sage-d:#5E7A52;--zg-steam:#D9D2C7;--zg-bulb:#FFF6DC;--zg-arm:#2A2623;--zg-editor:#121110;overflow:visible}
         #zg-hero .ol{stroke:var(--zg-outline);stroke-width:5;stroke-linejoin:round;stroke-linecap:round}

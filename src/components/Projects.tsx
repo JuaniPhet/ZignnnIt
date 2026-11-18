@@ -2,7 +2,8 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -12,6 +13,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
+  const t = useTranslations("projects");
+  const locale = useLocale();
   const triggerRef = useRef<HTMLDivElement>(null);
   const scrollTrackRef = useRef<HTMLDivElement>(null);
 
@@ -70,10 +73,10 @@ export default function Projects() {
           <div className="px-4 sm:px-6 lg:px-8 w-full mb-8 sm:mb-10">
             <div className="invisible projects-heading container mx-auto max-w-7xl w-full">
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground">
-                Our <span className="text-amber">Projects</span>
+                {t.rich("title", { hl: (chunks) => <span className="text-amber">{chunks}</span> })}
               </h2>
               <p className="mt-2 sm:mt-3 text-base sm:text-lg lg:text-xl text-muted-foreground">
-                Missions we&apos;ve successfully completed.
+                {t("subtitle")}
               </p>
             </div>
           </div>
@@ -110,7 +113,7 @@ export default function Projects() {
                     {/* Overlay for description on hover */}
                     <div className="absolute inset-0 bg-black/80 flex items-center justify-center p-6 sm:p-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
                       <p className="text-white text-base sm:text-lg text-center leading-relaxed">
-                        {project.description}
+                        {project.description[locale]}
                       </p>
                     </div>
                   </div>
@@ -135,22 +138,18 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  {/* Bottom row: Button 'Voir plus' and Category Tag */}
+                  {/* Bottom row: project button and category tag */}
                   <div className="flex items-center gap-3">
                     <a
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="bg-primary text-primary-foreground px-5 py-2 font-semibold rounded-lg hover:brightness-110 transition-all text-sm sm:text-base"
                     >
-                      <button
-                        type="button"
-                        className="bg-primary text-primary-foreground px-5 py-2 font-semibold rounded-lg hover:brightness-110 transition-all text-sm sm:text-base cursor-pointer"
-                      >
-                        Voir plus
-                      </button>
+                      {t("viewProject")}
                     </a>
                     <span className="inline-flex items-center text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-full bg-amber/15 text-carbon dark:text-amber border border-amber/30">
-                      {project.category}
+                      {t(`categories.${project.category}`)}
                     </span>
                   </div>
                 </div>
@@ -185,10 +184,10 @@ export default function Projects() {
                 </div>
                 <div className="text-center px-4 sm:px-6">
                   <h3 className="text-lg sm:text-2xl lg:text-3xl font-bold text-foreground">
-                    See all projects
+                    {t("seeAll")}
                   </h3>
                   <p className="mt-1 sm:mt-2 text-xs sm:text-sm lg:text-base text-muted-foreground">
-                    Explore our complete portfolio
+                    {t("seeAllSubtitle")}
                   </p>
                 </div>
               </div>

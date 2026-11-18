@@ -1,17 +1,25 @@
 "use client"
 
 import { useCallback, useState, type FormEvent } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { useLocale, useTranslations } from "next-intl";
 import Turnstile from "@/components/Turnstile";
 
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
-export default function ContactPage() {
+/**
+ * Contact page body (client: form state, fetch, Turnstile).
+ * The page itself (app/[locale]/contact/page.tsx) is a server component that
+ * only adds the translated metadata.
+ */
+export default function ContactContent() {
+  const t = useTranslations("contact");
+  const locale = useLocale();
   const [status, setStatus] = useState<FormStatus>("idle");
-  const [errorMessage, setErrorMessage] = useState("");
+  // We store an error CODE, not a sentence: it is translated at render time,
+  // so the message follows the current language.
+  const [errorCode, setErrorCode] = useState("generic");
   const [turnstileToken, setTurnstileToken] = useState("");
   const [turnstileReset, setTurnstileReset] = useState(0);
 
@@ -24,7 +32,7 @@ export default function ContactPage() {
 
     if (TURNSTILE_SITE_KEY && !turnstileToken) {
       setStatus("error");
-      setErrorMessage("Please wait for the security check to complete, then try again.");
+      setErrorCode("turnstile_pending");
       return;
     }
 
@@ -33,7 +41,6 @@ export default function ContactPage() {
     const value = (key: string) => String(formData.get(key) ?? "").trim();
 
     setStatus("loading");
-    setErrorMessage("");
 
     try {
       const response = await fetch("/api/send", {
@@ -55,18 +62,15 @@ export default function ContactPage() {
       const result = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(result?.error || "Something went wrong. Please try again.");
+        // The API answers with a stable code (e.g. "email_invalid") — see api/send/route.ts.
+        throw new Error(typeof result?.code === "string" ? result.code : "generic");
       }
 
       setStatus("success");
       form.reset();
     } catch (err) {
       setStatus("error");
-      setErrorMessage(
-        err instanceof Error && err.message
-          ? err.message
-          : "Something went wrong. Please try again."
-      );
+      setErrorCode(err instanceof Error && err.message ? err.message : "generic");
     } finally {
       // A Turnstile token is single-use: get a fresh one for the next submission.
       setTurnstileReset((n) => n + 1);
@@ -74,10 +78,10 @@ export default function ContactPage() {
   }
 
   const isLoading = status === "loading";
+  const errorKey = `errors.${errorCode}`;
+  const errorText = t.has(errorKey as "errors.generic") ? t(errorKey as "errors.generic") : t("errors.generic");
 
   return (
-    <>
-      <Navbar />
       <main className="pt-24 min-h-screen bg-background">
         <div className="isolate px-4 sm:px-6 py-16 sm:py-24 lg:px-8 relative">
           {/* Background gradient blob */}
@@ -97,13 +101,13 @@ export default function ContactPage() {
           <div className="mx-auto max-w-2xl text-center mb-12 sm:mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-secondary-foreground text-sm font-semibold mb-6 border border-border/50 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-              Get in Touch
+              {t("badge")}
             </div>
             <h1 className="text-balance text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground">
-              Contact <span className="text-primary">Us</span>
+              {t.rich("title", { hl: (chunks) => <span className="text-primary">{chunks}</span> })}
             </h1>
             <p className="mt-4 text-base sm:text-lg lg:text-xl text-muted-foreground max-w-xl mx-auto">
-              Feel free to tell us about your project or ask any question. We&apos;re ready to create with you.
+              {t("subtitle")}
             </p>
           </div>
 
@@ -131,7 +135,7 @@ export default function ContactPage() {
                   <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
                     <div>
                       <label htmlFor="first-name" className="block text-sm font-semibold text-foreground mb-2">
-                        First name
+                        {t("form.firstName")}
                       </label>
                       <input
                         type="text"
@@ -140,13 +144,13 @@ export default function ContactPage() {
                         autoComplete="given-name"
                         maxLength={100}
                         required
-                        placeholder="John"
+                        placeholder={t("form.firstNamePlaceholder")}
                         className="block w-full rounded-xl bg-background/80 border border-border px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm"
                       />
                     </div>
                     <div>
                       <label htmlFor="last-name" className="block text-sm font-semibold text-foreground mb-2">
-                        Last name
+                        {t("form.lastName")}
                       </label>
                       <input
                         type="text"
@@ -154,13 +158,13 @@ export default function ContactPage() {
                         id="last-name"
                         autoComplete="family-name"
                         maxLength={100}
-                        placeholder="Doe"
+                        placeholder={t("form.lastNamePlaceholder")}
                         className="block w-full rounded-xl bg-background/80 border border-border px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm"
                       />
                     </div>
                     <div className="sm:col-span-2">
                       <label htmlFor="company" className="block text-sm font-semibold text-foreground mb-2">
-                        Company
+                        {t("form.company")}
                       </label>
                       <input
                         type="text"
@@ -168,13 +172,13 @@ export default function ContactPage() {
                         id="company"
                         autoComplete="organization"
                         maxLength={150}
-                        placeholder="Your company or agency"
+                        placeholder={t("form.companyPlaceholder")}
                         className="block w-full rounded-xl bg-background/80 border border-border px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm"
                       />
                     </div>
                     <div className="sm:col-span-2">
                       <label htmlFor="email" className="block text-sm font-semibold text-foreground mb-2">
-                        Email address
+                        {t("form.email")}
                       </label>
                       <input
                         type="email"
@@ -183,20 +187,20 @@ export default function ContactPage() {
                         autoComplete="email"
                         maxLength={254}
                         required
-                        placeholder="john.doe@example.com"
+                        placeholder={t("form.emailPlaceholder")}
                         className="block w-full rounded-xl bg-background/80 border border-border px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm"
                       />
                     </div>
                     <div className="sm:col-span-2">
                       <label htmlFor="phone-number" className="block text-sm font-semibold text-foreground mb-2">
-                        Phone number
+                        {t("form.phone")}
                       </label>
                       <div className="flex rounded-xl bg-background/80 border border-border overflow-hidden focus-within:ring-2 focus-within:ring-primary focus-within:border-primary transition-all duration-200 shadow-sm">
                         <select
                           id="country"
                           name="country"
                           autoComplete="country"
-                          aria-label="Country"
+                          aria-label={t("form.country")}
                           className="appearance-none bg-transparent py-3 pl-3 pr-2 text-sm font-medium text-muted-foreground border-r border-border focus:outline-none cursor-pointer"
                         >
                           {/* Value keeps the country code for the email; the label stays compact on mobile */}
@@ -219,13 +223,13 @@ export default function ContactPage() {
                           autoComplete="tel-national"
                           maxLength={30}
                           className="block min-w-0 grow py-3 px-4 text-base text-foreground bg-transparent placeholder:text-muted-foreground/60 focus:outline-none"
-                          placeholder="690 000 000"
+                          placeholder={t("form.phonePlaceholder")}
                         />
                       </div>
                     </div>
                     <div className="sm:col-span-2">
                       <label htmlFor="message" className="block text-sm font-semibold text-foreground mb-2">
-                        Message
+                        {t("form.message")}
                       </label>
                       <textarea
                         name="message"
@@ -234,13 +238,14 @@ export default function ContactPage() {
                         minLength={10}
                         maxLength={5000}
                         required
-                        placeholder="Tell us about your project requirements..."
+                        placeholder={t("form.messagePlaceholder")}
                         className="block w-full rounded-xl bg-background/80 border border-border px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm resize-y"
                       ></textarea>
                     </div>
                   </div>
                   <Turnstile
                     siteKey={TURNSTILE_SITE_KEY}
+                    language={locale}
                     onVerify={handleTurnstileVerify}
                     onExpire={handleTurnstileExpire}
                     resetSignal={turnstileReset}
@@ -253,7 +258,7 @@ export default function ContactPage() {
                       disabled={isLoading}
                       className="w-full rounded-xl bg-primary text-primary-foreground py-4 text-center text-lg font-semibold shadow-lg shadow-primary/25 hover:brightness-110 active:scale-[0.98] transition-all duration-200 cursor-pointer flex items-center justify-center gap-2.5 group disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100 disabled:hover:brightness-100"
                     >
-                      <span>{isLoading ? "Sending..." : "Let\u2019s talk"}</span>
+                      <span>{isLoading ? t("form.sending") : t("form.submit")}</span>
                       {isLoading ? (
                         <svg
                           className="w-5 h-5 animate-spin"
@@ -291,7 +296,7 @@ export default function ContactPage() {
                         id="contact-success"
                         className="rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-600 dark:text-emerald-400"
                       >
-                        Thank you! Your message has been sent. We&apos;ll get back to you within 24 hours.
+                        {t("form.success")}
                       </p>
                     )}
                     {status === "error" && (
@@ -300,7 +305,7 @@ export default function ContactPage() {
                         role="alert"
                         className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm font-medium text-red-600 dark:text-red-400"
                       >
-                        {errorMessage}
+                        {errorText}
                       </p>
                     )}
                   </div>
@@ -318,7 +323,7 @@ export default function ContactPage() {
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                 </svg>
               </div>
-              <h3 className="font-sans font-semibold tracking-normal text-foreground text-base mb-1">Email Us</h3>
+              <h3 className="font-sans font-semibold tracking-normal text-foreground text-base mb-1">{t("info.emailTitle")}</h3>
               <p className="text-sm text-muted-foreground break-all px-2">contact@zignnnit.com</p>
             </div>
 
@@ -329,8 +334,8 @@ export default function ContactPage() {
                   <circle cx="12" cy="10" r="3" />
                 </svg>
               </div>
-              <h3 className="font-sans font-semibold tracking-normal text-foreground text-base mb-1">Location</h3>
-              <p className="text-sm text-muted-foreground px-2">Douala, Cameroon</p>
+              <h3 className="font-sans font-semibold tracking-normal text-foreground text-base mb-1">{t("info.locationTitle")}</h3>
+              <p className="text-sm text-muted-foreground px-2">{t("info.location")}</p>
             </div>
 
             <div className="flex flex-col items-center p-5 sm:p-6 rounded-2xl bg-secondary/40 border border-border/50 text-center w-full">
@@ -340,13 +345,11 @@ export default function ContactPage() {
                   <polyline points="12 6 12 12 16 14" />
                 </svg>
               </div>
-              <h3 className="font-sans font-semibold tracking-normal text-foreground text-base mb-1">Response Time</h3>
-              <p className="text-sm text-muted-foreground px-2">Within 24 hours</p>
+              <h3 className="font-sans font-semibold tracking-normal text-foreground text-base mb-1">{t("info.responseTitle")}</h3>
+              <p className="text-sm text-muted-foreground px-2">{t("info.response")}</p>
             </div>
           </div>
         </div>
       </main>
-      <Footer />
-    </>
   );
 }

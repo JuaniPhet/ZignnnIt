@@ -1,15 +1,16 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import LocaleSwitcher from "@/components/LocaleSwitcher";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const pathname = usePathname();
+  const t = useTranslations("nav");
 
   useEffect(() => {
     setMounted(true);
@@ -41,16 +42,14 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen((open) => !open);
   const closeMenu = () => setIsOpen(false);
 
-  const getLinkHref = (hash: string) => {
-    return pathname === "/" ? hash : `/${hash}`;
-  };
-
+  // Locale-aware Link adds the /en or /fr prefix; "/#services" works from any page
+  // (on the home page Next.js just scrolls to the section).
   const links = [
-    { href: getLinkHref("#home"), label: "Home" },
-    { href: getLinkHref("#about-us"), label: "About" },
-    { href: getLinkHref("#services"), label: "Services" },
-    { href: "/projects", label: "Projects" },
-    { href: "/contact", label: "Contact" },
+    { href: "/#home", label: t("home") },
+    { href: "/#about-us", label: t("about") },
+    { href: "/#services", label: t("services") },
+    { href: "/projects", label: t("projects") },
+    { href: "/contact", label: t("contact") },
   ];
 
   return (
@@ -60,7 +59,7 @@ export default function Navbar() {
       <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber/60 to-transparent"></div>
       <div className="px-4 sm:px-6 lg:px-8 w-full">
         <nav className="container mx-auto max-w-7xl flex items-center justify-between text-lg h-20 sm:h-24">
-          <Link href={pathname === "/" ? "#home" : "/"} onClick={closeMenu} aria-label="ZignnnIt — home">
+          <Link href="/" onClick={closeMenu} aria-label={t("homeAria")}>
           <div className="cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" width="254" height="98" viewBox="0 0 254 98" fill="none" className="w-32 -mt-3 text-foreground">
               <path d="M0 0H52V30H0V0Z" fill="#F7B700" />
@@ -85,16 +84,19 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
-          {/* <li><Link href={getLinkHref("#pricing")} className="nav-link …">Pricing</Link></li> */}
+          {/* <li><Link href="/#pricing" className="nav-link …">Pricing</Link></li> */}
         </ul>
 
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-2 sm:gap-4 items-center">
+          {/* Language switcher (desktop) — in the mobile menu below xl */}
+          <LocaleSwitcher className="hidden xl:inline-flex" />
+
           {/* Dark Mode Icon */}
           <button
             type="button"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             className="text-xl sm:text-3xl cursor-pointer p-2 rounded-full hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            aria-label="Toggle theme"
+            aria-label={t("toggleTheme")}
           >
             {mounted && (theme === "dark" ? <i className="ri-sun-fill text-amber"></i> : <i className="ri-moon-fill"></i>)}
           </button>
@@ -102,7 +104,7 @@ export default function Navbar() {
           {/* Shop button */}
           <div className="hidden xl:flex">
             <Link href="/shop" className="bg-primary text-primary-foreground px-5 py-3 font-semibold rounded-lg hover:brightness-110 active:scale-[0.97] transition-all duration-200">
-              Shop
+              {t("shop")}
             </Link>
           </div>
 
@@ -111,7 +113,7 @@ export default function Navbar() {
             type="button"
             onClick={toggleMenu}
             className="text-xl sm:text-3xl cursor-pointer xl:hidden p-2 rounded-full hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-label={isOpen ? t("closeMenu") : t("openMenu")}
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
           >
@@ -151,11 +153,11 @@ export default function Navbar() {
             onClick={closeMenu}
             className="block bg-primary text-primary-foreground text-xl px-8 py-3 font-semibold rounded-lg hover:brightness-110 active:scale-[0.97] transition-all duration-200"
           >
-            Shop
+            {t("shop")}
           </Link>
         </li>
       </ul>
-      {/* Language switcher (EN / FR) — added with i18n in step 2 */}
+      <LocaleSwitcher className="mt-10 text-base" onSwitch={closeMenu} />
     </div>
     </>
   );

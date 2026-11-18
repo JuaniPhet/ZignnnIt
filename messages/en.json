@@ -1,0 +1,184 @@
+{
+  "metadata": {
+    "siteName": "ZignnnIt",
+    "home": {
+      "title": "ZignnnIt — Creative Digital Agency",
+      "description": "We craft brands and products that stand out: brand identity, UI/UX design and web & mobile development for ambitious businesses."
+    },
+    "projects": {
+      "title": "Our Projects",
+      "description": "A showcase of missions we’ve successfully completed — from brand identities to web and mobile apps."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "Tell us about your project. We reply within 24 hours."
+    },
+    "shop": {
+      "title": "Design Templates Shop",
+      "description": "Premium design templates crafted with passion and precision. Coming soon."
+    },
+    "notFound": {
+      "title": "Page not found"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "contact": "Contact",
+    "shop": "Shop",
+    "homeAria": "ZignnnIt — home",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "toggleTheme": "Toggle theme"
+  },
+  "language": {
+    "label": "Language",
+    "switchTo": "Switch to {language}",
+    "en": "English",
+    "fr": "French"
+  },
+  "hero": {
+    "badge": "Creative Digital Agency",
+    "title": "We craft brands and products that stand out.",
+    "highlight": "stand out.",
+    "subtitle": "Digital and visual experiences that <b>elevate your business</b>.",
+    "cta": "Ready to zignnn your project?",
+    "secondary": "Discover our services",
+    "illustrationTitle": "Creative desk: screen with a design app, steaming cup, lamp, clock and cactus"
+  },
+  "about": {
+    "title": "Bringing Your Ideas to Life with <hl>Creativity and Innovation</hl>",
+    "imageAlt": "The ZignnnIt workspace: a code editor and the ZignnnIt website on screen",
+    "p1": "<b>ZignnnIt</b> is a key player in graphic design, UI/UX, and web & mobile development. We combine creativity and technical expertise to transform your ideas into impactful digital experiences.",
+    "p2": "From conception to launch, we support our clients with a constant focus on quality and innovation. Together, let’s build products that inspire and shape the future of your business."
+  },
+  "services": {
+    "title": "Our <hl>Services</hl>",
+    "subtitle": "Grow your business with our expertise.",
+    "deliverables": "Deliverables",
+    "timeline": "Indicative timeline: <b>{duration}</b>",
+    "items": {
+      "graphicDesign": {
+        "title": "Graphic Design",
+        "quote": "“Transforming ideas into captivating visuals.”",
+        "description": "We bring your brand to life with unique, impactful designs — from logos to marketing materials — crafted with precision and attention to detail.",
+        "deliverables": ["Logo & visual identity", "Brand guidelines", "Print & marketing materials", "Social media kits"],
+        "timeline": "1–3 weeks"
+      },
+      "uiUxDesign": {
+        "title": "UI/UX Design",
+        "quote": "“Intuitive interfaces, delightful experiences.”",
+        "description": "Our UI/UX team crafts visually appealing, user-friendly interfaces that drive engagement and satisfaction across every screen.",
+        "deliverables": ["User research & user flows", "Wireframes", "High-fidelity mockups", "Interactive Figma prototype"],
+        "timeline": "2–4 weeks"
+      },
+      "webDevelopment": {
+        "title": "Web Development",
+        "quote": "“Websites that inspire and perform.”",
+        "description": "Dynamic, responsive websites tailored to your business goals — built for performance, security, and scalability.",
+        "deliverables": ["Showcase websites & landing pages", "Web apps & dashboards", "SEO & performance optimization", "Deployment & hosting setup"],
+        "timeline": "2–8 weeks"
+      },
+      "mobileDevelopment": {
+        "title": "Mobile Development",
+        "quote": "“Mobile solutions for a connected world.”",
+        "description": "Custom iOS and Android apps optimized for performance and usability, from concept to market launch.",
+        "deliverables": ["iOS & Android apps (Flutter)", "App UI design", "API & back-end integration", "App Store & Play Store publishing"],
+        "timeline": "6–12 weeks"
+      }
+    }
+  },
+  "projects": {
+    "title": "Our <hl>Projects</hl>",
+    "subtitle": "Missions we’ve successfully completed.",
+    "pageSubtitle": "A showcase of missions we’ve successfully completed — from branding to full-stack development.",
+    "viewProject": "View project",
+    "seeAll": "See all projects",
+    "seeAllSubtitle": "Explore our complete portfolio",
+    "categories": {
+      "graphicDesign": "Graphic Design",
+      "uiUxDesign": "UI/UX Design",
+      "webDevelopment": "Web Development",
+      "mobileDevelopment": "Mobile Development"
+    }
+  },
+  "stats": {
+    "title": "Work with <hl>us</hl>",
+    "subtitle": "We transform ideas into unique digital and visual experiences — websites, mobile apps, and graphic design brought to life.",
+    "backgroundAlt": "The ZignnnIt team at work",
+    "projects": "Projects delivered",
+    "clients": "Happy clients",
+    "years": "Years of experience",
+    "creativity": "Creativity guaranteed"
+  },
+  "footer": {
+    "tagline": "Creative digital and visual experiences to elevate your business.",
+    "rights": "© {year} ZignnnIt. All rights reserved.",
+    "signature": "Design. Code. Zignnn."
+  },
+  "contact": {
+    "badge": "Get in Touch",
+    "title": "Contact <hl>Us</hl>",
+    "subtitle": "Feel free to tell us about your project or ask any question. We’re ready to create with you.",
+    "form": {
+      "firstName": "First name",
+      "firstNamePlaceholder": "John",
+      "lastName": "Last name",
+      "lastNamePlaceholder": "Doe",
+      "company": "Company",
+      "companyPlaceholder": "Your company or agency",
+      "email": "Email address",
+      "emailPlaceholder": "john.doe@example.com",
+      "phone": "Phone number",
+      "country": "Country code",
+      "phonePlaceholder": "690 000 000",
+      "message": "Message",
+      "messagePlaceholder": "Tell us about your project requirements…",
+      "submit": "Let’s talk",
+      "sending": "Sending…",
+      "success": "Thank you! Your message has been sent. We’ll get back to you within 24 hours."
+    },
+    "errors": {
+      "generic": "Something went wrong. Please try again.",
+      "turnstile_pending": "Please wait for the security check to complete, then try again.",
+      "invalid_body": "Invalid request. Please refresh the page and try again.",
+      "name_required": "Please provide your name.",
+      "email_required": "Email address is required.",
+      "email_invalid": "Please provide a valid email address.",
+      "message_required": "Message is required.",
+      "message_too_short": "Message must be at least 10 characters long.",
+      "phone_invalid": "Phone number contains invalid characters.",
+      "field_too_long": "One of the fields is too long.",
+      "security_failed": "Security check failed. Please refresh and try again.",
+      "service_unavailable": "The email service is temporarily unavailable. Please write to contact@zignnnit.com.",
+      "send_failed": "Failed to send your message. Please try again later."
+    },
+    "info": {
+      "emailTitle": "Email Us",
+      "locationTitle": "Location",
+      "location": "Douala, Cameroon",
+      "responseTitle": "Response Time",
+      "response": "Within 24 hours"
+    }
+  },
+  "shop": {
+    "badge": "New Feature",
+    "title": "Design <hl>Templates</hl>",
+    "subtitle": "The ideal place where you can buy premium design templates crafted with passion and precision.",
+    "comingSoon": "Coming Soon",
+    "description": "We’re crafting a curated collection of professional templates — from web designs to brand identity kits. Stay tuned for something extraordinary.",
+    "icons": {
+      "design": "Design",
+      "code": "Code",
+      "graphics": "Graphics",
+      "mobile": "Mobile"
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The page you are looking for doesn’t exist or has moved.",
+    "back": "Back to home"
+  }
+}

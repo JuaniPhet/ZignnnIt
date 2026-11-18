@@ -5,11 +5,13 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useTranslations } from "next-intl";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Stats() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations("stats");
 
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -48,7 +50,7 @@ export default function Stats() {
     <div ref={containerRef} className="relative isolate overflow-hidden bg-carbon text-white py-24 sm:py-32">
       <Image
         src="/img/stats_background.jpg"
-        alt="Work with us background"
+        alt={t("backgroundAlt")}
         fill
         sizes="100vw"
         className="absolute inset-0 -z-10 size-full object-cover object-right md:object-center opacity-30"
@@ -58,10 +60,10 @@ export default function Stats() {
         <div className="container mx-auto max-w-7xl w-full">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2 className="invisible stats-title text-5xl sm:text-7xl lg:text-8xl font-bold text-white">
-            Work with <span className="text-amber">us</span>
+            {t.rich("title", { hl: (chunks) => <span className="text-amber">{chunks}</span> })}
           </h2>
           <p className="invisible stats-subtitle mt-6 text-base sm:text-lg text-gray-300 leading-relaxed">
-            We transform ideas into unique digital and visual experiences — websites, mobile apps, and graphic design brought to life.
+            {t("subtitle")}
           </p>
         </div>
 
@@ -71,19 +73,19 @@ export default function Stats() {
         <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
           <dl className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <div className="invisible stat-card flex flex-col-reverse gap-1 border-l-2 border-amber pl-4">
-              <dt className="text-sm sm:text-base text-gray-400 uppercase tracking-wider">Projects delivered</dt>
+              <dt className="text-sm sm:text-base text-gray-400 uppercase tracking-wider">{t("projects")}</dt>
               <dd className="text-5xl sm:text-6xl lg:text-7xl font-display font-extrabold text-white">60+</dd>
             </div>
             <div className="invisible stat-card flex flex-col-reverse gap-1 border-l-2 border-amber pl-4">
-              <dt className="text-sm sm:text-base text-gray-400 uppercase tracking-wider">Happy Clients</dt>
+              <dt className="text-sm sm:text-base text-gray-400 uppercase tracking-wider">{t("clients")}</dt>
               <dd className="text-5xl sm:text-6xl lg:text-7xl font-display font-extrabold text-white">43+</dd>
             </div>
             <div className="invisible stat-card flex flex-col-reverse gap-1 border-l-2 border-amber pl-4">
-              <dt className="text-sm sm:text-base text-gray-400 uppercase tracking-wider">Years of experience</dt>
+              <dt className="text-sm sm:text-base text-gray-400 uppercase tracking-wider">{t("years")}</dt>
               <dd className="text-5xl sm:text-6xl lg:text-7xl font-display font-extrabold text-white">6</dd>
             </div>
             <div className="invisible stat-card flex flex-col-reverse gap-1 border-l-2 border-amber pl-4">
-              <dt className="text-sm sm:text-base text-gray-400 uppercase tracking-wider">Creativity guaranteed</dt>
+              <dt className="text-sm sm:text-base text-gray-400 uppercase tracking-wider">{t("creativity")}</dt>
               <dd className="text-5xl sm:text-6xl lg:text-7xl font-display font-extrabold text-white">100%</dd>
             </div>
           </dl>

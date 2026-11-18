@@ -1,14 +1,9 @@
-"use client"
-
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export default function Footer() {
-  const pathname = usePathname();
-
-  const getLinkHref = (hash: string) => {
-    return pathname === "/" ? hash : `/${hash}`;
-  };
+  const t = useTranslations("footer");
+  const tNav = useTranslations("nav");
 
   return (
     <footer className="relative bg-carbon dark:bg-black text-white py-12 sm:py-16 overflow-hidden">
@@ -22,7 +17,7 @@ export default function Footer() {
 
           {/* Logo & Tagline */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-3">
-            <Link href={pathname === "/" ? "#home" : "/"}>
+            <Link href="/" aria-label={tNav("homeAria")}>
               <div className="cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="254" height="98" viewBox="0 0 254 98" fill="none" className="w-auto h-9 text-white">
                   <path d="M0 0H52V30H0V0Z" fill="#F7B700" />
@@ -38,24 +33,24 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-xs text-white/70 max-w-sm">
-              Creative digital and visual experiences to elevate your business.
+              {t("tagline")}
             </p>
           </div>
 
           {/* Navigation Links */}
           {/* <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
             <li>
-              <Link href={getLinkHref("#home")} className="text-sm font-medium text-white/70 hover:text-amber transition-colors">
+              <Link href="/#home" className="text-sm font-medium text-white/70 hover:text-amber transition-colors">
                 Home
               </Link>
             </li>
             <li>
-              <Link href={getLinkHref("#about-us")} className="text-sm font-medium text-white/70 hover:text-amber transition-colors">
+              <Link href="/#about-us" className="text-sm font-medium text-white/70 hover:text-amber transition-colors">
                 About
               </Link>
             </li>
             <li>
-              <Link href={getLinkHref("#services")} className="text-sm font-medium text-white/70 hover:text-amber transition-colors">
+              <Link href="/#services" className="text-sm font-medium text-white/70 hover:text-amber transition-colors">
                 Services
               </Link>
             </li>
@@ -93,10 +88,9 @@ export default function Footer() {
         {/* Bottom bar */}
         {/* Stacked and centered on mobile, side by side from lg */}
         <div className="pt-8 flex flex-col lg:flex-row items-center justify-between text-center text-xs text-white/60 gap-2 lg:gap-4">
-          <p>© {new Date().getFullYear()} ZignnnIt. All rights reserved.</p>
-          <p>
-            Crafted with passion by <span className="font-semibold text-white whitespace-nowrap">ZignnnIt</span>
-          </p>
+          <p>{t("rights", { year: new Date().getFullYear() })}</p>
+          {/* Brand signature (same in every language) */}
+          <p className="font-display text-sm font-bold tracking-normal text-white">{t("signature")}</p>
         </div>
         </div>
       </div>
