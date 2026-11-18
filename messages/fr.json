@@ -43,7 +43,7 @@
     "badge": "Agence créative digitale",
     "title": "Nous créons des marques et des produits qui se démarquent.",
     "highlight": "se démarquent.",
-    "subtitle": "Des expériences digitales et visuelles qui <b>font grandir votre entreprise</b>.",
+    "subtitle": "<b>Identité visuelle, UI/UX et développement web & mobile</b> pour les entreprises ambitieuses — du premier croquis au lancement.",
     "cta": "Prêt à zignnn votre projet ?",
     "secondary": "Découvrir nos services",
     "illustrationTitle": "Bureau créatif : écran avec un logiciel de dessin, tasse fumante, lampe, horloge et cactus"
@@ -64,28 +64,48 @@
         "title": "Design graphique",
         "quote": "« Transformer les idées en visuels captivants. »",
         "description": "Nous donnons vie à votre marque avec des créations uniques et percutantes — du logo aux supports marketing — réalisées avec précision et souci du détail.",
-        "deliverables": ["Logo & identité visuelle", "Charte graphique", "Supports print & marketing", "Kits pour les réseaux sociaux"],
+        "deliverables": [
+          "Logo & identité visuelle",
+          "Charte graphique",
+          "Supports print & marketing",
+          "Kits pour les réseaux sociaux"
+        ],
         "timeline": "1 à 3 semaines"
       },
       "uiUxDesign": {
         "title": "Design UI/UX",
         "quote": "« Des interfaces intuitives, des expériences agréables. »",
         "description": "Notre équipe UI/UX conçoit des interfaces belles et faciles à utiliser, qui suscitent l’engagement et la satisfaction sur chaque écran.",
-        "deliverables": ["Recherche utilisateur & parcours", "Wireframes", "Maquettes haute fidélité", "Prototype Figma interactif"],
+        "deliverables": [
+          "Recherche utilisateur & parcours",
+          "Wireframes",
+          "Maquettes haute fidélité",
+          "Prototype Figma interactif"
+        ],
         "timeline": "2 à 4 semaines"
       },
       "webDevelopment": {
         "title": "Développement web",
         "quote": "« Des sites qui inspirent et qui performent. »",
         "description": "Des sites dynamiques et responsives, adaptés à vos objectifs — conçus pour la performance, la sécurité et l’évolutivité.",
-        "deliverables": ["Sites vitrines & landing pages", "Applications web & tableaux de bord", "Optimisation SEO & performance", "Mise en ligne & hébergement"],
+        "deliverables": [
+          "Sites vitrines & landing pages",
+          "Applications web & tableaux de bord",
+          "Optimisation SEO & performance",
+          "Mise en ligne & hébergement"
+        ],
         "timeline": "2 à 8 semaines"
       },
       "mobileDevelopment": {
         "title": "Développement mobile",
         "quote": "« Des solutions mobiles pour un monde connecté. »",
         "description": "Des applications iOS et Android sur mesure, optimisées pour la performance et l’ergonomie, du concept à la publication.",
-        "deliverables": ["Applications iOS & Android (Flutter)", "Design de l’interface", "Intégration API & back-end", "Publication App Store & Play Store"],
+        "deliverables": [
+          "Applications iOS & Android (Flutter)",
+          "Design de l’interface",
+          "Intégration API & back-end",
+          "Publication App Store & Play Store"
+        ],
         "timeline": "6 à 12 semaines"
       }
     }

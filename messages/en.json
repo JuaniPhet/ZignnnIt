@@ -43,7 +43,7 @@
     "badge": "Creative Digital Agency",
     "title": "We craft brands and products that stand out.",
     "highlight": "stand out.",
-    "subtitle": "Digital and visual experiences that <b>elevate your business</b>.",
+    "subtitle": "<b>Brand identity, UI/UX and web & mobile development</b> for ambitious businesses — from the first sketch to the final launch.",
     "cta": "Ready to zignnn your project?",
     "secondary": "Discover our services",
     "illustrationTitle": "Creative desk: screen with a design app, steaming cup, lamp, clock and cactus"
@@ -64,28 +64,48 @@
         "title": "Graphic Design",
         "quote": "“Transforming ideas into captivating visuals.”",
         "description": "We bring your brand to life with unique, impactful designs — from logos to marketing materials — crafted with precision and attention to detail.",
-        "deliverables": ["Logo & visual identity", "Brand guidelines", "Print & marketing materials", "Social media kits"],
+        "deliverables": [
+          "Logo & visual identity",
+          "Brand guidelines",
+          "Print & marketing materials",
+          "Social media kits"
+        ],
         "timeline": "1–3 weeks"
       },
       "uiUxDesign": {
         "title": "UI/UX Design",
         "quote": "“Intuitive interfaces, delightful experiences.”",
         "description": "Our UI/UX team crafts visually appealing, user-friendly interfaces that drive engagement and satisfaction across every screen.",
-        "deliverables": ["User research & user flows", "Wireframes", "High-fidelity mockups", "Interactive Figma prototype"],
+        "deliverables": [
+          "User research & user flows",
+          "Wireframes",
+          "High-fidelity mockups",
+          "Interactive Figma prototype"
+        ],
         "timeline": "2–4 weeks"
       },
       "webDevelopment": {
         "title": "Web Development",
         "quote": "“Websites that inspire and perform.”",
         "description": "Dynamic, responsive websites tailored to your business goals — built for performance, security, and scalability.",
-        "deliverables": ["Showcase websites & landing pages", "Web apps & dashboards", "SEO & performance optimization", "Deployment & hosting setup"],
+        "deliverables": [
+          "Showcase websites & landing pages",
+          "Web apps & dashboards",
+          "SEO & performance optimization",
+          "Deployment & hosting setup"
+        ],
         "timeline": "2–8 weeks"
       },
       "mobileDevelopment": {
         "title": "Mobile Development",
         "quote": "“Mobile solutions for a connected world.”",
         "description": "Custom iOS and Android apps optimized for performance and usability, from concept to market launch.",
-        "deliverables": ["iOS & Android apps (Flutter)", "App UI design", "API & back-end integration", "App Store & Play Store publishing"],
+        "deliverables": [
+          "iOS & Android apps (Flutter)",
+          "App UI design",
+          "API & back-end integration",
+          "App Store & Play Store publishing"
+        ],
         "timeline": "6–12 weeks"
       }
     }
