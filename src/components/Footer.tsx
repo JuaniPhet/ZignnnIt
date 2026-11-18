@@ -36,7 +36,7 @@ export default function Footer() {
                 </svg>
               </div>
             </Link>
-            <p className="text-xs text-muted-foreground font-light tracking-wide max-w-sm">
+            <p className="text-xs text-muted-foreground max-w-sm">
               Creative digital and visual experiences to elevate your business.
             </p>
           </div>
@@ -90,7 +90,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-muted-foreground font-light gap-4">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-muted-foreground gap-4">
           <p>© {new Date().getFullYear()} ZignnnIt. All rights reserved.</p>
           <p className="flex items-center gap-1">
             Crafted with passion by <span className="font-semibold text-foreground">ZignnnIt</span>

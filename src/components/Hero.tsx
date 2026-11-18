@@ -176,7 +176,7 @@ export default function Hero() {
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-[1.08] tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground">
             {characters.map((item) => (
               <span
                 key={item.index}
@@ -191,10 +191,10 @@ export default function Hero() {
           </h1>
 
           {/* Subtitle */}
-          <h2 className="invisible we-help-you-to text-base sm:text-lg md:text-xl lg:text-2xl font-light mt-6 sm:mt-8 mb-8 sm:mb-10 text-muted-foreground leading-relaxed tracking-wide max-w-xl">
+          <p className="invisible we-help-you-to text-base sm:text-lg md:text-xl lg:text-2xl mt-6 sm:mt-8 mb-8 sm:mb-10 text-muted-foreground leading-relaxed max-w-xl">
             Digital and visual experiences that{" "}
             <b className="text-foreground font-semibold">elevate your business</b>.
-          </h2>
+          </p>
 
           {/* CTA Group */}
           <div className="invisible hero-cta-group flex flex-col md:flex-row items-stretch md:items-center gap-4 w-full md:w-auto">
@@ -204,7 +204,7 @@ export default function Hero() {
               <Link href="/contact" className="w-full block">
                 <button
                   type="button"
-                  className="relative w-full md:w-auto bg-primary text-primary-foreground text-sm sm:text-sm md:text-base px-3 sm:px-6 md:px-8 py-3.5 sm:py-4 font-bold rounded-xl hover:brightness-110 active:scale-[0.98] transition-all duration-200 shadow-lg shadow-primary/25 flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer text-center group whitespace-nowrap"
+                  className="relative w-full md:w-auto bg-primary text-primary-foreground text-sm sm:text-sm md:text-base px-3 sm:px-6 md:px-8 py-3.5 sm:py-4 font-semibold rounded-xl hover:brightness-110 active:scale-[0.98] transition-all duration-200 shadow-lg shadow-primary/25 flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer text-center group whitespace-nowrap"
                 >
                   <span>Ready to zignnn your project ?</span>
                   {/* <svg

@@ -26,10 +26,10 @@ export default function ProjectsPage() {
 
           {/* Page header */}
           <div className="mx-auto max-w-2xl text-center mb-16 sm:mb-20">
-            <h1 className="text-balance text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
+            <h1 className="text-balance text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground">
               Our <span className="text-primary">Projects</span>
             </h1>
-            <p className="mt-4 text-lg sm:text-xl text-muted-foreground font-light tracking-wide">
+            <p className="mt-4 text-lg sm:text-xl text-muted-foreground">
               A showcase of missions we&apos;ve successfully completed — from branding to full-stack development.
             </p>
           </div>
@@ -60,7 +60,7 @@ export default function ProjectsPage() {
                       </div>
                       {/* Overlay on hover */}
                       <div className="absolute inset-0 bg-black/75 flex items-center justify-center p-6 sm:p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
-                        <p className="text-white text-sm sm:text-base text-center leading-relaxed font-light">
+                        <p className="text-white text-sm sm:text-base text-center leading-relaxed">
                           {project.description}
                         </p>
                       </div>
@@ -70,7 +70,7 @@ export default function ProjectsPage() {
                   {/* Project info */}
                   <div className="mt-5">
                     <div className="flex flex-wrap gap-3 justify-between items-center">
-                      <h2 className="text-xl sm:text-2xl font-semibold text-foreground tracking-tight">
+                      <h2 className="text-2xl font-bold text-foreground">
                         {project.title}
                       </h2>
 
@@ -87,7 +87,7 @@ export default function ProjectsPage() {
                       </div>
                     </div>
 
-                    <p className="mt-2 text-sm text-muted-foreground font-light leading-relaxed line-clamp-2">
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed line-clamp-2">
                       {project.description}
                     </p>
 
@@ -99,12 +99,12 @@ export default function ProjectsPage() {
                       >
                         <button
                           type="button"
-                          className="bg-primary text-primary-foreground px-5 py-2 font-bold rounded-lg hover:brightness-110 active:scale-[0.97] transition-all duration-200 text-sm"
+                          className="bg-primary text-primary-foreground px-5 py-2 font-semibold rounded-lg hover:brightness-110 active:scale-[0.97] transition-all duration-200 text-sm"
                         >
                           Voir plus
                         </button>
                       </a>
-                      <span className="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/25 tracking-wide">
+                      <span className="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/25">
                         {project.category}
                       </span>
                     </div>

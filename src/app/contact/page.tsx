@@ -99,10 +99,10 @@ export default function ContactPage() {
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
               Get in Touch
             </div>
-            <h1 className="text-balance text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
+            <h1 className="text-balance text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground">
               Contact <span className="text-primary">Us</span>
             </h1>
-            <p className="mt-4 text-base sm:text-lg lg:text-xl text-muted-foreground font-light tracking-wide max-w-xl mx-auto">
+            <p className="mt-4 text-base sm:text-lg lg:text-xl text-muted-foreground max-w-xl mx-auto">
               Feel free to tell us about your project or ask any question. We&apos;re ready to create with you.
             </p>
           </div>
@@ -250,7 +250,7 @@ export default function ContactPage() {
                       type="submit"
                       id="contact-submit"
                       disabled={isLoading}
-                      className="w-full rounded-xl bg-primary text-primary-foreground py-4 text-center text-lg font-bold shadow-lg shadow-primary/25 hover:brightness-110 active:scale-[0.98] transition-all duration-200 cursor-pointer flex items-center justify-center gap-2.5 group disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100 disabled:hover:brightness-100"
+                      className="w-full rounded-xl bg-primary text-primary-foreground py-4 text-center text-lg font-semibold shadow-lg shadow-primary/25 hover:brightness-110 active:scale-[0.98] transition-all duration-200 cursor-pointer flex items-center justify-center gap-2.5 group disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100 disabled:hover:brightness-100"
                     >
                       <span>{isLoading ? "Sending..." : "Let\u2019s talk"}</span>
                       {isLoading ? (
@@ -317,8 +317,8 @@ export default function ContactPage() {
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-foreground text-base mb-1">Email Us</h3>
-              <p className="text-sm text-muted-foreground font-light break-all px-2">contact@zignnnit.com</p>
+              <h3 className="font-sans font-semibold tracking-normal text-foreground text-base mb-1">Email Us</h3>
+              <p className="text-sm text-muted-foreground break-all px-2">contact@zignnnit.com</p>
             </div>
 
             <div className="flex flex-col items-center p-5 sm:p-6 rounded-2xl bg-secondary/40 border border-border/50 text-center w-full">
@@ -328,8 +328,8 @@ export default function ContactPage() {
                   <circle cx="12" cy="10" r="3" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-foreground text-base mb-1">Location</h3>
-              <p className="text-sm text-muted-foreground font-light px-2">Douala, Cameroon</p>
+              <h3 className="font-sans font-semibold tracking-normal text-foreground text-base mb-1">Location</h3>
+              <p className="text-sm text-muted-foreground px-2">Douala, Cameroon</p>
             </div>
 
             <div className="flex flex-col items-center p-5 sm:p-6 rounded-2xl bg-secondary/40 border border-border/50 text-center w-full">
@@ -339,8 +339,8 @@ export default function ContactPage() {
                   <polyline points="12 6 12 12 16 14" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-foreground text-base mb-1">Response Time</h3>
-              <p className="text-sm text-muted-foreground font-light px-2">Within 24 hours</p>
+              <h3 className="font-sans font-semibold tracking-normal text-foreground text-base mb-1">Response Time</h3>
+              <p className="text-sm text-muted-foreground px-2">Within 24 hours</p>
             </div>
           </div>
         </div>

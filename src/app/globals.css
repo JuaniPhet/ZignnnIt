@@ -1,13 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 @import "remixicon/fonts/remixicon.css";
 
 @import "tailwindcss";
 
 @source "../../src/**/*.{js,ts,jsx,tsx,mdx}";
 
-@theme {
-  --font-urbanist: "Urbanist", sans-serif;
+/*
+ * Fonts: the --font-cabinet-grotesk / --font-general-sans variables are set on <html>
+ * by next/font/local (see app/layout.tsx). `inline` makes Tailwind write the var()
+ * reference directly into each utility instead of resolving it on :root.
+ *   font-display -> Cabinet Grotesk (headings >= 24px, key figures, big CTAs)
+ *   font-sans    -> General Sans (body text, UI, buttons, navigation)
+ */
+@theme inline {
+  --font-display: var(--font-cabinet-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-general-sans), ui-sans-serif, system-ui, sans-serif;
+}
 
+@theme {
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
@@ -103,16 +112,28 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: var(--font-urbanist);
-    letter-spacing: 0.05em;
+    font-family: var(--font-sans);
     margin: 0;
     padding: 0;
+    /* Only the weights we ship exist: never let the browser fake a bold/italic. */
+    font-synthesis: none;
+  }
+
+  /* Display headings. Smaller h3 (< 24px) opt out with `font-sans font-semibold`. */
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
   }
 }
 
 .nav-link {
   font-size: 1.125rem;
   line-height: 1.75rem;
-  font-weight: 700;
+  font-weight: 600;
   transition-duration: 300ms;
 }

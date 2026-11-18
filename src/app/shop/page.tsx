@@ -135,13 +135,13 @@ export default function ShopPage() {
           </div>
 
           {/* Title */}
-          <h1 className="shop-title invisible text-5xl sm:text-7xl lg:text-8xl font-bold text-foreground tracking-tight leading-tight">
+          <h1 className="shop-title invisible text-5xl sm:text-7xl lg:text-8xl font-bold text-foreground">
             Design
             <span className="text-amber-500"> Templates</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="shop-subtitle invisible mt-6 text-xl sm:text-2xl text-muted-foreground max-w-2xl leading-relaxed font-light">
+          <p className="shop-subtitle invisible mt-6 text-xl sm:text-2xl text-muted-foreground max-w-2xl leading-relaxed">
             The ideal place where you can buy premium design templates crafted with passion and precision.
           </p>
 
@@ -151,7 +151,7 @@ export default function ShopPage() {
           {/* Coming Soon */}
           <div className="shop-coming invisible">
             <div className="relative inline-block">
-              <h2 className="text-3xl sm:text-5xl font-extralight text-foreground tracking-[0.3em] uppercase">
+              <h2 className="font-sans font-medium text-3xl sm:text-5xl text-foreground tracking-[0.3em] uppercase leading-tight">
                 Coming Soon
               </h2>
               <div className="absolute -bottom-3 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>

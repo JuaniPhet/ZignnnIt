@@ -87,10 +87,10 @@ export default function Services() {
     <section ref={sectionRef} className="pt-40 px-4 sm:px-6 lg:px-8 w-full" id="services">
       <div className="container mx-auto max-w-7xl w-full">
         <div className="invisible services-heading">
-          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground tracking-tight leading-[1.1]">
+          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground">
             Our <span className="text-amber-500">Services</span>
           </h2>
-          <p className="pt-4 pb-10 text-lg sm:text-xl text-muted-foreground font-light tracking-wide">
+          <p className="pt-4 pb-10 text-lg sm:text-xl text-muted-foreground">
             Grow your business with our expertise.
           </p>
         </div>
@@ -102,7 +102,7 @@ export default function Services() {
               value={service.value}
               className="invisible services-item border-b border-border py-4"
             >
-              <AccordionTrigger className="text-3xl sm:text-4xl lg:text-5xl text-muted-foreground hover:text-foreground font-extralight hover:no-underline duration-300 py-6 transition-colors [&[data-state=open]]:text-foreground [&[data-state=open]]:font-semibold">
+              <AccordionTrigger className="text-3xl sm:text-4xl lg:text-5xl text-muted-foreground hover:text-foreground hover:no-underline duration-300 py-6 transition-colors [&[data-state=open]]:text-foreground [&[data-state=open]]:font-semibold">
                 {service.title}
               </AccordionTrigger>
               <AccordionContent>
@@ -117,10 +117,10 @@ export default function Services() {
                     />
                   </div>
                   <div className="w-full md:w-1/2 flex flex-col justify-center">
-                    <h3 className="text-xl sm:text-2xl font-medium text-foreground mb-4">
+                    <h3 className="font-sans font-semibold tracking-normal leading-snug text-xl sm:text-2xl text-foreground mb-4">
                       {service.quote}
                     </h3>
-                    <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-light">
+                    <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                       {service.description}
                     </p>
                   </div>

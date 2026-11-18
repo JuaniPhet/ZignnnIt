@@ -69,10 +69,10 @@ export default function Projects() {
         <div className="bg-background pt-24 pb-10 min-h-screen flex flex-col justify-center">
           <div className="px-4 sm:px-6 lg:px-8 w-full mb-8 sm:mb-10">
             <div className="invisible projects-heading container mx-auto max-w-7xl w-full">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground tracking-tight leading-[1.1]">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground">
                 Our <span className="text-amber-500">Projects</span>
               </h2>
-              <p className="mt-2 sm:mt-3 text-base sm:text-lg lg:text-xl text-muted-foreground font-light tracking-wide">
+              <p className="mt-2 sm:mt-3 text-base sm:text-lg lg:text-xl text-muted-foreground">
                 Missions we&apos;ve successfully completed.
               </p>
             </div>
@@ -109,7 +109,7 @@ export default function Projects() {
                     </div>
                     {/* Overlay for description on hover */}
                     <div className="absolute inset-0 bg-black/80 flex items-center justify-center p-6 sm:p-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
-                      <p className="text-white text-base sm:text-lg text-center leading-relaxed font-light">
+                      <p className="text-white text-base sm:text-lg text-center leading-relaxed">
                         {project.description}
                       </p>
                     </div>
@@ -118,7 +118,7 @@ export default function Projects() {
                 <div className="mt-5 sm:mt-6 flex flex-col gap-3 sm:gap-4">
                   {/* Top row: Title (left) & Tools (right) */}
                   <div className="flex flex-wrap sm:flex-nowrap justify-between items-center gap-2 sm:gap-4">
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-foreground tracking-tight">
+                    <h3 className="text-2xl lg:text-3xl font-bold text-foreground">
                       {project.title}
                     </h3>
 
@@ -144,12 +144,12 @@ export default function Projects() {
                     >
                       <button
                         type="button"
-                        className="bg-primary text-primary-foreground px-5 py-2 font-bold rounded-lg hover:brightness-110 transition-all text-sm sm:text-base cursor-pointer"
+                        className="bg-primary text-primary-foreground px-5 py-2 font-semibold rounded-lg hover:brightness-110 transition-all text-sm sm:text-base cursor-pointer"
                       >
                         Voir plus
                       </button>
                     </a>
-                    <span className="inline-flex items-center text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/25 tracking-wide">
+                    <span className="inline-flex items-center text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/25">
                       {project.category}
                     </span>
                   </div>
@@ -184,10 +184,10 @@ export default function Projects() {
                   </svg>
                 </div>
                 <div className="text-center px-4 sm:px-6">
-                  <h3 className="text-lg sm:text-2xl lg:text-3xl font-bold text-foreground tracking-tight">
+                  <h3 className="text-lg sm:text-2xl lg:text-3xl font-bold text-foreground">
                     See all projects
                   </h3>
-                  <p className="mt-1 sm:mt-2 text-xs sm:text-sm lg:text-base text-muted-foreground font-light">
+                  <p className="mt-1 sm:mt-2 text-xs sm:text-sm lg:text-base text-muted-foreground">
                     Explore our complete portfolio
                   </p>
                 </div>

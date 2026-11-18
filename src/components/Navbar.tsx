@@ -67,7 +67,7 @@ export default function Navbar() {
             <li className="xl:hidden">
               <Link
                 href="/shop"
-                className="bg-primary text-primary-foreground px-5 py-3 font-bold rounded-lg hover:brightness-110 active:scale-[0.97] transition-all duration-200"
+                className="bg-primary text-primary-foreground px-5 py-3 font-semibold rounded-lg hover:brightness-110 active:scale-[0.97] transition-all duration-200"
                 onClick={() => setIsOpen(false)}
               >
                 Shop
@@ -89,7 +89,7 @@ export default function Navbar() {
 
           {/* Shop button */}
           <div className="hidden xl:flex z-50">
-            <Link href="/shop" className="bg-primary text-primary-foreground px-5 py-3 font-bold rounded-lg hover:brightness-110 active:scale-[0.97] transition-all duration-200">
+            <Link href="/shop" className="bg-primary text-primary-foreground px-5 py-3 font-semibold rounded-lg hover:brightness-110 active:scale-[0.97] transition-all duration-200">
               Shop
             </Link>
           </div>

@@ -57,10 +57,10 @@ export default function About() {
         </div>
         <div className="px-4 sm:px-6 lg:px-8 w-full">
           <div className="container mx-auto w-full text-center max-w-4xl">
-            <h1 className="invisible about-title text-4xl sm:text-5xl lg:text-6xl font-bold pb-8 text-foreground leading-[1.2] tracking-tight">
+            <h1 className="invisible about-title text-4xl sm:text-5xl lg:text-6xl font-bold pb-8 text-foreground">
               Bringing Your Ideas to Life with <span className="text-amber-500">Creativity and Innovation</span>
             </h1>
-            <p className="invisible about-text text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed font-light">
+            <p className="invisible about-text text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed">
               <b className="text-foreground font-semibold">ZignnnIt</b> is a key
               player in graphic design, UI/UX, and web & mobile development.
               We combine creativity and technical expertise to transform your ideas into
