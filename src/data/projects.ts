@@ -22,7 +22,7 @@ export type Project = {
   type: ProjectType;
   title: string;
   category: ProjectCategory;
-  /** TODO: fill in the year for each project (shown in the page hero when set). */
+  /** Year of delivery (shown in the project page hero). */
   year?: number;
   /** One or two sentences: cards, page intro, meta description. */
   summary: Localized;
@@ -55,6 +55,7 @@ export const projects: Project[] = [
     type: "branding",
     title: "Kasastay",
     category: "graphicDesign",
+    year: 2025,
     summary: {
       en: "A comprehensive brand identity and graphic guidelines crafted for Kasastay, a modern property rental and real estate company in Cameroon.",
       fr: "Une identité visuelle complète et une charte graphique conçues pour Kasastay, une entreprise moderne de location et d’immobilier au Cameroun.",
@@ -68,6 +69,7 @@ export const projects: Project[] = [
     type: "app",
     title: "Pasteefy",
     category: "webDevelopment",
+    year: 2026,
     summary: {
       en: "An intuitive social media text formatter and styling tool designed to craft engaging, beautifully formatted posts.",
       fr: "Un outil intuitif de mise en forme de texte pour les réseaux sociaux, pour rédiger des publications engageantes et soignées.",
@@ -81,6 +83,7 @@ export const projects: Project[] = [
     type: "branding",
     title: "Evers Beauty",
     category: "graphicDesign",
+    year: 2025,
     summary: {
       en: "A comprehensive visual identity and brand style guide crafted for Evers Beauty, a modern aesthetics and wellness institute.",
       fr: "Une identité visuelle complète et un guide de style conçus pour Evers Beauty, un institut moderne d’esthétique et de bien-être.",
@@ -94,6 +97,7 @@ export const projects: Project[] = [
     type: "website",
     title: "Gaëlle & Joël",
     category: "webDevelopment",
+    year: 2026,
     summary: {
       en: "A personalized digital wedding invitation and interactive e-ticket platform crafted for an unforgettable celebration.",
       fr: "Une invitation de mariage digitale personnalisée et une plateforme d’e-billets interactive pour une célébration inoubliable.",
@@ -107,6 +111,7 @@ export const projects: Project[] = [
     type: "branding",
     title: "NovaSup",
     category: "graphicDesign",
+    year: 2025,
     summary: {
       en: "A complete brand identity and graphic guidelines crafted for NovaSup, a higher education and academic institute.",
       fr: "Une identité de marque complète et une charte graphique conçues pour NovaSup, un institut d’enseignement supérieur.",
@@ -120,6 +125,7 @@ export const projects: Project[] = [
     type: "app",
     title: "Profinder",
     category: "uiUxDesign",
+    year: 2024,
     summary: {
       en: "An intuitive platform connecting professionals with clients through a sleek, engaging interface.",
       fr: "Une plateforme intuitive qui met en relation professionnels et clients grâce à une interface élégante et engageante.",
@@ -136,6 +142,7 @@ export const projects: Project[] = [
     type: "website",
     title: "ZignnnIt",
     category: "webDevelopment",
+    year: 2024,
     summary: {
       en: "Our own digital presence — creativity, innovation, and cutting-edge technology in one platform.",
       fr: "Notre propre vitrine digitale — créativité, innovation et technologies de pointe réunies sur une seule plateforme.",
@@ -149,6 +156,7 @@ export const projects: Project[] = [
     type: "branding",
     title: "Lumax",
     category: "graphicDesign",
+    year: 2023,
     summary: {
       en: "A modern visual identity for Lumax — logo, stationery, and branding crafted with precision.",
       fr: "Une identité visuelle moderne pour Lumax — logo, papeterie et branding réalisés avec précision.",
@@ -162,6 +170,7 @@ export const projects: Project[] = [
     type: "app",
     title: "BMI Calculator",
     category: "mobileDevelopment",
+    year: 2024,
     summary: {
       en: "A user-friendly Flutter app for health insights and personalized BMI recommendations.",
       fr: "Une application Flutter simple d’utilisation pour suivre sa santé, avec des recommandations IMC personnalisées.",

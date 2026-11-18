@@ -21,9 +21,9 @@ export const team: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/japhetseumo",
   },
   {
-    name: "Moïse Tchakounte",
+    name: "Jordan Tchakounte",
     role: { en: "2D / 3D Designer", fr: "Designer 2D / 3D" },
-    photo: "/team/moise-tchakounte.webp",
-    linkedin: null, // TODO: add Moïse's LinkedIn URL
+    photo: "/team/jordan-tchakounte.webp",
+    linkedin: null, // TODO: add Jordan's LinkedIn URL
   },
 ];
