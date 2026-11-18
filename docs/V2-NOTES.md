@@ -131,6 +131,7 @@ Visiteur → zignnnit.com/contact
 | Ajouter un collaborateur | Un objet dans `src/data/team.ts`, puis la photo dans `public/team/` (ratio 4:5). Sans photo, la carte affiche les initiales. |
 | Changer un texte d'interface | `messages/en.json` et `messages/fr.json` |
 | Changer e-mail, WhatsApp, LinkedIn | `src/data/contact.ts` (utilisé par le contact, le footer et le JSON-LD) |
+| Ajouter un témoignage | Un objet dans `src/data/testimonials.ts`. Un témoignage marqué `placeholder: true` (texte inventé pour tester le design) est **masqué en production** : il n'apparaît qu'en local et dans les aperçus Vercel. Publier de faux avis tromperait les visiteurs. |
 
 **Pourquoi pas de base de données ?** Le contenu change rarement et c'est toi qui l'écris. Un fichier versionné dans Git donne l'historique, la relecture, zéro coût et zéro panne possible, et TypeScript vérifie la structure. Les gros fichiers (PDF, vidéos longues) restent à l'extérieur : Drive, YouTube.
 

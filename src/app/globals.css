@@ -209,6 +209,37 @@ html.has-custom-cursor [contenteditable="true"] {
   cursor: text !important;
 }
 
+/* Testimonials band: the track contains the list twice and slides by -50%. */
+.zg-marquee {
+  /* Soft fade on both edges */
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.zg-marquee-track {
+  animation: zg-marquee var(--zg-marquee-duration, 40s) linear infinite;
+}
+.zg-marquee:hover .zg-marquee-track,
+.zg-marquee:focus-within .zg-marquee-track {
+  animation-play-state: paused;
+}
+@keyframes zg-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .zg-marquee {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    mask-image: none;
+  }
+  .zg-marquee-track {
+    animation: none !important;
+  }
+  .zg-marquee-track > li {
+    scroll-snap-align: start;
+  }
+}
+
 /* Contact form success check mark (stroke drawing) */
 @keyframes zg-draw {
   to {

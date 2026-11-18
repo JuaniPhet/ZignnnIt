@@ -92,7 +92,8 @@ export default function Services() {
               </AccordionTrigger>
               <AccordionContent>
                 <div className="flex flex-col md:flex-row items-start justify-center gap-8 py-6">
-                  <div className="relative w-full md:w-1/2 h-60 rounded-2xl overflow-hidden shadow-md">
+                  {/* 4:3 frame (was a fixed 240px height that cropped the images into a thin band) */}
+                  <div className="relative w-full md:w-1/2 aspect-[4/3] rounded-2xl overflow-hidden shadow-md">
                     <Image
                       src={service.image}
                       alt={t(`${item}.title`)}

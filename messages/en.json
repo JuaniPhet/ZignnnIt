@@ -224,6 +224,11 @@
     "years": "Years of experience",
     "creativity": "Creativity guaranteed"
   },
+  "testimonials": {
+    "title": "What our <hl>clients</hl> say",
+    "subtitle": "In their own words.",
+    "rating": "Rated 5 out of 5"
+  },
   "footer": {
     "tagline": "Creative digital and visual experiences to elevate your business.",
     "rights": "© {year} ZignnnIt. All rights reserved.",

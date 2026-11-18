@@ -8,6 +8,7 @@ import About from "@/components/About";
 import Services from "@/components/Services";
 import Projects from "@/components/Projects";
 import Stats from "@/components/Stats";
+import Testimonials from "@/components/Testimonials";
 import { routing } from "@/i18n/routing";
 import { pageAlternates, pageOpenGraph } from "@/i18n/metadata";
 
@@ -38,6 +39,7 @@ export default async function Home({ params }: PageProps) {
       <Services />
       <Projects />
       <Stats />
+      <Testimonials />
     </main>
   );
 }
