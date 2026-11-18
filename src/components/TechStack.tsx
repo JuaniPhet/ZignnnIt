@@ -11,28 +11,30 @@ interface ToolItem {
   invertDark?: boolean;
 }
 
+// Lighter marquee (v2): less relevant tools are commented out, not deleted,
+// so they can be restored by removing the `//`. Project cards keep their own badges.
 const toolsList: ToolItem[] = [
   // Design & Creative
   { src: "/img/tools/adobe-illustrator.svg", alt: "Illustrator" },
   { src: "/img/tools/adobe-photoshop.svg", alt: "Photoshop" },
-  { src: "/img/tools/adobe-indesign.svg", alt: "InDesign" },
-  { src: "/img/tools/adobe-xd.svg", alt: "XD" },
+  // { src: "/img/tools/adobe-indesign.svg", alt: "InDesign" },
+  // { src: "/img/tools/adobe-xd.svg", alt: "XD" },
   { src: "/img/tools/figma.svg", alt: "Figma" },
-  { src: "/img/tools/canva.svg", alt: "Canva" },
+  // { src: "/img/tools/canva.svg", alt: "Canva" },
   { src: "/img/tools/framer.svg", alt: "Framer", invertDark: true },
 
   // Web Frontend
-  { src: "/img/tools/html-5.svg", alt: "HTML 5" },
-  { src: "/img/tools/css-3.svg", alt: "CSS 3" },
-  { src: "/img/tools/javascript.svg", alt: "JavaScript" },
+  // { src: "/img/tools/html-5.svg", alt: "HTML 5" },
+  // { src: "/img/tools/css-3.svg", alt: "CSS 3" },
+  // { src: "/img/tools/javascript.svg", alt: "JavaScript" },
   { src: "/img/tools/typescript.svg", alt: "TypeScript" },
   { src: "/img/tools/react.svg", alt: "React" },
   { src: "/img/tools/nextjs.svg", alt: "Next.js", invertDark: true },
   { src: "/img/tools/shadcn-ui.svg", alt: "Shadcn UI", invertDark: true },
   { src: "/img/tools/tailwindcss.svg", alt: "Tailwind CSS" },
-  { src: "/img/tools/bootstrap.svg", alt: "Bootstrap" },
+  // { src: "/img/tools/bootstrap.svg", alt: "Bootstrap" },
   { src: "/img/tools/gsap.svg", alt: "GSAP" },
-  { src: "/img/tools/google-fonts.svg", alt: "Google Fonts" },
+  // { src: "/img/tools/google-fonts.svg", alt: "Google Fonts" },
 
   // Backend & Databases
   { src: "/img/tools/python.svg", alt: "Python" },
@@ -44,7 +46,7 @@ const toolsList: ToolItem[] = [
   { src: "/img/tools/flutter.svg", alt: "Flutter" },
   { src: "/img/tools/android.svg", alt: "Android" },
   { src: "/img/tools/apple.svg", alt: "iOS", invertDark: true },
-  { src: "/img/tools/microsoft-windows.svg", alt: "Windows" },
+  // { src: "/img/tools/microsoft-windows.svg", alt: "Windows" },
 
   // DevOps & Cloud
   { src: "/img/tools/docker.svg", alt: "Docker" },
@@ -72,7 +74,7 @@ export default function TechStack() {
     // We animate translating X to half the width of the full scroll container
     animationRef.current = gsap.to(scrollRef.current, {
       x: "-50%",
-      duration: 65,
+      duration: 48, // keeps the v1 scroll speed with 24 logos instead of 33
       ease: "linear",
       repeat: -1
     });
