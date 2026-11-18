@@ -5,6 +5,14 @@
 @source "../../src/**/*.{js,ts,jsx,tsx,mdx}";
 
 /*
+ * Tailwind v4's `dark:` variant follows the OS (prefers-color-scheme) by default.
+ * The site has its own theme toggle (next-themes puts .dark on <html>), so make
+ * `dark:` follow that class instead — otherwise a visitor whose OS is in dark mode
+ * gets dark: styles on top of the light theme.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
  * Fonts: the --font-cabinet-grotesk / --font-general-sans variables are set on <html>
  * by next/font/local (see app/layout.tsx). `inline` makes Tailwind write the var()
  * reference directly into each utility instead of resolving it on :root.
