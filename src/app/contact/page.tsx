@@ -197,19 +197,20 @@ export default function ContactPage() {
                           name="country"
                           autoComplete="country"
                           aria-label="Country"
-                          className="appearance-none bg-transparent py-3 pl-4 pr-8 text-sm font-medium text-muted-foreground border-r border-border focus:outline-none cursor-pointer"
+                          className="appearance-none bg-transparent py-3 pl-3 pr-2 text-sm font-medium text-muted-foreground border-r border-border focus:outline-none cursor-pointer"
                         >
-                          <option className="bg-background text-foreground">CMR (+237)</option>
-                          <option className="bg-background text-foreground">USA (+1)</option>
-                          <option className="bg-background text-foreground">FRA (+33)</option>
-                          <option className="bg-background text-foreground">ESP (+34)</option>
-                          <option className="bg-background text-foreground">DEU (+49)</option>
-                          <option className="bg-background text-foreground">CHE (+41)</option>
-                          <option className="bg-background text-foreground">ITA (+39)</option>
-                          <option className="bg-background text-foreground">GBR (+44)</option>
-                          <option className="bg-background text-foreground">CAN (+1)</option>
-                          <option className="bg-background text-foreground">AUS (+61)</option>
-                          <option className="bg-background text-foreground">IND (+91)</option>
+                          {/* Value keeps the country code for the email; the label stays compact on mobile */}
+                          <option value="CMR (+237)" className="bg-background text-foreground">CM +237</option>
+                          <option value="USA (+1)" className="bg-background text-foreground">US +1</option>
+                          <option value="FRA (+33)" className="bg-background text-foreground">FR +33</option>
+                          <option value="ESP (+34)" className="bg-background text-foreground">ES +34</option>
+                          <option value="DEU (+49)" className="bg-background text-foreground">DE +49</option>
+                          <option value="CHE (+41)" className="bg-background text-foreground">CH +41</option>
+                          <option value="ITA (+39)" className="bg-background text-foreground">IT +39</option>
+                          <option value="GBR (+44)" className="bg-background text-foreground">GB +44</option>
+                          <option value="CAN (+1)" className="bg-background text-foreground">CA +1</option>
+                          <option value="AUS (+61)" className="bg-background text-foreground">AU +61</option>
+                          <option value="IND (+91)" className="bg-background text-foreground">IN +91</option>
                         </select>
                         <input
                           type="tel"
@@ -218,7 +219,7 @@ export default function ContactPage() {
                           autoComplete="tel-national"
                           maxLength={30}
                           className="block min-w-0 grow py-3 px-4 text-base text-foreground bg-transparent placeholder:text-muted-foreground/60 focus:outline-none"
-                          placeholder="690-000-000"
+                          placeholder="690 000 000"
                         />
                       </div>
                     </div>
