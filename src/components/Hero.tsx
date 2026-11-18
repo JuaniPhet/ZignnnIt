@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import SplitTitle from "@/components/SplitTitle";
+import HeroIllustration from "@/components/hero/HeroIllustration";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,16 +58,6 @@ export default function Hero() {
         { autoAlpha: 1, x: 0, scale: 1, duration: 1, ease: "power2.out" },
         "-=0.5"
       );
-
-    // Subtle float animation for the illustration
-    gsap.to(".hero-illustration", {
-      y: -14,
-      duration: 3.5,
-      ease: "sine.inOut",
-      repeat: -1,
-      yoyo: true,
-      delay: 1.5,
-    });
 
     // Subtle pulse on the glow behind CTA
     gsap.to(".cta-glow", {
@@ -236,21 +227,9 @@ export default function Hero() {
         </div>
 
         {/* Right column - Illustration */}
-        {/*
-          Below the CTAs on mobile (80% wide, centered), right column from lg.
-          `relative` so the animated SVG layers (steam, clock hands…) can later be
-          positioned in % on top of the artwork and follow its resizing.
-        */}
-        <div className="invisible hero-illustration relative w-4/5 max-w-md mx-auto lg:mx-0 lg:w-5/12 lg:max-w-lg xl:max-w-xl flex-shrink-0">
-          <Image
-            src="/img/vector2@4x-8.png"
-            alt="Illustration of a creative workspace: computer, coffee cup, lamp and clock"
-            width={600}
-            height={425}
-            sizes="(max-width: 768px) 80vw, 40vw"
-            className="w-full h-auto drop-shadow-2xl"
-            priority
-          />
+        {/* Animated vector illustration: below the CTAs on mobile (~90% wide, centered), right column from lg */}
+        <div className="invisible hero-illustration w-[90%] max-w-[520px] mx-auto lg:mx-0 lg:w-1/2 lg:max-w-2xl flex-shrink-0">
+          <HeroIllustration />
         </div>
       </div>
       </div>

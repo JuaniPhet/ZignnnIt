@@ -1,0 +1,66 @@
+/* ZignnnIt — animations de l'illustration du hero
+   À charger avec hero-illustration.svg intégré EN LIGNE (inline) dans la page.
+   Le JS (hero-animations.js) gère : horloge, plume, fusée, lampe qui suit la souris, parallaxe. */
+
+/* ---------- Vapeur ---------- */
+#zg-hero .steam-path {
+  stroke-dasharray: 120 240;
+  animation: zg-steam 3.6s linear infinite;
+}
+#zg-hero #steam-2 { animation-duration: 4.2s; animation-delay: -2s; }
+#zg-hero #steam-sway { animation: zg-sway 5s ease-in-out infinite; }
+@keyframes zg-steam { from { stroke-dashoffset: 360; } to { stroke-dashoffset: 0; } }
+@keyframes zg-sway { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(10px); } }
+
+/* ---------- Reflet qui balaie l'écran ---------- */
+#zg-hero #screen-glare .band { animation: zg-glare 8s cubic-bezier(.6,0,.3,1) infinite; }
+@keyframes zg-glare {
+  0%   { transform: translateX(-760px); }
+  30%  { transform: translateX(900px); }
+  100% { transform: translateX(900px); }
+}
+
+/* ---------- Nuancier qui pulse ---------- */
+#zg-hero .swatch {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: zg-swatch 4.5s ease-in-out infinite;
+}
+@keyframes zg-swatch { 0%, 60%, 100% { transform: scale(1); } 70% { transform: scale(1.16); } }
+
+/* ---------- Flamme de la fusée ---------- */
+#zg-hero .flame {
+  transform-box: fill-box;
+  transform-origin: 100% 50%;
+  animation: zg-flame .16s ease-in-out infinite alternate;
+}
+@keyframes zg-flame { from { transform: scaleX(.65); } to { transform: scaleX(1.15); } }
+
+/* ---------- Cactus qui oscille ---------- */
+#zg-hero #cactus {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: zg-cactus 5.5s ease-in-out infinite;
+}
+@keyframes zg-cactus { 0%, 100% { transform: rotate(-1.6deg); } 50% { transform: rotate(1.6deg); } }
+
+/* ---------- Lampe qui s'allume ---------- */
+#zg-hero #lamp-light { opacity: 0; }
+#zg-hero #lamp-bulb { transition: fill .4s; }
+#zg-hero:not(.zg-on) #lamp-bulb { fill: var(--zg-light); }
+#zg-hero.zg-on #lamp-light {
+  animation: zg-lamp-on 1.5s linear .5s forwards, zg-lamp-breathe 5s ease-in-out 2s infinite;
+}
+@keyframes zg-lamp-on {
+  0% { opacity: 0; } 10% { opacity: .75; } 16% { opacity: .1; } 30% { opacity: .9; }
+  38% { opacity: .25; } 60% { opacity: 1; } 100% { opacity: 1; }
+}
+@keyframes zg-lamp-breathe { 0%, 100% { opacity: 1; } 50% { opacity: .82; } }
+
+/* ---------- Accessibilité : animations réduites ---------- */
+@media (prefers-reduced-motion: reduce) {
+  #zg-hero *, #zg-hero *::before, #zg-hero *::after { animation: none !important; }
+  #zg-hero .steam-path { stroke-dasharray: none; opacity: .6; }
+  #zg-hero #lamp-light { opacity: 1; }
+  #zg-hero #screen-glare .band { transform: translateX(0); }
+}

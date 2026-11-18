@@ -125,32 +125,42 @@ Les photos seront retouchées avant d'être fournies : prévoir des placeholders
 
 Objectif : un site vitrine qui marque, pas un site « comme les autres ». Toujours au service de la lisibilité, et fluide (60 fps).
 
-### 7.1 Illustration du hero animée (prioritaire)
+### 7.1 Illustration du hero animée (prioritaire) — FOURNIE, À INTÉGRER
 
-L'illustration actuelle est un PNG unique (`/img/vector2@4x-8.png`, 600×425) : ordinateur, tasse avec vapeur, lampe, horloge, cactus, stylet.
+L'ancienne illustration (`/img/vector2@4x-8.png`, PNG d'une banque d'images aux couleurs hors charte : magenta, bleu, violet) est **remplacée** par une nouvelle illustration vectorielle, redessinée aux couleurs ZignnnIt. Même scène : écran avec logiciel de dessin, tasse fumante, lampe, horloge, cactus, feutre, souris.
 
-**État actuel :** le fichier `hero_img.svg` fourni n'est **pas vectoriel**. C'est le PNG (1705×1207) dans une enveloppe SVG exportée depuis Figma, sans tracés ni calques : il est inutilisable tel quel pour l'animation.
+**Fichiers fournis** (à placer dans `src/components/hero/`) :
 
-**Méthode recommandée :** une version **SVG vectorielle** exportée depuis Illustrator à partir du fichier source (.ai ou .eps), avec ces réglages :
-- Exporter sous > SVG
-- Style : attributs de présentation
-- Police : vectoriser
-- ID d'objet : noms de calque
+| Fichier | Rôle |
+|---|---|
+| `hero-illustration.svg` | Illustration vectorielle, `viewBox="0 0 1720 1220"`, `id="zg-hero"`, calques nommés, couleurs pilotées par variables CSS |
+| `hero-animations.css` | Animations CSS : vapeur, reflet de l'écran, nuancier, flamme de la fusée, cactus, allumage de la lampe, `prefers-reduced-motion` |
+| `hero-animations.js` | `initZgHero()` sans dépendance : horloge à l'heure réelle, timeline de l'écran (design → décollage → code → retour, 14 s, constantes `T` en tête de fichier pour régler les durées), lampe qui suit la souris, parallaxe, pause hors écran. Retourne une fonction de nettoyage. |
+| `demo-hero-zignnnit.html` | Démo autonome de référence : le rendu final doit être identique |
 
-Calques nommés attendus : `steam-1`, `steam-2`, `cup`, `clock-hand-hour`, `clock-hand-minute`, `clock-center`, `lamp-head`, `lamp-arm`, `lamp-light`, `screen-glare`, `art-circle`, `art-pen`, `art-rocket`, `palette-swatches`, `cactus`, `monitor`, `screen-ui`, `keyboard`, `mouse`, `marker`, `pot`.
+**Intégration (Next.js) :**
+- Le SVG doit être **inline** (pas de `<img src>`), sinon ni le CSS ni le JS ne peuvent l'animer. Le convertir en composant React (`HeroIllustration.tsx`), en gardant **tous les `id` et `class`**. Convertir les attributs au format JSX (`stroke-width` → `strokeWidth`, `clip-path` → `clipPath`, etc.).
+- Composant client (`'use client'`) : appeler `initZgHero(ref.current)` dans un `useEffect` et retourner la fonction de nettoyage.
+- Importer `hero-animations.css` dans ce composant (ou dans les styles globaux).
+- Les ids des `clipPath`, `mask` et `gradient` sont préfixés `zg-` : garder ce préfixe pour éviter les conflits.
+- Visible **aussi sur mobile** (sous les CTA, environ 90 % de la largeur). La parallaxe et la lampe qui suit la souris sont automatiquement désactivées sans souris.
+- **Mode sombre :** surcharger les variables du SVG quand le thème sombre est actif :
+  ```css
+  .dark #zg-hero { --zg-outline:#0E0D0C; --zg-arm:#8F8882; --zg-carbon:#2E2A26; --zg-carbon2:#45403A; --zg-steam:#6B645D; }
+  ```
+- Si GSAP est déjà utilisé dans le projet, on peut porter les boucles de `hero-animations.js` en timelines GSAP. **Le comportement visuel doit rester identique à la démo.**
+- Couleur d'accent : le cactus est vert sauge (`--zg-sage`), la seule couleur hors ambre et neutres. On peut la changer via la variable.
 
-Intégrer ce SVG inline et animer chaque calque :
+**Ce qui bouge :**
 
-- **Vapeur de la tasse :** 2 ou 3 volutes qui montent, ondulent et s'estompent en boucle (GSAP timeline ou keyframes CSS, décalées ; option `feTurbulence` + `feDisplacementMap` pour un effet organique).
-- **Écran du PC :** le tracé de plume Illustrator se dessine (`stroke-dashoffset`), la fusée se déplace, les pastilles de couleur pulsent ; boucle d'environ 6 s.
-- **Horloge :** aiguilles qui affichent **l'heure réelle du visiteur** (petit détail qui surprend).
-- **Lampe :** léger halo ambre qui s'allume au chargement ; la tête de lampe suit légèrement la souris (desktop).
-- **Cactus :** légère oscillation.
-- **Parallaxe au mouvement de la souris** sur les calques (profondeurs différentes), désactivée sur mobile.
-
-- **Reflet de l'écran (`screen-glare`) :** balayage lumineux lent sur l'écran, en boucle.
-
-**Solution de repli** si le vectoriel n'est pas disponible : garder le PNG comme fond, avec une version **sans la vapeur et sans les aiguilles**. Redessiner en SVG inline uniquement les parties animées (vapeur, aiguilles, reflet), positionnées en `%` dans le même conteneur que l'image, pour qu'elles suivent son redimensionnement.
+| Élément | Animation |
+|---|---|
+| Vapeur | Volutes qui montent en continu, légère ondulation |
+| Horloge | Heure réelle du visiteur, trotteuse ambre |
+| Écran — histoire en boucle de 14 s : **« on design, puis on code »** | 1. **Design** : la plume trace le cercle, qui se remplit ; le nuancier pulse ; la fusée flotte. 2. **Décollage** : la fusée part hors de la toile. 3. **Balayage ambre** (clin d'œil au carré du logo) : l'écran bascule sur un **IDE de code**. 4. **Code** : explorateur de fichiers, onglets, lignes de code colorées qui s'écrivent avec un curseur ambre, puis le terminal affiche un build réussi (coche verte). 5. **Retour** : second balayage ambre, toile vierge, la fusée revient, et le cycle recommence. Un reflet balaie l'écran en continu. |
+| Lampe | S'allume avec un petit grésillement au chargement, halo qui respire, la tête suit la souris |
+| Cactus | Légère oscillation |
+| Ensemble | Parallaxe en profondeur selon la souris |
 
 ### 7.2 Autres animations
 
@@ -265,7 +275,7 @@ La page « Coming soon » n'offre aucune action. Ajouter un champ e-mail « Noti
 ## 13. Checklist de validation
 
 - [ ] Plus aucun mot coupé dans les titres, à toutes les largeurs (320 → 1920 px).
-- [ ] Illustration visible et animée sur mobile.
+- [ ] Nouvelle illustration intégrée en SVG inline, identique à `demo-hero-zignnnit.html`, visible et animée sur mobile, correcte en mode sombre.
 - [ ] Urbanist entièrement retirée ; Cabinet Grotesk et General Sans auto-hébergées.
 - [ ] Pages projets : les 3 types s'affichent correctement ; la vidéo YouTube ne se charge qu'au clic.
 - [ ] Bascule EN/FR fonctionnelle sur toutes les pages, `hreflang` en place.
