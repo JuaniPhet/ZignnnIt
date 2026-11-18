@@ -11,19 +11,20 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-background border-t border-border/60 py-12 sm:py-16 overflow-hidden">
+    <footer className="relative bg-carbon dark:bg-black text-white py-12 sm:py-16 overflow-hidden">
+      {/* Carbon footer (dark mode: pure black, to stay distinct from the carbon page background) */}
       {/* Top gold-amber gradient border highlight */}
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber/40 to-transparent"></div>
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber/70 to-transparent"></div>
 
       <div className="px-4 sm:px-6 lg:px-8 w-full">
         <div className="container mx-auto max-w-7xl w-full">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 pb-10 border-b border-border/40">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 pb-10 border-b border-white/10">
 
           {/* Logo & Tagline */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-3">
             <Link href={pathname === "/" ? "#home" : "/"}>
               <div className="cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="254" height="98" viewBox="0 0 254 98" fill="none" className="w-auto h-9 text-foreground">
+                <svg xmlns="http://www.w3.org/2000/svg" width="254" height="98" viewBox="0 0 254 98" fill="none" className="w-auto h-9 text-white">
                   <path d="M0 0H52V30H0V0Z" fill="#F7B700" />
                   <path d="M254 51.9727H244.276V72.2255C244.276 74.1032 244.79 75.2656 245.818 75.7127C246.668 76.0704 247.763 76.2492 249.104 76.2492C250.446 76.2492 251.921 75.8915 253.531 75.1762H254V80.1388C252.122 81.1224 250.11 81.6142 247.964 81.6142C241.437 81.6142 238.173 78.6634 238.173 72.762V51.9727H231.802V51.5703L244.276 39.365V46.7418H254V51.9727Z" fill="currentColor" />
                   <path d="M218.664 80.9436V34H225.639V80.9436H218.664Z" fill="currentColor" />
@@ -36,7 +37,7 @@ export default function Footer() {
                 </svg>
               </div>
             </Link>
-            <p className="text-xs text-muted-foreground max-w-sm">
+            <p className="text-xs text-white/70 max-w-sm">
               Creative digital and visual experiences to elevate your business.
             </p>
           </div>
@@ -44,32 +45,32 @@ export default function Footer() {
           {/* Navigation Links */}
           {/* <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
             <li>
-              <Link href={getLinkHref("#home")} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              <Link href={getLinkHref("#home")} className="text-sm font-medium text-white/70 hover:text-amber transition-colors">
                 Home
               </Link>
             </li>
             <li>
-              <Link href={getLinkHref("#about-us")} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              <Link href={getLinkHref("#about-us")} className="text-sm font-medium text-white/70 hover:text-amber transition-colors">
                 About
               </Link>
             </li>
             <li>
-              <Link href={getLinkHref("#services")} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              <Link href={getLinkHref("#services")} className="text-sm font-medium text-white/70 hover:text-amber transition-colors">
                 Services
               </Link>
             </li>
             <li>
-              <Link href="/projects" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              <Link href="/projects" className="text-sm font-medium text-white/70 hover:text-amber transition-colors">
                 Projects
               </Link>
             </li>
             <li>
-              <Link href="/contact" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              <Link href="/contact" className="text-sm font-medium text-white/70 hover:text-amber transition-colors">
                 Contact
               </Link>
             </li>
             <li>
-              <Link href="/shop" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              <Link href="/shop" className="text-sm font-medium text-white/70 hover:text-amber transition-colors">
                 Shop
               </Link>
             </li>
@@ -81,7 +82,7 @@ export default function Footer() {
               href="https://www.linkedin.com/in/japhetseumo"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-primary/15 hover:bg-primary text-foreground hover:text-primary-foreground px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200"
+              className="inline-flex items-center gap-2 bg-white/10 hover:bg-primary text-white hover:text-primary-foreground px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200"
             >
               <i className="ri-linkedin-fill text-lg"></i>
               <span>LinkedIn</span>
@@ -91,10 +92,10 @@ export default function Footer() {
 
         {/* Bottom bar */}
         {/* Stacked and centered on mobile, side by side from lg */}
-        <div className="pt-8 flex flex-col lg:flex-row items-center justify-between text-center text-xs text-muted-foreground gap-2 lg:gap-4">
+        <div className="pt-8 flex flex-col lg:flex-row items-center justify-between text-center text-xs text-white/60 gap-2 lg:gap-4">
           <p>© {new Date().getFullYear()} ZignnnIt. All rights reserved.</p>
           <p>
-            Crafted with passion by <span className="font-semibold text-foreground whitespace-nowrap">ZignnnIt</span>
+            Crafted with passion by <span className="font-semibold text-white whitespace-nowrap">ZignnnIt</span>
           </p>
         </div>
         </div>
