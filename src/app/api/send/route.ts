@@ -14,8 +14,16 @@ const LIMITS = {
   email: 254,
   country: 50,
   phone: 30,
+  website: 200,
   message: 5000,
 } as const;
+
+const PREFERRED_CONTACT = {
+  email: "Email",
+  whatsapp: "WhatsApp",
+  phone: "Phone call",
+} as const;
+type PreferredContact = keyof typeof PREFERRED_CONTACT;
 
 type ContactPayload = {
   firstName: string;
@@ -24,6 +32,8 @@ type ContactPayload = {
   email: string;
   country: string;
   phone: string;
+  website: string;
+  preferredContact: PreferredContact;
   message: string;
 };
 
@@ -39,6 +49,8 @@ type ErrorCode =
   | "message_required"
   | "message_too_short"
   | "phone_invalid"
+  | "phone_required"
+  | "website_invalid"
   | "field_too_long"
   | "security_failed"
   | "service_unavailable"
@@ -50,6 +62,16 @@ function fail(code: ErrorCode, error: string, status: number) {
 
 function str(value: unknown): string {
   return typeof value === "string" ? value.trim() : "";
+}
+
+/** Accepts "example.com" or "https://example.com" (http/https only). */
+function isWebsite(value: string): boolean {
+  try {
+    const url = new URL(/^https?:\/\//i.test(value) ? value : `https://${value}`);
+    return (url.protocol === "http:" || url.protocol === "https:") && url.hostname.includes(".");
+  } catch {
+    return false;
+  }
 }
 
 function escapeHtml(value: string): string {
@@ -69,6 +91,10 @@ function validate(body: Record<string, unknown>): { data?: ContactPayload; code?
     email: str(body.email),
     country: str(body.country),
     phone: str(body.phone),
+    website: str(body.website),
+    preferredContact: (str(body.preferredContact) in PREFERRED_CONTACT
+      ? str(body.preferredContact)
+      : "email") as PreferredContact,
     message: str(body.message),
   };
 
@@ -80,9 +106,15 @@ function validate(body: Record<string, unknown>): { data?: ContactPayload; code?
   if (data.phone && !/^[0-9+()\-.\s]+$/.test(data.phone)) {
     return { code: "phone_invalid", error: "Phone number contains invalid characters." };
   }
+  if (data.preferredContact !== "email" && !data.phone) {
+    return { code: "phone_required", error: "A phone number is required for WhatsApp or phone contact." };
+  }
+  if (data.website && !isWebsite(data.website)) {
+    return { code: "website_invalid", error: "Please provide a valid website address." };
+  }
 
   for (const [field, max] of Object.entries(LIMITS)) {
-    if (data[field as keyof ContactPayload].length > max) {
+    if (data[field as keyof typeof LIMITS].length > max) {
       return { code: "field_too_long", error: `Field "${field}" is too long (max ${max} characters).` };
     }
   }
@@ -135,9 +167,9 @@ export async function POST(request: Request) {
     return fail("invalid_body", "Invalid request body.", 400);
   }
 
-  // Champ piège anti-spam : invisible pour un humain, rempli par les bots.
+  // Champ piège anti-spam ("fax") : invisible pour un humain, rempli par les bots.
   // On répond « succès » sans rien envoyer pour ne pas renseigner le bot.
-  if (str(body.website)) {
+  if (str(body.fax)) {
     return NextResponse.json({ success: true }, { status: 200 });
   }
 
@@ -167,7 +199,9 @@ export async function POST(request: Request) {
     ["Name", fullName],
     ["Email", data.email],
     ["Company", data.company],
+    ["Website", data.website],
     ["Phone", phone],
+    ["Preferred contact", PREFERRED_CONTACT[data.preferredContact]],
   ];
 
   const text = [

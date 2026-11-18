@@ -243,7 +243,16 @@
       "messagePlaceholder": "Tell us about your project requirements…",
       "submit": "Let’s talk",
       "sending": "Sending…",
-      "success": "Thank you! Your message has been sent. We’ll get back to you within 24 hours."
+      "success": "Thank you! Your message has been sent. We’ll get back to you within 24 hours.",
+      "website": "Website",
+      "optional": "optional",
+      "websitePlaceholder": "https://your-company.com",
+      "preferred": "Preferred contact method",
+      "preferredOptions": {
+        "email": "Email",
+        "whatsapp": "WhatsApp",
+        "phone": "Phone call"
+      }
     },
     "errors": {
       "generic": "Something went wrong. Please try again.",
@@ -258,14 +267,21 @@
       "field_too_long": "One of the fields is too long.",
       "security_failed": "Security check failed. Please refresh and try again.",
       "service_unavailable": "The email service is temporarily unavailable. Please write to contact@zignnnit.com.",
-      "send_failed": "Failed to send your message. Please try again later."
+      "send_failed": "Failed to send your message. Please try again later.",
+      "phone_required": "Please add your phone number so we can reach you on WhatsApp or by phone.",
+      "website_invalid": "Please enter a valid website address."
     },
     "info": {
-      "emailTitle": "Email Us",
-      "locationTitle": "Location",
-      "location": "Douala, Cameroon",
-      "responseTitle": "Response Time",
-      "response": "Within 24 hours"
+      "location": "Douala, Cameroon"
+    },
+    "other": {
+      "title": "Other ways to reach us",
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "whatsappText": "Chat with us",
+      "linkedin": "LinkedIn",
+      "linkedinText": "Follow our work",
+      "details": "Based in {location} · We reply within 24 hours"
     }
   },
   "shop": {

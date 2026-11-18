@@ -243,7 +243,16 @@
       "messagePlaceholder": "Décrivez-nous votre projet…",
       "submit": "Parlons-en",
       "sending": "Envoi…",
-      "success": "Merci ! Votre message a bien été envoyé. Nous vous répondons sous 24 heures."
+      "success": "Merci ! Votre message a bien été envoyé. Nous vous répondons sous 24 heures.",
+      "website": "Site web",
+      "optional": "facultatif",
+      "websitePlaceholder": "https://votre-entreprise.com",
+      "preferred": "Moyen de contact préféré",
+      "preferredOptions": {
+        "email": "E-mail",
+        "whatsapp": "WhatsApp",
+        "phone": "Appel"
+      }
     },
     "errors": {
       "generic": "Une erreur est survenue. Veuillez réessayer.",
@@ -258,14 +267,21 @@
       "field_too_long": "L’un des champs est trop long.",
       "security_failed": "La vérification de sécurité a échoué. Rechargez la page et réessayez.",
       "service_unavailable": "Le service d’e-mail est momentanément indisponible. Écrivez-nous à contact@zignnnit.com.",
-      "send_failed": "L’envoi de votre message a échoué. Veuillez réessayer plus tard."
+      "send_failed": "L’envoi de votre message a échoué. Veuillez réessayer plus tard.",
+      "phone_required": "Ajoutez votre numéro de téléphone pour que nous puissions vous joindre sur WhatsApp ou par téléphone.",
+      "website_invalid": "Veuillez saisir une adresse de site web valide."
     },
     "info": {
-      "emailTitle": "Écrivez-nous",
-      "locationTitle": "Adresse",
-      "location": "Douala, Cameroun",
-      "responseTitle": "Délai de réponse",
-      "response": "Sous 24 heures"
+      "location": "Douala, Cameroun"
+    },
+    "other": {
+      "title": "Autres moyens de nous joindre",
+      "email": "E-mail",
+      "whatsapp": "WhatsApp",
+      "whatsappText": "Discutons sur WhatsApp",
+      "linkedin": "LinkedIn",
+      "linkedinText": "Suivez nos réalisations",
+      "details": "Basés à {location} · Réponse sous 24 heures"
     }
   },
   "shop": {

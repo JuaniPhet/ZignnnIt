@@ -3,10 +3,24 @@
 import { useCallback, useState, type FormEvent } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import Turnstile from "@/components/Turnstile";
+import { contact, whatsappUrl } from "@/data/contact";
 
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
+
+const PREFERRED = ["email", "whatsapp", "phone"] as const;
+
+// [value sent in the email, compact label]
+const COUNTRY_CODES = [
+  ["CMR (+237)", "CM +237"], ["USA (+1)", "US +1"], ["FRA (+33)", "FR +33"], ["ESP (+34)", "ES +34"],
+  ["DEU (+49)", "DE +49"], ["CHE (+41)", "CH +41"], ["ITA (+39)", "IT +39"], ["GBR (+44)", "GB +44"],
+  ["CAN (+1)", "CA +1"], ["AUS (+61)", "AU +61"], ["IND (+91)", "IN +91"],
+] as const;
+
+const labelClass = "block text-sm font-semibold text-foreground mb-2";
+const inputClass =
+  "block w-full rounded-xl bg-background/80 border border-border px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm";
 
 /**
  * Contact page body (client: form state, fetch, Turnstile).
@@ -54,7 +68,9 @@ export default function ContactContent() {
           country: value("country"),
           phone: value("phone-number"),
           message: value("message"),
-          website: value("website"),
+          website: value("company-website"),
+          preferredContact: value("preferred-contact"),
+          fax: value("fax"), // honeypot
           turnstileToken,
         }),
       });
@@ -127,74 +143,38 @@ export default function ContactContent() {
                   aria-busy={isLoading}
                   className="space-y-6"
                 >
-                  {/* Honeypot anti-spam : caché aux humains, ignoré par les lecteurs d'écran */}
+                  {/* Honeypot (anti-spam): hidden from humans and screen readers, bots fill it in.
+                      Named "fax" because "website" is now a real field. */}
                   <div className="hidden" aria-hidden="true">
-                    <label htmlFor="website">Website</label>
-                    <input type="text" name="website" id="website" tabIndex={-1} autoComplete="off" />
+                    <label htmlFor="fax">Fax</label>
+                    <input type="text" name="fax" id="fax" tabIndex={-1} autoComplete="off" />
                   </div>
-                  <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
+                  {/* Two columns from md (540px): this project's `sm` breakpoint is only 340px */}
+                  <div className="grid grid-cols-1 gap-x-6 gap-y-6 md:grid-cols-2">
                     <div>
-                      <label htmlFor="first-name" className="block text-sm font-semibold text-foreground mb-2">
-                        {t("form.firstName")}
-                      </label>
-                      <input
-                        type="text"
-                        name="first-name"
-                        id="first-name"
-                        autoComplete="given-name"
-                        maxLength={100}
-                        required
-                        placeholder={t("form.firstNamePlaceholder")}
-                        className="block w-full rounded-xl bg-background/80 border border-border px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm"
-                      />
+                      <label htmlFor="first-name" className={labelClass}>{t("form.firstName")}</label>
+                      <input type="text" name="first-name" id="first-name" autoComplete="given-name" maxLength={100} required placeholder={t("form.firstNamePlaceholder")} className={inputClass} />
                     </div>
                     <div>
-                      <label htmlFor="last-name" className="block text-sm font-semibold text-foreground mb-2">
-                        {t("form.lastName")}
-                      </label>
-                      <input
-                        type="text"
-                        name="last-name"
-                        id="last-name"
-                        autoComplete="family-name"
-                        maxLength={100}
-                        placeholder={t("form.lastNamePlaceholder")}
-                        className="block w-full rounded-xl bg-background/80 border border-border px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm"
-                      />
+                      <label htmlFor="last-name" className={labelClass}>{t("form.lastName")}</label>
+                      <input type="text" name="last-name" id="last-name" autoComplete="family-name" maxLength={100} placeholder={t("form.lastNamePlaceholder")} className={inputClass} />
                     </div>
-                    <div className="sm:col-span-2">
-                      <label htmlFor="company" className="block text-sm font-semibold text-foreground mb-2">
-                        {t("form.company")}
-                      </label>
-                      <input
-                        type="text"
-                        name="company"
-                        id="company"
-                        autoComplete="organization"
-                        maxLength={150}
-                        placeholder={t("form.companyPlaceholder")}
-                        className="block w-full rounded-xl bg-background/80 border border-border px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm"
-                      />
+                    <div className="md:col-span-2">
+                      <label htmlFor="email" className={labelClass}>{t("form.email")}</label>
+                      <input type="email" name="email" id="email" autoComplete="email" maxLength={254} required placeholder={t("form.emailPlaceholder")} className={inputClass} />
                     </div>
-                    <div className="sm:col-span-2">
-                      <label htmlFor="email" className="block text-sm font-semibold text-foreground mb-2">
-                        {t("form.email")}
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        autoComplete="email"
-                        maxLength={254}
-                        required
-                        placeholder={t("form.emailPlaceholder")}
-                        className="block w-full rounded-xl bg-background/80 border border-border px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm"
-                      />
+                    <div>
+                      <label htmlFor="company" className={labelClass}>{t("form.company")}</label>
+                      <input type="text" name="company" id="company" autoComplete="organization" maxLength={150} placeholder={t("form.companyPlaceholder")} className={inputClass} />
                     </div>
-                    <div className="sm:col-span-2">
-                      <label htmlFor="phone-number" className="block text-sm font-semibold text-foreground mb-2">
-                        {t("form.phone")}
+                    <div>
+                      <label htmlFor="company-website" className={labelClass}>
+                        {t("form.website")} <span className="font-normal text-muted-foreground">({t("form.optional")})</span>
                       </label>
+                      <input type="text" name="company-website" id="company-website" autoComplete="url" inputMode="url" maxLength={200} placeholder={t("form.websitePlaceholder")} className={inputClass} />
+                    </div>
+                    <div className="md:col-span-2">
+                      <label htmlFor="phone-number" className={labelClass}>{t("form.phone")}</label>
                       <div className="flex rounded-xl bg-background/80 border border-border overflow-hidden focus-within:ring-2 focus-within:ring-primary focus-within:border-primary transition-all duration-200 shadow-sm">
                         <select
                           id="country"
@@ -204,17 +184,9 @@ export default function ContactContent() {
                           className="appearance-none bg-transparent py-3 pl-3 pr-2 text-sm font-medium text-muted-foreground border-r border-border focus:outline-none cursor-pointer"
                         >
                           {/* Value keeps the country code for the email; the label stays compact on mobile */}
-                          <option value="CMR (+237)" className="bg-background text-foreground">CM +237</option>
-                          <option value="USA (+1)" className="bg-background text-foreground">US +1</option>
-                          <option value="FRA (+33)" className="bg-background text-foreground">FR +33</option>
-                          <option value="ESP (+34)" className="bg-background text-foreground">ES +34</option>
-                          <option value="DEU (+49)" className="bg-background text-foreground">DE +49</option>
-                          <option value="CHE (+41)" className="bg-background text-foreground">CH +41</option>
-                          <option value="ITA (+39)" className="bg-background text-foreground">IT +39</option>
-                          <option value="GBR (+44)" className="bg-background text-foreground">GB +44</option>
-                          <option value="CAN (+1)" className="bg-background text-foreground">CA +1</option>
-                          <option value="AUS (+61)" className="bg-background text-foreground">AU +61</option>
-                          <option value="IND (+91)" className="bg-background text-foreground">IN +91</option>
+                          {COUNTRY_CODES.map(([value, label]) => (
+                            <option key={value} value={value} className="bg-background text-foreground">{label}</option>
+                          ))}
                         </select>
                         <input
                           type="tel"
@@ -227,20 +199,22 @@ export default function ContactContent() {
                         />
                       </div>
                     </div>
-                    <div className="sm:col-span-2">
-                      <label htmlFor="message" className="block text-sm font-semibold text-foreground mb-2">
-                        {t("form.message")}
-                      </label>
-                      <textarea
-                        name="message"
-                        id="message"
-                        rows={4}
-                        minLength={10}
-                        maxLength={5000}
-                        required
-                        placeholder={t("form.messagePlaceholder")}
-                        className="block w-full rounded-xl bg-background/80 border border-border px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 shadow-sm resize-y"
-                      ></textarea>
+                    <fieldset className="md:col-span-2">
+                      <legend className={labelClass}>{t("form.preferred")}</legend>
+                      <div className="flex flex-wrap gap-3">
+                        {PREFERRED.map((method) => (
+                          <label key={method} className="cursor-pointer">
+                            <input type="radio" name="preferred-contact" value={method} defaultChecked={method === "email"} className="peer sr-only" />
+                            <span className="inline-flex items-center rounded-full border border-border bg-background/80 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors peer-checked:border-primary peer-checked:bg-primary peer-checked:text-primary-foreground peer-focus-visible:ring-2 peer-focus-visible:ring-ring">
+                              {t(`form.preferredOptions.${method}`)}
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                    </fieldset>
+                    <div className="md:col-span-2">
+                      <label htmlFor="message" className={labelClass}>{t("form.message")}</label>
+                      <textarea name="message" id="message" rows={4} minLength={10} maxLength={5000} required placeholder={t("form.messagePlaceholder")} className={`${inputClass} resize-y`}></textarea>
                     </div>
                   </div>
                   <Turnstile
@@ -314,41 +288,32 @@ export default function ContactContent() {
             </div>
           </div>
 
-          {/* Quick Contact Info Badges */}
-          <div className="mt-12 sm:mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
-            <div className="flex flex-col items-center p-5 sm:p-6 rounded-2xl bg-secondary/40 border border-border/50 text-center w-full">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-amber-deep dark:text-amber mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect width="20" height="16" x="2" y="4" rx="2" />
-                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                </svg>
-              </div>
-              <h3 className="font-sans font-semibold tracking-normal text-foreground text-base mb-1">{t("info.emailTitle")}</h3>
-              <p className="text-sm text-muted-foreground break-all px-2">contact@zignnnit.com</p>
-            </div>
-
-            <div className="flex flex-col items-center p-5 sm:p-6 rounded-2xl bg-secondary/40 border border-border/50 text-center w-full">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-amber-deep dark:text-amber mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-              </div>
-              <h3 className="font-sans font-semibold tracking-normal text-foreground text-base mb-1">{t("info.locationTitle")}</h3>
-              <p className="text-sm text-muted-foreground px-2">{t("info.location")}</p>
-            </div>
-
-            <div className="flex flex-col items-center p-5 sm:p-6 rounded-2xl bg-secondary/40 border border-border/50 text-center w-full">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-amber-deep dark:text-amber mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <polyline points="12 6 12 12 16 14" />
-                </svg>
-              </div>
-              <h3 className="font-sans font-semibold tracking-normal text-foreground text-base mb-1">{t("info.responseTitle")}</h3>
-              <p className="text-sm text-muted-foreground px-2">{t("info.response")}</p>
-            </div>
-          </div>
+          {/* Other ways to reach us (WhatsApp as a secondary channel, no floating button) */}
+          <section className="mt-16 sm:mt-20 max-w-4xl mx-auto" aria-labelledby="other-ways">
+            <h2 id="other-ways" className="text-2xl sm:text-3xl text-center text-foreground">{t("other.title")}</h2>
+            <ul className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+              {[
+                { href: `mailto:${contact.email}`, icon: "ri-mail-line", title: t("other.email"), text: contact.email, external: false },
+                { href: whatsappUrl, icon: "ri-whatsapp-line", title: t("other.whatsapp"), text: t("other.whatsappText"), external: true },
+                { href: contact.linkedin, icon: "ri-linkedin-box-line", title: t("other.linkedin"), text: t("other.linkedinText"), external: true },
+              ].map((item) => (
+                <li key={item.icon}>
+                  <a
+                    href={item.href}
+                    {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className="group flex h-full flex-col items-center rounded-2xl border border-border/50 bg-secondary/40 p-5 sm:p-6 text-center transition-colors hover:border-primary"
+                  >
+                    <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-2xl text-amber-deep dark:text-amber transition-colors group-hover:bg-primary group-hover:text-primary-foreground" aria-hidden="true">
+                      <i className={item.icon}></i>
+                    </span>
+                    <span className="font-semibold text-foreground">{item.title}</span>
+                    <span className="mt-1 text-sm text-muted-foreground break-all">{item.text}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 text-center text-sm text-muted-foreground">{t("other.details", { location: t("info.location") })}</p>
+          </section>
         </div>
       </main>
   );
