@@ -24,6 +24,6 @@ export const team: TeamMember[] = [
     name: "Jordan Tchakounte",
     role: { en: "2D / 3D Designer", fr: "Designer 2D / 3D" },
     photo: "/team/jordan-tchakounte.webp",
-    linkedin: null, // TODO: add Jordan's LinkedIn URL
+    linkedin: "https://www.linkedin.com/in/jordan-tchakounte-642404349",
   },
 ];
