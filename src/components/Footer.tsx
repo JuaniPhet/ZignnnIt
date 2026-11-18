@@ -13,7 +13,7 @@ export default function Footer() {
   return (
     <footer className="relative bg-background border-t border-border/60 py-12 sm:py-16 overflow-hidden">
       {/* Top gold-amber gradient border highlight */}
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber-500/40 to-transparent"></div>
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber/40 to-transparent"></div>
 
       <div className="px-4 sm:px-6 lg:px-8 w-full">
         <div className="container mx-auto max-w-7xl w-full">
@@ -81,7 +81,7 @@ export default function Footer() {
               href="https://www.linkedin.com/in/japhetseumo"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200"
+              className="inline-flex items-center gap-2 bg-primary/15 hover:bg-primary text-foreground hover:text-primary-foreground px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200"
             >
               <i className="ri-linkedin-fill text-lg"></i>
               <span>LinkedIn</span>

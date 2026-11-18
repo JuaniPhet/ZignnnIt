@@ -86,7 +86,7 @@ export default function ContactPage() {
             aria-hidden="true"
           >
             <div
-              className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#F7B700] to-[#737373] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
+              className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-amber to-neutral-500 opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
               style={{
                 clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
               }}
@@ -111,10 +111,10 @@ export default function ContactPage() {
           <div className="mx-auto max-w-2xl">
             <div className="relative rounded-3xl">
               {/* Backlight glow */}
-              <div className="absolute -inset-2 bg-gradient-to-tr from-amber-500/20 via-primary/30 to-amber-500/20 rounded-3xl opacity-60 blur-xl pointer-events-none"></div>
+              <div className="absolute -inset-2 bg-gradient-to-tr from-amber/20 via-primary/30 to-amber/20 rounded-3xl opacity-60 blur-xl pointer-events-none"></div>
 
               {/* Fine glowing gradient border */}
-              <div className="absolute -inset-[1px] bg-gradient-to-r from-amber-500/40 via-primary to-amber-500/40 rounded-3xl opacity-70 blur-[1px] pointer-events-none"></div>
+              <div className="absolute -inset-[1px] bg-gradient-to-r from-amber/40 via-primary to-amber/40 rounded-3xl opacity-70 blur-[1px] pointer-events-none"></div>
 
               {/* Glass Card */}
               <div className="relative bg-secondary/80 dark:bg-card/90 backdrop-blur-md rounded-3xl p-6 sm:p-10 md:p-12 shadow-2xl">
@@ -311,7 +311,7 @@ export default function ContactPage() {
           {/* Quick Contact Info Badges */}
           <div className="mt-12 sm:mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
             <div className="flex flex-col items-center p-5 sm:p-6 rounded-2xl bg-secondary/40 border border-border/50 text-center w-full">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-3">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-amber-deep dark:text-amber mb-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect width="20" height="16" x="2" y="4" rx="2" />
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
@@ -322,7 +322,7 @@ export default function ContactPage() {
             </div>
 
             <div className="flex flex-col items-center p-5 sm:p-6 rounded-2xl bg-secondary/40 border border-border/50 text-center w-full">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-3">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-amber-deep dark:text-amber mb-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
                   <circle cx="12" cy="10" r="3" />
@@ -333,7 +333,7 @@ export default function ContactPage() {
             </div>
 
             <div className="flex flex-col items-center p-5 sm:p-6 rounded-2xl bg-secondary/40 border border-border/50 text-center w-full">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-3">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-amber-deep dark:text-amber mb-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="10" />
                   <polyline points="12 6 12 12 16 14" />

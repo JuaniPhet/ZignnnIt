@@ -17,7 +17,7 @@ export default function ProjectsPage() {
             aria-hidden="true"
           >
             <div
-              className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#F7B700] to-[#737373] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
+              className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-amber to-neutral-500 opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
               style={{
                 clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
               }}
@@ -45,9 +45,9 @@ export default function ProjectsPage() {
                   {/* Image card */}
                   <div className="relative rounded-2xl w-full aspect-[16/9]">
                     {/* Fine glowing gradient line border */}
-                    <div className="absolute -inset-[1px] bg-gradient-to-r from-amber-500/40 via-primary to-amber-500/40 rounded-2xl opacity-50 group-hover:opacity-100 blur-[1px] group-hover:blur-[3px] transition-all duration-500"></div>
+                    <div className="absolute -inset-[1px] bg-gradient-to-r from-amber/40 via-primary to-amber/40 rounded-2xl opacity-50 group-hover:opacity-100 blur-[1px] group-hover:blur-[3px] transition-all duration-500"></div>
 
-                    <div className="relative bg-amber-100 dark:bg-amber-950/20 rounded-2xl w-full h-full shadow-lg overflow-hidden flex items-center justify-center">
+                    <div className="relative bg-amber/15 dark:bg-amber/5 rounded-2xl w-full h-full shadow-lg overflow-hidden flex items-center justify-center">
                       {/* Fixed-ratio image frame: guarantees the same amber top/bottom band on every project */}
                       <div className="relative w-full aspect-[1.89/1]">
                         <Image
@@ -104,7 +104,7 @@ export default function ProjectsPage() {
                           Voir plus
                         </button>
                       </a>
-                      <span className="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/25">
+                      <span className="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-full bg-amber/15 text-carbon dark:text-amber border border-amber/30">
                         {project.category}
                       </span>
                     </div>

@@ -22,9 +22,9 @@ export default function Navbar() {
   };
 
   return (
-    <header id="navbar" className="bg-background/95 backdrop-blur-md fixed shadow-lg shadow-amber-500/10 dark:shadow-amber-500/5 w-full z-50 top-0 left-0 header-nav border-b border-amber-500/20">
+    <header id="navbar" className="bg-background/95 backdrop-blur-md fixed shadow-lg shadow-amber/10 dark:shadow-amber/5 w-full z-50 top-0 left-0 header-nav border-b border-amber/20">
       {/* Gold-amber gradient line at the bottom border */}
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber-500/60 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber/60 to-transparent"></div>
       <div className="px-4 sm:px-6 lg:px-8 w-full">
         <nav className="container mx-auto max-w-7xl flex items-center justify-between text-lg h-20 sm:h-24">
           <Link href={pathname === "/" ? "#home" : "/"}>
@@ -59,7 +59,7 @@ export default function Navbar() {
               <Link href="/projects" className="nav-link hover:bg-secondary hover:text-secondary-foreground p-3 rounded-lg" onClick={() => setIsOpen(false)}>Projects</Link>
             </li>
             {/* <li>
-              <Link href={getLinkHref("#pricing")} className="nav-link hover:bg-amber-100 dark:hover:bg-amber-950 p-3 rounded-lg" onClick={() => setIsOpen(false)}>Pricing</Link>
+              <Link href={getLinkHref("#pricing")} className="nav-link hover:bg-amber/15 dark:hover:bg-amber/10 p-3 rounded-lg" onClick={() => setIsOpen(false)}>Pricing</Link>
             </li> */}
             <li>
               <Link href="/contact" className="nav-link hover:bg-secondary hover:text-secondary-foreground p-3 rounded-lg" onClick={() => setIsOpen(false)}>Contact</Link>
@@ -84,7 +84,7 @@ export default function Navbar() {
             className="text-xl sm:text-3xl cursor-pointer z-50 focus:outline-none p-2 rounded-full hover:bg-muted"
             aria-label="Toggle theme"
           >
-            {mounted && (theme === "dark" ? <i className="ri-sun-fill text-amber-500"></i> : <i className="ri-moon-fill"></i>)}
+            {mounted && (theme === "dark" ? <i className="ri-sun-fill text-amber"></i> : <i className="ri-moon-fill"></i>)}
           </button>
 
           {/* Shop button */}

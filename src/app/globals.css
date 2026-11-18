@@ -16,6 +16,19 @@
   --font-sans: var(--font-general-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
+/*
+ * Brand tokens (single source of truth for the brand palette).
+ * Never write a raw amber hex or a Tailwind amber-500/600 class in components:
+ * use bg-amber, text-amber-deep, bg-carbon, bg-cream… instead.
+ * Accessibility: no small amber text on white (contrast too low) — use amber-deep or carbon.
+ */
+@theme inline {
+  --color-amber: var(--amber);
+  --color-amber-deep: var(--amber-deep);
+  --color-carbon: var(--carbon);
+  --color-cream: var(--cream);
+}
+
 @theme {
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
@@ -60,14 +73,20 @@
 
 @layer base {
   :root {
+    --amber: #f59e0b;      /* accents, CTAs, highlighted words */
+    --amber-deep: #d97706; /* hover, amber text on light backgrounds */
+    --carbon: #141414;     /* text, dark backgrounds */
+    --cream: #faf7f2;      /* alternate light backgrounds */
+
+    /* shadcn semantic tokens (HSL channels). primary = amber, foreground = carbon. */
     --background: 0 0% 100%;
-    --foreground: 20 14.3% 4.1%;
+    --foreground: 0 0% 7.8%;
     --card: 0 0% 100%;
-    --card-foreground: 20 14.3% 4.1%;
+    --card-foreground: 0 0% 7.8%;
     --popover: 0 0% 100%;
-    --popover-foreground: 20 14.3% 4.1%;
+    --popover-foreground: 0 0% 7.8%;
     --primary: 38 92% 50%;
-    --primary-foreground: 20 14.3% 4.1%;
+    --primary-foreground: 0 0% 7.8%;
     --secondary: 35 100% 96.5%;
     --secondary-foreground: 38 92% 20%;
     --muted: 20 5.9% 96%;
@@ -83,14 +102,14 @@
   }
 
   .dark {
-    --background: 20 14.3% 4.1%;
+    --background: 0 0% 7.8%;
     --foreground: 0 0% 98%;
-    --card: 20 14.3% 4.1%;
+    --card: 0 0% 7.8%;
     --card-foreground: 0 0% 98%;
-    --popover: 20 14.3% 4.1%;
+    --popover: 0 0% 7.8%;
     --popover-foreground: 0 0% 98%;
     --primary: 38 92% 50%;
-    --primary-foreground: 20 14.3% 4.1%;
+    --primary-foreground: 0 0% 7.8%;
     --secondary: 20 5.9% 10%;
     --secondary-foreground: 0 0% 98%;
     --muted: 20 5.9% 15%;

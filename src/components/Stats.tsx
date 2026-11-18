@@ -45,7 +45,7 @@ export default function Stats() {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="relative isolate overflow-hidden bg-[#202020] text-white py-24 sm:py-32">
+    <div ref={containerRef} className="relative isolate overflow-hidden bg-carbon text-white py-24 sm:py-32">
       <Image
         src="/img/stats_background.jpg"
         alt="Work with us background"
@@ -58,7 +58,7 @@ export default function Stats() {
         <div className="container mx-auto max-w-7xl w-full">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2 className="invisible stats-title text-5xl sm:text-7xl lg:text-8xl font-bold text-white">
-            Work with <span className="text-amber-400">us</span>
+            Work with <span className="text-amber">us</span>
           </h2>
           <p className="invisible stats-subtitle mt-6 text-base sm:text-lg text-gray-300 leading-relaxed">
             We transform ideas into unique digital and visual experiences — websites, mobile apps, and graphic design brought to life.
@@ -66,23 +66,23 @@ export default function Stats() {
         </div>
 
         {/* Divider */}
-        <div className="stats-divider my-10 w-20 h-[2px] bg-gradient-to-r from-amber-500 to-transparent origin-left"></div>
+        <div className="stats-divider my-10 w-20 h-[2px] bg-gradient-to-r from-amber to-transparent origin-left"></div>
 
         <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
           <dl className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="invisible stat-card flex flex-col-reverse gap-1 border-l-2 border-amber-500 pl-4">
+            <div className="invisible stat-card flex flex-col-reverse gap-1 border-l-2 border-amber pl-4">
               <dt className="text-sm sm:text-base text-gray-400 uppercase tracking-wider">Projects delivered</dt>
               <dd className="text-5xl sm:text-6xl lg:text-7xl font-display font-extrabold text-white">60+</dd>
             </div>
-            <div className="invisible stat-card flex flex-col-reverse gap-1 border-l-2 border-amber-500 pl-4">
+            <div className="invisible stat-card flex flex-col-reverse gap-1 border-l-2 border-amber pl-4">
               <dt className="text-sm sm:text-base text-gray-400 uppercase tracking-wider">Happy Clients</dt>
               <dd className="text-5xl sm:text-6xl lg:text-7xl font-display font-extrabold text-white">43+</dd>
             </div>
-            <div className="invisible stat-card flex flex-col-reverse gap-1 border-l-2 border-amber-500 pl-4">
+            <div className="invisible stat-card flex flex-col-reverse gap-1 border-l-2 border-amber pl-4">
               <dt className="text-sm sm:text-base text-gray-400 uppercase tracking-wider">Years of experience</dt>
               <dd className="text-5xl sm:text-6xl lg:text-7xl font-display font-extrabold text-white">6</dd>
             </div>
-            <div className="invisible stat-card flex flex-col-reverse gap-1 border-l-2 border-amber-500 pl-4">
+            <div className="invisible stat-card flex flex-col-reverse gap-1 border-l-2 border-amber pl-4">
               <dt className="text-sm sm:text-base text-gray-400 uppercase tracking-wider">Creativity guaranteed</dt>
               <dd className="text-5xl sm:text-6xl lg:text-7xl font-display font-extrabold text-white">100%</dd>
             </div>

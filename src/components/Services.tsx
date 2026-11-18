@@ -88,7 +88,7 @@ export default function Services() {
       <div className="container mx-auto max-w-7xl w-full">
         <div className="invisible services-heading">
           <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground">
-            Our <span className="text-amber-500">Services</span>
+            Our <span className="text-amber">Services</span>
           </h2>
           <p className="pt-4 pb-10 text-lg sm:text-xl text-muted-foreground">
             Grow your business with our expertise.

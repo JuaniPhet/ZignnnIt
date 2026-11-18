@@ -97,7 +97,7 @@ export default function ShopPage() {
           aria-hidden="true"
         >
           <div
-            className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#F7B700] to-[#737373] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
+            className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-amber to-neutral-500 opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
             style={{
               clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
             }}
@@ -109,7 +109,7 @@ export default function ShopPage() {
           aria-hidden="true"
         >
           <div
-            className="relative left-1/2 aspect-[1155/678] w-[36.125rem] max-w-none translate-x-[-30%] bg-gradient-to-bl from-amber-400 to-amber-700 opacity-20 sm:w-[72.1875rem]"
+            className="relative left-1/2 aspect-[1155/678] w-[36.125rem] max-w-none translate-x-[-30%] bg-gradient-to-bl from-amber to-amber-deep opacity-20 sm:w-[72.1875rem]"
             style={{
               clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
             }}
@@ -117,18 +117,18 @@ export default function ShopPage() {
         </div>
 
         {/* Floating decorative elements */}
-        <div className="float-element-1 absolute top-32 left-[10%] w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/20 backdrop-blur-sm -z-5" aria-hidden="true"></div>
-        <div className="float-element-2 absolute top-48 right-[15%] w-12 h-12 rounded-full bg-amber-400/10 border border-amber-400/20 backdrop-blur-sm -z-5" aria-hidden="true"></div>
-        <div className="float-element-3 absolute bottom-32 left-[20%] w-20 h-20 rounded-3xl bg-amber-600/10 border border-amber-600/15 backdrop-blur-sm -z-5" aria-hidden="true"></div>
+        <div className="float-element-1 absolute top-32 left-[10%] w-16 h-16 rounded-2xl bg-amber/10 border border-amber/20 backdrop-blur-sm -z-5" aria-hidden="true"></div>
+        <div className="float-element-2 absolute top-48 right-[15%] w-12 h-12 rounded-full bg-amber/10 border border-amber/20 backdrop-blur-sm -z-5" aria-hidden="true"></div>
+        <div className="float-element-3 absolute bottom-32 left-[20%] w-20 h-20 rounded-3xl bg-amber-deep/10 border border-amber-deep/15 backdrop-blur-sm -z-5" aria-hidden="true"></div>
 
         {/* Main content */}
         <div className="flex flex-col items-center justify-center min-h-[70vh] px-6 py-24 sm:py-32 text-center">
           {/* Badge */}
           <div className="shop-badge invisible mb-8">
-            <span className="inline-flex items-center gap-2 rounded-full bg-amber-500/10 dark:bg-amber-500/20 px-5 py-2 text-sm font-medium text-amber-700 dark:text-amber-400 ring-1 ring-inset ring-amber-500/20">
+            <span className="inline-flex items-center gap-2 rounded-full bg-amber/10 dark:bg-amber/20 px-5 py-2 text-sm font-medium text-carbon dark:text-amber ring-1 ring-inset ring-amber/20">
               <span className="relative flex h-2 w-2">
-                <span className="pulse-ring absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                <span className="pulse-ring absolute inline-flex h-full w-full rounded-full bg-amber opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber"></span>
               </span>
               New Feature
             </span>
@@ -137,7 +137,7 @@ export default function ShopPage() {
           {/* Title */}
           <h1 className="shop-title invisible text-5xl sm:text-7xl lg:text-8xl font-bold text-foreground">
             Design
-            <span className="text-amber-500"> Templates</span>
+            <span className="text-amber"> Templates</span>
           </h1>
 
           {/* Subtitle */}
@@ -146,7 +146,7 @@ export default function ShopPage() {
           </p>
 
           {/* Divider */}
-          <div className="shop-divider my-10 w-24 h-[2px] bg-gradient-to-r from-transparent via-amber-500 to-transparent origin-center"></div>
+          <div className="shop-divider my-10 w-24 h-[2px] bg-gradient-to-r from-transparent via-amber to-transparent origin-center"></div>
 
           {/* Coming Soon */}
           <div className="shop-coming invisible">
@@ -154,7 +154,7 @@ export default function ShopPage() {
               <h2 className="font-sans font-medium text-3xl sm:text-5xl text-foreground tracking-[0.3em] uppercase leading-tight">
                 Coming Soon
               </h2>
-              <div className="absolute -bottom-3 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
+              <div className="absolute -bottom-3 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber/50 to-transparent"></div>
             </div>
           </div>
 

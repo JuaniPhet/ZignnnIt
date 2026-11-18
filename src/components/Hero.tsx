@@ -145,7 +145,7 @@ export default function Hero() {
         aria-hidden="true"
       >
         <div
-          className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#F7B700] to-[#737373] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
+          className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-amber to-neutral-500 opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
           style={{
             clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
           }}
@@ -267,7 +267,7 @@ export default function Hero() {
       </div>
 
       {/* Bottom-right ambient glow */}
-      <div className="w-72 h-72 sm:w-96 sm:h-96 bg-amber-200/20 dark:bg-amber-950/20 rounded-full absolute -z-10 bottom-20 right-0 blur-3xl"></div>
+      <div className="w-72 h-72 sm:w-96 sm:h-96 bg-amber/10 dark:bg-amber/5 rounded-full absolute -z-10 bottom-20 right-0 blur-3xl"></div>
 
       {/* Bottom-left subtle glow */}
       <div className="w-48 h-48 sm:w-64 sm:h-64 bg-primary/10 rounded-full absolute -z-10 bottom-10 left-[-5rem] blur-3xl"></div>

@@ -70,7 +70,7 @@ export default function Projects() {
           <div className="px-4 sm:px-6 lg:px-8 w-full mb-8 sm:mb-10">
             <div className="invisible projects-heading container mx-auto max-w-7xl w-full">
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground">
-                Our <span className="text-amber-500">Projects</span>
+                Our <span className="text-amber">Projects</span>
               </h2>
               <p className="mt-2 sm:mt-3 text-base sm:text-lg lg:text-xl text-muted-foreground">
                 Missions we&apos;ve successfully completed.
@@ -94,9 +94,9 @@ export default function Projects() {
               >
                 <div className="relative rounded-2xl w-full aspect-[16/9]">
                   {/* Fine glowing gradient line border */}
-                  <div className="absolute -inset-[1px] bg-gradient-to-r from-amber-500/40 via-primary to-amber-500/40 rounded-2xl opacity-50 group-hover:opacity-100 blur-[1px] group-hover:blur-[3px] transition-all duration-500"></div>
+                  <div className="absolute -inset-[1px] bg-gradient-to-r from-amber/40 via-primary to-amber/40 rounded-2xl opacity-50 group-hover:opacity-100 blur-[1px] group-hover:blur-[3px] transition-all duration-500"></div>
 
-                  <div className="relative bg-amber-100 dark:bg-amber-950/20 rounded-2xl w-full h-full shadow-xl overflow-hidden flex items-center justify-center">
+                  <div className="relative bg-amber/15 dark:bg-amber/5 rounded-2xl w-full h-full shadow-xl overflow-hidden flex items-center justify-center">
                     {/* Fixed-ratio image frame: guarantees the same amber top/bottom band on every project, whatever the source image ratio */}
                     <div className="relative w-full aspect-[1.89/1]">
                       <Image
@@ -149,7 +149,7 @@ export default function Projects() {
                         Voir plus
                       </button>
                     </a>
-                    <span className="inline-flex items-center text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/25">
+                    <span className="inline-flex items-center text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-full bg-amber/15 text-carbon dark:text-amber border border-amber/30">
                       {project.category}
                     </span>
                   </div>
@@ -163,7 +163,7 @@ export default function Projects() {
               className="flex flex-col items-center justify-center w-[calc(100vw-2rem)] lg:w-[500px] xl:w-[600px] flex-shrink-0 group relative"
             >
               {/* Fine glowing gradient line border */}
-              <div className="absolute -inset-[1px] bg-gradient-to-r from-amber-500/40 via-primary to-amber-500/40 rounded-2xl opacity-50 group-hover:opacity-100 blur-[1px] group-hover:blur-[3px] transition-all duration-500"></div>
+              <div className="absolute -inset-[1px] bg-gradient-to-r from-amber/40 via-primary to-amber/40 rounded-2xl opacity-50 group-hover:opacity-100 blur-[1px] group-hover:blur-[3px] transition-all duration-500"></div>
 
               <div className="relative bg-secondary/90 dark:bg-card/90 backdrop-blur-sm rounded-2xl w-full aspect-[16/9] shadow-xl flex flex-col items-center justify-center gap-4 sm:gap-6 transition-all duration-300">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-full bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110 border border-primary/20 shadow-sm">
