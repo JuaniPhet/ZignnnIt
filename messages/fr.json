@@ -232,7 +232,7 @@
   "footer": {
     "tagline": "Des expériences digitales et visuelles créatives pour faire grandir votre entreprise.",
     "rights": "© {year} ZignnnIt. Tous droits réservés.",
-    "signature": "Design. Code. Zignnn."
+    "signature": "D-zignnn. Code. Enjoy."
   },
   "contact": {
     "badge": "Écrivez-nous",
@@ -315,12 +315,5 @@
   },
   "cursor": {
     "view": "Voir"
-  },
-  "loader": {
-    "words": [
-      "D-zignnn.",
-      "Code.",
-      "Enjoy."
-    ]
   }
 }

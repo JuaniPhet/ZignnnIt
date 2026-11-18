@@ -20,7 +20,7 @@ export const isLoaderActive = () => typeof document !== "undefined" && document.
 
 /**
  * First-visit loader (≤ 1.2 s, once per session): "D-zignnn. Code. Enjoy." word by
- * word (texts in messages → loader.words, last word in amber), then the carbon panel
+ * word (the brand signature, messages → footer.signature; last word in amber), then the carbon panel
  * slides up to reveal the page.
  * Hidden by CSS unless <html data-loader="1">; a CSS fallback removes it after 2.5 s
  * even if JavaScript fails.

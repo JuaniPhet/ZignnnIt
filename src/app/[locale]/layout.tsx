@@ -83,7 +83,9 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   // Enables static rendering: tells next-intl the locale without reading headers.
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "metadata" });
-  const tLoader = await getTranslations({ locale, namespace: "loader" });
+  // Brand signature: single source (messages → footer.signature), reused by the
+  // footer, the loader, the share images and the structured data.
+  const signature = (await getTranslations({ locale, namespace: "footer" }))("signature");
 
   // Structured data (schema.org): tells search engines who we are, what we do and
   // how to reach us — can show up as a richer result. Rendered as JSON in the page.
@@ -96,7 +98,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
     logo: `${SITE_URL}/img/ZignnnIt-favicon.svg`,
     image: `${SITE_URL}/${locale}/opengraph-image`,
     description: t("home.description"),
-    slogan: "Design. Code. Zignnn.",
+    slogan: signature,
     email: contact.email,
     address: { "@type": "PostalAddress", addressLocality: contact.city, addressCountry: contact.countryCode },
     areaServed: "Worldwide",
@@ -124,7 +126,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
             enableSystem={false}
             disableTransitionOnChange
           >
-            <FirstVisitLoader words={tLoader.raw("words") as string[]} />
+            <FirstVisitLoader words={signature.split(" ")} />
             <SmoothScroll />
             <PageTransition />
             <ScrollReveals />
