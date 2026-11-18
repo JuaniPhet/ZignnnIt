@@ -6,7 +6,7 @@ import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
-import { pageAlternates } from "@/i18n/metadata";
+import { pageAlternates, pageOpenGraph } from "@/i18n/metadata";
 import { team } from "@/data/team";
 import TeamCard from "@/components/about/TeamCard";
 import Stats from "@/components/Stats";
@@ -17,7 +17,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) return {};
   const t = await getTranslations({ locale, namespace: "metadata.about" });
-  return { title: t("title"), description: t("description"), alternates: pageAlternates(locale, "/about") };
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: pageAlternates(locale, "/about"),
+    openGraph: pageOpenGraph(locale, { title: t("title"), description: t("description"), path: "/about" }),
+  };
 }
 
 // Keys only: texts are in messages/*.json (aboutPage.steps / aboutPage.values).
@@ -80,7 +85,7 @@ export default async function AboutPage({ params }: PageProps) {
         <div className="container mx-auto max-w-7xl">
           <h2 className={sectionTitle}>{t.rich("processTitle", { hl })}</h2>
           <p className="mt-4 text-lg text-muted-foreground">{t("processSubtitle")}</p>
-          <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {steps.map((step, i) => (
               <li key={step.key} className="relative rounded-3xl border border-border p-6 sm:p-8">
                 <div className="flex items-center justify-between">
@@ -101,7 +106,7 @@ export default async function AboutPage({ params }: PageProps) {
       <section className="bg-carbon text-white px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
         <div className="container mx-auto max-w-7xl">
           <h2 className="text-4xl sm:text-5xl lg:text-6xl text-white">{t.rich("valuesTitle", { hl })}</h2>
-          <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {values.map((value) => (
               <li key={value.key} className="rounded-3xl bg-white/5 border border-white/10 p-6 sm:p-8">
                 <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber text-carbon text-2xl" aria-hidden="true">
@@ -120,7 +125,7 @@ export default async function AboutPage({ params }: PageProps) {
         <div className="container mx-auto max-w-7xl">
           <h2 className={sectionTitle}>{t.rich("teamTitle", { hl })}</h2>
           <p className="mt-4 text-lg text-muted-foreground">{t("teamSubtitle")}</p>
-          <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {team.map((member) => (
               <TeamCard
                 key={member.name}

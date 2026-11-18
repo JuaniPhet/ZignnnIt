@@ -50,7 +50,7 @@ export default function ProjectCard({ project, sizes, className, as: Heading = "
       </Link>
 
       <div className="mt-5 sm:mt-6 flex flex-col gap-3 sm:gap-4">
-        <div className="flex flex-wrap sm:flex-nowrap justify-between items-center gap-2 sm:gap-4">
+        <div className="flex flex-wrap md:flex-nowrap justify-between items-center gap-2 sm:gap-4">
           <Heading className="text-2xl lg:text-3xl font-bold text-foreground">{project.title}</Heading>
           <ToolBadges ids={project.tools} />
         </div>
