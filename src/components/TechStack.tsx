@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { prefersReducedMotion } from "@/lib/motion";
 
 interface ToolItem {
   src: string;
@@ -69,7 +70,7 @@ export default function TechStack() {
   const items = [...toolsList, ...toolsList];
 
   useGSAP(() => {
-    if (!scrollRef.current) return;
+    if (!scrollRef.current || prefersReducedMotion()) return; // no autoplaying motion
 
     // We animate translating X to half the width of the full scroll container
     animationRef.current = gsap.to(scrollRef.current, {

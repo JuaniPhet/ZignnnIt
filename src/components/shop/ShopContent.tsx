@@ -4,6 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useTranslations } from "next-intl";
+import { prefersReducedMotion } from "@/lib/motion";
 
 /** Shop page body (client: GSAP entrance and floating shapes). */
 export default function ShopContent() {
@@ -48,6 +49,8 @@ export default function ShopContent() {
       { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" },
       "-=0.2"
     );
+
+    if (prefersReducedMotion()) return; // keep the entrance fades, skip the loops
 
     // Floating animation for decorative elements
     gsap.to(".float-element-1", {

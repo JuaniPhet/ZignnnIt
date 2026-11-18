@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
+import { prefersReducedMotion } from "@/lib/motion";
 import { Link } from "@/i18n/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -25,7 +26,7 @@ export default function Projects() {
     // Entrance animation for heading
     gsap.fromTo(
       ".projects-heading",
-      { autoAlpha: 0, y: 40 },
+      { autoAlpha: 0, y: prefersReducedMotion() ? 0 : 40 },
       {
         autoAlpha: 1,
         y: 0,

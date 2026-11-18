@@ -225,7 +225,7 @@ export default function ContactContent() {
                     resetSignal={turnstileReset}
                     className="flex justify-center min-h-[65px]"
                   />
-                  <div className="pt-4">
+                  <div className="pt-4" data-magnetic>
                     <button
                       type="submit"
                       id="contact-submit"
@@ -268,9 +268,14 @@ export default function ContactContent() {
                     {status === "success" && (
                       <p
                         id="contact-success"
-                        className="rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-600 dark:text-emerald-400"
+                        className="zg-success flex items-start gap-3 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-700 dark:text-emerald-400"
                       >
-                        {t("form.success")}
+                        {/* Check mark drawn with stroke-dashoffset (CSS, globals.css) */}
+                        <svg viewBox="0 0 24 24" className="mt-0.5 h-5 w-5 shrink-0" fill="none" aria-hidden="true">
+                          <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" opacity="0.35" />
+                          <path className="zg-check" d="M7 12.5l3.2 3.2L17 9" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <span>{t("form.success")}</span>
                       </p>
                     )}
                     {status === "error" && (

@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useTranslations } from "next-intl";
+import { prefersReducedMotion } from "@/lib/motion";
 import {
   Accordion,
   AccordionContent,
@@ -29,10 +30,11 @@ export default function Services() {
   const t = useTranslations("services");
 
   useGSAP(() => {
+    const y = (v: number) => (prefersReducedMotion() ? 0 : v);
     // Entrance animation for the heading area
     gsap.fromTo(
       ".services-heading",
-      { autoAlpha: 0, y: 40 },
+      { autoAlpha: 0, y: y(40) },
       {
         autoAlpha: 1,
         y: 0,
@@ -48,7 +50,7 @@ export default function Services() {
     // Staggered entrance for each accordion item
     gsap.fromTo(
       ".services-item",
-      { autoAlpha: 0, y: 30 },
+      { autoAlpha: 0, y: y(30) },
       {
         autoAlpha: 1,
         y: 0,

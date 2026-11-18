@@ -6,7 +6,9 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import SplitTitle from "@/components/SplitTitle";
+import HeroTitle from "@/components/hero/HeroTitle";
+import { prefersReducedMotion } from "@/lib/motion";
+import { isLoaderActive, LOADER_DONE_EVENT } from "@/components/motion/FirstVisitLoader";
 import HeroIllustration from "@/components/hero/HeroIllustration";
 
 export default function Hero() {
@@ -14,107 +16,55 @@ export default function Hero() {
   const t = useTranslations("hero");
 
   useGSAP(() => {
-    // Badge entrance
-    gsap.fromTo(
+    // Reduced motion: fades only (no movement, no looping pulse).
+    const reduced = prefersReducedMotion();
+    const move = (v: number) => (reduced ? 0 : v);
+
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo(
       ".hero-badge",
-      { autoAlpha: 0, y: -20, scale: 0.9 },
+      { autoAlpha: 0, y: move(-20), scale: reduced ? 1 : 0.9 },
       { autoAlpha: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.7)" }
-    );
-
-    // Captive title letters animation
-    gsap.fromTo(
-      ".captive-letter",
-      {
-        autoAlpha: 0,
-        display: "inline-block",
-      },
-      {
-        autoAlpha: 1,
-        duration: 1,
-        repeat: -1,
-        repeatDelay: 5,
-        stagger: 0.04,
-        display: "inline-block",
-      }
-    );
-
-    // Entrance timeline for subtitle, CTA, and illustration
-    const entranceTl = gsap.timeline({ delay: 0.5 });
-
-    entranceTl
+    )
       .fromTo(
         ".we-help-you-to",
-        { autoAlpha: 0, y: 30 },
-        { autoAlpha: 1, y: 0, duration: 0.8, ease: "power2.out" }
+        { autoAlpha: 0, y: move(30) },
+        { autoAlpha: 1, y: 0, duration: 0.8, ease: "power2.out" },
+        0.5
       )
       .fromTo(
         ".hero-cta-group",
-        { autoAlpha: 0, y: 20 },
+        { autoAlpha: 0, y: move(20) },
         { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" },
         "-=0.3"
       )
       .fromTo(
         ".hero-illustration",
-        { autoAlpha: 0, x: 60, scale: 0.95 },
+        { autoAlpha: 0, x: move(60), scale: reduced ? 1 : 0.95 },
         { autoAlpha: 1, x: 0, scale: 1, duration: 1, ease: "power2.out" },
         "-=0.5"
       );
 
+    // Wait for the first-visit loader (if any) before the entrance.
+    const play = () => tl.play();
+    if (isLoaderActive()) window.addEventListener(LOADER_DONE_EVENT, play, { once: true });
+    else play();
+
     // Subtle pulse on the glow behind CTA
-    gsap.to(".cta-glow", {
-      scale: 1.15,
-      opacity: 0.6,
-      duration: 2,
-      ease: "sine.inOut",
-      repeat: -1,
-      yoyo: true,
-      delay: 1,
-    });
+    if (!reduced) {
+      gsap.to(".cta-glow", {
+        scale: 1.15,
+        opacity: 0.6,
+        duration: 2,
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true,
+        delay: 1,
+      });
+    }
 
+    return () => window.removeEventListener(LOADER_DONE_EVENT, play);
   }, { scope: containerRef });
-
-  const handleCtaMouseEnter = () => {
-    gsap.to(".emoji-1", {
-      visibility: "visible",
-      scale: 4,
-      duration: 2,
-      x: 250,
-      y: -50,
-      rotation: 360,
-      opacity: 0,
-      display: "inline-block",
-    });
-    gsap.to(".emoji-2", {
-      visibility: "visible",
-      scale: 4,
-      duration: 2,
-      x: 300,
-      rotation: 360,
-      opacity: 0,
-      display: "inline-block",
-    });
-    gsap.to(".emoji-3", {
-      visibility: "visible",
-      scale: 4,
-      duration: 2,
-      x: 210,
-      y: 50,
-      rotation: 360,
-      opacity: 0,
-      display: "inline-block",
-    });
-  };
-
-  const handleCtaMouseLeave = () => {
-    gsap.to([".emoji-1", ".emoji-2", ".emoji-3"], {
-      visibility: "hidden",
-      scale: 0,
-      x: 0,
-      y: 0,
-      opacity: 1,
-      duration: 1,
-    });
-  };
 
   return (
     <section
@@ -159,10 +109,9 @@ export default function Hero() {
           </div>
 
           {/* Title */}
-          <SplitTitle
-            text={t("title")}
-            highlight={t("highlight")}
-            letterClassName="captive-letter"
+          <HeroTitle
+            start={t("titleStart")}
+            words={t.raw("rotating") as string[]}
             className="text-[clamp(2.5rem,5.6vw,5rem)] leading-[1.02] font-extrabold text-foreground"
           />
 
@@ -175,7 +124,8 @@ export default function Hero() {
 
           {/* CTA Group */}
           <div className="invisible hero-cta-group flex flex-col md:flex-row items-stretch md:items-center gap-4 w-full md:w-auto">
-            <div className="relative w-full md:w-auto">
+            {/* data-magnetic: pulled toward the pointer on desktop (see CustomCursor) */}
+            <div className="relative w-full md:w-auto" data-magnetic>
               {/* CTA Glow effect */}
               <div className="cta-glow absolute -inset-1 bg-primary/30 rounded-xl blur-lg opacity-40"></div>
               <Link
