@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
 import { routing } from "@/i18n/routing";
 import { pageAlternates, SITE_URL } from "@/i18n/metadata";
+import { contact } from "@/data/contact";
 
 // Self-hosted fonts (Fontshare, ITF Free Font License — see src/fonts/LICENSE-ITF-FFL.txt).
 // next/font/local serves them from our own domain, preloads them and generates
@@ -61,6 +62,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
       locale: locale === "fr" ? "fr_FR" : "en_US",
       type: "website",
     },
+    twitter: { card: "summary_large_image" },
     icons: { icon: "/img/ZignnnIt-favicon.svg" },
   };
 }
@@ -75,10 +77,35 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
 
   // Enables static rendering: tells next-intl the locale without reading headers.
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "metadata" });
+
+  // Structured data (schema.org): tells search engines who we are, what we do and
+  // how to reach us — can show up as a richer result. Rendered as JSON in the page.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${SITE_URL}/#organization`,
+    name: "ZignnnIt",
+    url: `${SITE_URL}/${locale}`,
+    logo: `${SITE_URL}/img/ZignnnIt-favicon.svg`,
+    image: `${SITE_URL}/${locale}/opengraph-image`,
+    description: t("home.description"),
+    slogan: "Design. Code. Zignnn.",
+    email: contact.email,
+    address: { "@type": "PostalAddress", addressLocality: contact.city, addressCountry: contact.countryCode },
+    areaServed: "Worldwide",
+    knowsLanguage: ["en", "fr"],
+    sameAs: [contact.linkedin],
+  };
 
   return (
     <html lang={locale} suppressHydrationWarning className={cn(cabinetGrotesk.variable, generalSans.variable)}>
       <body className="min-h-screen bg-background text-foreground font-sans antialiased">
+        <script
+          type="application/ld+json"
+          // "<" is escaped so the JSON can never close the <script> tag early.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+        />
         {/* Makes the current locale's messages available to client components */}
         <NextIntlClientProvider>
           <ThemeProvider

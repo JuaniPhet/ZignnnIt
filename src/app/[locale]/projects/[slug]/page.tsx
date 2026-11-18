@@ -5,7 +5,7 @@ import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
-import { pageAlternates } from "@/i18n/metadata";
+import { pageAlternates, pageOpenGraph } from "@/i18n/metadata";
 import { getNextProject, getProject, projects } from "@/data/projects";
 import ToolBadges from "@/components/projects/ToolBadges";
 import YouTubeFacade from "@/components/projects/YouTubeFacade";
@@ -29,7 +29,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: project.title,
     description: project.summary[locale],
     alternates: pageAlternates(locale, `/projects/${slug}`),
-    openGraph: { images: [{ url: project.cover }] },
+    openGraph: pageOpenGraph(locale, {
+      title: project.title,
+      description: project.summary[locale],
+      path: `/projects/${slug}`,
+    }),
   };
 }
 
@@ -120,7 +124,7 @@ export default async function ProjectPage({ params }: PageProps) {
 
           {hasActions && (
             <section className="mt-16" aria-label={t("actions")}>
-              <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+              <div className="flex flex-col md:flex-row flex-wrap gap-4">
                 {project.downloadUrl && (
                   <a href={project.downloadUrl} target="_blank" rel="noopener noreferrer" className={`${buttonBase} bg-primary text-primary-foreground shadow-lg shadow-primary/25 hover:brightness-110`}>
                     <i className="ri-download-2-line text-lg" aria-hidden="true"></i>
@@ -155,11 +159,11 @@ export default async function ProjectPage({ params }: PageProps) {
 
           {/* Next project */}
           <nav className="mt-20 sm:mt-24 border-t border-border pt-10" aria-label={t("nextProject")}>
-            <Link href={`/projects/${next.slug}`} className="group flex flex-col sm:flex-row sm:items-center gap-6">
-              <div className="relative w-full sm:w-64 aspect-video shrink-0 overflow-hidden rounded-2xl bg-amber/15">
+            <Link href={`/projects/${next.slug}`} className="group flex flex-col md:flex-row md:items-center gap-6">
+              <div className="relative w-full md:w-64 aspect-video shrink-0 overflow-hidden rounded-2xl bg-amber/15">
                 <Image src={next.cover} alt="" fill sizes="(max-width: 540px) 100vw, 256px" className="object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">{t("nextProject")}</p>
                 <p className="mt-1 font-display text-3xl sm:text-4xl font-bold text-foreground transition-colors group-hover:text-amber-deep dark:group-hover:text-amber">
                   {next.title}

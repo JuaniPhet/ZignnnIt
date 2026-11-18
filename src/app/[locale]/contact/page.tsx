@@ -4,7 +4,7 @@ import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import ContactContent from "@/components/contact/ContactContent";
 import { routing } from "@/i18n/routing";
-import { pageAlternates } from "@/i18n/metadata";
+import { pageAlternates, pageOpenGraph } from "@/i18n/metadata";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: t("title"),
     description: t("description"),
     alternates: pageAlternates(locale, "/contact"),
+    openGraph: pageOpenGraph(locale, { title: t("title"), description: t("description"), path: "/contact" }),
   };
 }
 

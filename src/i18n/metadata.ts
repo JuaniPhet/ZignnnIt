@@ -22,3 +22,24 @@ export function pageAlternates(locale: Locale, path: string = ""): Metadata["alt
     languages,
   };
 }
+
+/**
+ * Complete Open Graph block for a page. In Next.js a page's `openGraph` REPLACES the
+ * layout's (it is not deep-merged), so each page rebuilds the whole object here.
+ * Without `images`, the per-language opengraph-image.tsx is used.
+ */
+export function pageOpenGraph(
+  locale: Locale,
+  page: { title: string; description: string; path?: string; images?: { url: string }[] }
+): Metadata["openGraph"] {
+  return {
+    title: page.title,
+    description: page.description,
+    url: `/${locale}${page.path && page.path !== "/" ? page.path : ""}`,
+    siteName: "ZignnnIt",
+    locale: locale === "fr" ? "fr_FR" : "en_US",
+    alternateLocale: locale === "fr" ? ["en_US"] : ["fr_FR"],
+    type: "website",
+    ...(page.images ? { images: page.images } : {}),
+  };
+}
