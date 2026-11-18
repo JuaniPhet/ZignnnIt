@@ -22,7 +22,7 @@ export const team: TeamMember[] = [
   },
   {
     name: "Jordan Tchakounte",
-    role: { en: "2D / 3D Designer", fr: "Designer 2D / 3D" },
+    role: { en: "Graphic, 2D/3D & Brand Designer", fr: "Designer graphique, 2D/3D & identité de marque" },
     photo: "/team/jordan-tchakounte.webp",
     linkedin: "https://www.linkedin.com/in/jordan-tchakounte-642404349",
   },
