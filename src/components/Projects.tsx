@@ -1,20 +1,19 @@
 "use client"
 
 import { useRef } from "react";
-import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { featuredProjects } from "@/lib/projects";
+import { featuredProjects } from "@/data/projects";
+import ProjectCard from "@/components/projects/ProjectCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
   const t = useTranslations("projects");
-  const locale = useLocale();
   const triggerRef = useRef<HTMLDivElement>(null);
   const scrollTrackRef = useRef<HTMLDivElement>(null);
 
@@ -90,70 +89,13 @@ export default function Projects() {
               paddingRight: "max(1rem, calc((100vw - 1280px) / 2 + 2rem))",
             }}
           >
-            {featuredProjects.map((project, idx) => (
-              <article
-                key={idx}
-                className="flex flex-col justify-between w-[calc(100vw-2rem)] lg:w-[500px] xl:w-[600px] flex-shrink-0 group"
-              >
-                <div className="relative rounded-2xl w-full aspect-[16/9]">
-                  {/* Fine glowing gradient line border */}
-                  <div className="absolute -inset-[1px] bg-gradient-to-r from-amber/40 via-primary to-amber/40 rounded-2xl opacity-50 group-hover:opacity-100 blur-[1px] group-hover:blur-[3px] transition-all duration-500"></div>
-
-                  <div className="relative bg-amber/15 dark:bg-amber/5 rounded-2xl w-full h-full shadow-xl overflow-hidden flex items-center justify-center">
-                    {/* Fixed-ratio image frame: guarantees the same amber top/bottom band on every project, whatever the source image ratio */}
-                    <div className="relative w-full aspect-[1.89/1]">
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 500px, 600px"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </div>
-                    {/* Overlay for description on hover */}
-                    <div className="absolute inset-0 bg-black/80 flex items-center justify-center p-6 sm:p-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
-                      <p className="text-white text-base sm:text-lg text-center leading-relaxed">
-                        {project.description[locale]}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-5 sm:mt-6 flex flex-col gap-3 sm:gap-4">
-                  {/* Top row: Title (left) & Tools (right) */}
-                  <div className="flex flex-wrap sm:flex-nowrap justify-between items-center gap-2 sm:gap-4">
-                    <h3 className="text-2xl lg:text-3xl font-bold text-foreground">
-                      {project.title}
-                    </h3>
-
-                    {/* Tools logos */}
-                    <div className="flex gap-2 h-6 sm:h-7 lg:h-8">
-                      {project.tools.map((tool, tIdx) => (
-                        <img
-                          key={tIdx}
-                          src={tool.src}
-                          alt={tool.alt}
-                          className="h-full w-auto object-contain dark:brightness-200 dark:contrast-100"
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Bottom row: project button and category tag */}
-                  <div className="flex items-center gap-3">
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-primary text-primary-foreground px-5 py-2 font-semibold rounded-lg hover:brightness-110 transition-all text-sm sm:text-base"
-                    >
-                      {t("viewProject")}
-                    </a>
-                    <span className="inline-flex items-center text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-full bg-amber/15 text-carbon dark:text-amber border border-amber/30">
-                      {t(`categories.${project.category}`)}
-                    </span>
-                  </div>
-                </div>
-              </article>
+            {featuredProjects.map((project) => (
+              <ProjectCard
+                key={project.slug}
+                project={project}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 500px, 600px"
+                className="justify-between w-[calc(100vw-2rem)] lg:w-[500px] xl:w-[600px] flex-shrink-0"
+              />
             ))}
 
             {/* "See all projects" CTA card */}

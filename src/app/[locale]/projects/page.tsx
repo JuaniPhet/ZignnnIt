@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { allProjects } from "@/lib/projects";
+import { projects } from "@/data/projects";
+import ProjectCard from "@/components/projects/ProjectCard";
 import { routing } from "@/i18n/routing";
 import { pageAlternates } from "@/i18n/metadata";
 
@@ -56,75 +56,13 @@ export default async function ProjectsPage({ params }: PageProps) {
           {/* Projects grid */}
           <div className="container mx-auto max-w-7xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12">
-              {allProjects.map((project, idx) => (
-                <article
-                  key={idx}
-                  className="flex flex-col group"
-                >
-                  {/* Image card */}
-                  <div className="relative rounded-2xl w-full aspect-[16/9]">
-                    {/* Fine glowing gradient line border */}
-                    <div className="absolute -inset-[1px] bg-gradient-to-r from-amber/40 via-primary to-amber/40 rounded-2xl opacity-50 group-hover:opacity-100 blur-[1px] group-hover:blur-[3px] transition-all duration-500"></div>
-
-                    <div className="relative bg-amber/15 dark:bg-amber/5 rounded-2xl w-full h-full shadow-lg overflow-hidden flex items-center justify-center">
-                      {/* Fixed-ratio image frame: guarantees the same amber top/bottom band on every project */}
-                      <div className="relative w-full aspect-[1.89/1]">
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                      </div>
-                      {/* Overlay on hover */}
-                      <div className="absolute inset-0 bg-black/75 flex items-center justify-center p-6 sm:p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
-                        <p className="text-white text-sm sm:text-base text-center leading-relaxed">
-                          {project.description[locale]}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Project info */}
-                  <div className="mt-5">
-                    <div className="flex flex-wrap gap-3 justify-between items-center">
-                      <h2 className="text-2xl font-bold text-foreground">
-                        {project.title}
-                      </h2>
-
-                      {/* Tools logos */}
-                      <div className="flex gap-2 h-6 sm:h-7">
-                        {project.tools.map((tool, tIdx) => (
-                          <img
-                            key={tIdx}
-                            src={tool.src}
-                            alt={tool.alt}
-                            className="h-full w-auto object-contain dark:brightness-200 dark:contrast-100"
-                          />
-                        ))}
-                      </div>
-                    </div>
-
-                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed line-clamp-2">
-                      {project.description[locale]}
-                    </p>
-
-                    <div className="mt-4 flex items-center gap-3">
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-primary text-primary-foreground px-5 py-2 font-semibold rounded-lg hover:brightness-110 active:scale-[0.97] transition-all duration-200 text-sm"
-                      >
-                        {t("viewProject")}
-                      </a>
-                      <span className="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-full bg-amber/15 text-carbon dark:text-amber border border-amber/30">
-                        {t(`categories.${project.category}`)}
-                      </span>
-                    </div>
-                  </div>
-                </article>
+              {projects.map((project) => (
+                <ProjectCard
+                  key={project.slug}
+                  project={project}
+                  as="h2"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 600px"
+                />
               ))}
             </div>
           </div>

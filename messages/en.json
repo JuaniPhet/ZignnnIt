@@ -19,6 +19,10 @@
     },
     "notFound": {
       "title": "Page not found"
+    },
+    "about": {
+      "title": "About Us",
+      "description": "Meet ZignnnIt: a creative studio where design and code work as one. Our story, our process, our values and our team."
     }
   },
   "nav": {
@@ -52,7 +56,61 @@
     "title": "Bringing Your Ideas to Life with <hl>Creativity and Innovation</hl>",
     "imageAlt": "The ZignnnIt workspace: a code editor and the ZignnnIt website on screen",
     "p1": "<b>ZignnnIt</b> is a key player in graphic design, UI/UX, and web & mobile development. We combine creativity and technical expertise to transform your ideas into impactful digital experiences.",
-    "p2": "From conception to launch, we support our clients with a constant focus on quality and innovation. Together, let’s build products that inspire and shape the future of your business."
+    "p2": "From conception to launch, we support our clients with a constant focus on quality and innovation. Together, let’s build products that inspire and shape the future of your business.",
+    "learnMore": "Learn more about us"
+  },
+  "aboutPage": {
+    "badge": "About ZignnnIt",
+    "heroTitle": "A creative studio where <hl>design and code</hl> work as one.",
+    "heroText": "We help ambitious businesses stand out and run smoothly — from the brand identity to the product their customers use every day.",
+    "storyTitle": "Our <hl>story</hl>",
+    "storyP1": "<b>ZignnnIt</b> is built on a simple conviction: a brand and the digital products that carry it should be designed together. Based in Douala, Cameroon, we work with clients wherever they are, bringing graphic design, UI/UX and web & mobile development under one roof.",
+    "storyP2": "Our mission: turn your ideas into digital experiences that are beautiful, useful and built to last. From the first sketch to the launch — and beyond — we stay by your side with a constant focus on quality, clarity and innovation.",
+    "processTitle": "How we <hl>work</hl>",
+    "processSubtitle": "Four steps, one team, no gaps between design and development.",
+    "steps": {
+      "discover": {
+        "title": "Discover",
+        "text": "We listen, ask the right questions and study your market, your users and your goals."
+      },
+      "design": {
+        "title": "Design",
+        "text": "We shape the identity, the user journeys and the interfaces, and validate them with you."
+      },
+      "build": {
+        "title": "Build",
+        "text": "We develop fast, accessible and secure websites and apps, tested on real devices."
+      },
+      "launch": {
+        "title": "Launch",
+        "text": "We put it online, measure what works and keep improving it with you."
+      }
+    },
+    "valuesTitle": "What we <hl>stand for</hl>",
+    "values": {
+      "craft": {
+        "title": "Craft",
+        "text": "Every pixel and every line of code matters. We sweat the details so you don’t have to."
+      },
+      "clarity": {
+        "title": "Clarity",
+        "text": "Plain language, honest timelines, no surprises. You always know where your project stands."
+      },
+      "impact": {
+        "title": "Impact",
+        "text": "Beautiful is not enough: what we build has to serve your goals and your users."
+      },
+      "partnership": {
+        "title": "Partnership",
+        "text": "We work with you, not just for you — and we stay around after launch."
+      }
+    },
+    "teamTitle": "Current <hl>collaborators</hl>",
+    "teamSubtitle": "The people behind ZignnnIt.",
+    "linkedinAria": "{name} on LinkedIn",
+    "ctaTitle": "Have a project in mind?",
+    "ctaText": "Tell us about it — we reply within 24 hours.",
+    "ctaButton": "Let’s talk"
   },
   "services": {
     "title": "Our <hl>Services</hl>",
@@ -123,6 +181,33 @@
       "webDevelopment": "Web Development",
       "mobileDevelopment": "Mobile Development"
     }
+  },
+  "projectPage": {
+    "allProjects": "All projects",
+    "category": "Category",
+    "year": "Year",
+    "overview": "Overview",
+    "video": "Presentation video",
+    "playVideo": "Play the video: {title}",
+    "gallery": "Gallery",
+    "openImage": "Open image {index} of {total}",
+    "imageAlt": "{title} — visual {index}",
+    "close": "Close",
+    "previous": "Previous image",
+    "next": "Next image",
+    "tools": "Tools used",
+    "actions": "Links",
+    "download": "Download brand guidelines (PDF)",
+    "live": {
+      "site": "Visit live site",
+      "app": "Open the app",
+      "prototype": "View the Figma prototype",
+      "post": "See the LinkedIn post"
+    },
+    "playStore": "Get it on Google Play",
+    "appStore": "Download on the App Store",
+    "newTab": "(opens in a new tab)",
+    "nextProject": "Next project"
   },
   "stats": {
     "title": "Work with <hl>us</hl>",

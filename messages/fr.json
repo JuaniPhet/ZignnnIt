@@ -19,6 +19,10 @@
     },
     "notFound": {
       "title": "Page introuvable"
+    },
+    "about": {
+      "title": "À propos",
+      "description": "Découvrez ZignnnIt : un studio créatif où le design et le code ne font qu’un. Notre histoire, notre méthode, nos valeurs et notre équipe."
     }
   },
   "nav": {
@@ -52,7 +56,61 @@
     "title": "Donner vie à vos idées avec <hl>créativité et innovation</hl>",
     "imageAlt": "L’espace de travail ZignnnIt : un éditeur de code et le site ZignnnIt à l’écran",
     "p1": "<b>ZignnnIt</b> est un acteur du design graphique, de l’UI/UX et du développement web & mobile. Nous allions créativité et expertise technique pour transformer vos idées en expériences digitales qui ont de l’impact.",
-    "p2": "De la conception au lancement, nous accompagnons nos clients avec une exigence constante de qualité et d’innovation. Ensemble, créons des produits qui inspirent et façonnent l’avenir de votre entreprise."
+    "p2": "De la conception au lancement, nous accompagnons nos clients avec une exigence constante de qualité et d’innovation. Ensemble, créons des produits qui inspirent et façonnent l’avenir de votre entreprise.",
+    "learnMore": "En savoir plus sur nous"
+  },
+  "aboutPage": {
+    "badge": "À propos de ZignnnIt",
+    "heroTitle": "Un studio créatif où <hl>le design et le code</hl> ne font qu’un.",
+    "heroText": "Nous aidons les entreprises ambitieuses à se démarquer et à bien fonctionner — de l’identité visuelle au produit que leurs clients utilisent chaque jour.",
+    "storyTitle": "Notre <hl>histoire</hl>",
+    "storyP1": "<b>ZignnnIt</b> repose sur une conviction simple : une marque et les produits digitaux qui la portent doivent être conçus ensemble. Basés à Douala, au Cameroun, nous travaillons avec des clients partout dans le monde et réunissons design graphique, UI/UX et développement web & mobile sous un même toit.",
+    "storyP2": "Notre mission : transformer vos idées en expériences digitales belles, utiles et durables. Du premier croquis au lancement — et après — nous restons à vos côtés avec une exigence constante de qualité, de clarté et d’innovation.",
+    "processTitle": "Notre <hl>méthode</hl>",
+    "processSubtitle": "Quatre étapes, une seule équipe, aucune rupture entre le design et le développement.",
+    "steps": {
+      "discover": {
+        "title": "Découvrir",
+        "text": "Nous écoutons, posons les bonnes questions et étudions votre marché, vos utilisateurs et vos objectifs."
+      },
+      "design": {
+        "title": "Concevoir",
+        "text": "Nous façonnons l’identité, les parcours utilisateurs et les interfaces, et les validons avec vous."
+      },
+      "build": {
+        "title": "Développer",
+        "text": "Nous développons des sites et des applications rapides, accessibles et sécurisés, testés sur de vrais appareils."
+      },
+      "launch": {
+        "title": "Lancer",
+        "text": "Nous mettons en ligne, mesurons ce qui fonctionne et continuons à l’améliorer avec vous."
+      }
+    },
+    "valuesTitle": "Ce qui nous <hl>guide</hl>",
+    "values": {
+      "craft": {
+        "title": "Exigence",
+        "text": "Chaque pixel et chaque ligne de code comptent. Nous soignons les détails pour que vous n’ayez pas à le faire."
+      },
+      "clarity": {
+        "title": "Transparence",
+        "text": "Un langage clair, des délais honnêtes, aucune mauvaise surprise. Vous savez toujours où en est votre projet."
+      },
+      "impact": {
+        "title": "Impact",
+        "text": "Le beau ne suffit pas : ce que nous créons doit servir vos objectifs et vos utilisateurs."
+      },
+      "partnership": {
+        "title": "Partenariat",
+        "text": "Nous travaillons avec vous, pas seulement pour vous — et nous restons là après le lancement."
+      }
+    },
+    "teamTitle": "Nos <hl>collaborateurs</hl>",
+    "teamSubtitle": "Les personnes derrière ZignnnIt.",
+    "linkedinAria": "{name} sur LinkedIn",
+    "ctaTitle": "Un projet en tête ?",
+    "ctaText": "Parlez-nous-en — nous répondons sous 24 heures.",
+    "ctaButton": "Parlons-en"
   },
   "services": {
     "title": "Nos <hl>services</hl>",
@@ -123,6 +181,33 @@
       "webDevelopment": "Développement web",
       "mobileDevelopment": "Développement mobile"
     }
+  },
+  "projectPage": {
+    "allProjects": "Tous les projets",
+    "category": "Catégorie",
+    "year": "Année",
+    "overview": "Aperçu",
+    "video": "Vidéo de présentation",
+    "playVideo": "Lire la vidéo : {title}",
+    "gallery": "Galerie",
+    "openImage": "Ouvrir l’image {index} sur {total}",
+    "imageAlt": "{title} — visuel {index}",
+    "close": "Fermer",
+    "previous": "Image précédente",
+    "next": "Image suivante",
+    "tools": "Outils utilisés",
+    "actions": "Liens",
+    "download": "Télécharger la charte graphique (PDF)",
+    "live": {
+      "site": "Voir le site",
+      "app": "Ouvrir l’application",
+      "prototype": "Voir le prototype Figma",
+      "post": "Voir la publication LinkedIn"
+    },
+    "playStore": "Disponible sur Google Play",
+    "appStore": "Télécharger dans l’App Store",
+    "newTab": "(s’ouvre dans un nouvel onglet)",
+    "nextProject": "Projet suivant"
   },
   "stats": {
     "title": "Travaillons <hl>ensemble</hl>",
