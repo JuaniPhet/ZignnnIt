@@ -90,10 +90,11 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-muted-foreground gap-4">
+        {/* Stacked and centered on mobile, side by side from lg */}
+        <div className="pt-8 flex flex-col lg:flex-row items-center justify-between text-center text-xs text-muted-foreground gap-2 lg:gap-4">
           <p>© {new Date().getFullYear()} ZignnnIt. All rights reserved.</p>
-          <p className="flex items-center gap-1">
-            Crafted with passion by <span className="font-semibold text-foreground">ZignnnIt</span>
+          <p>
+            Crafted with passion by <span className="font-semibold text-foreground whitespace-nowrap">ZignnnIt</span>
           </p>
         </div>
         </div>
