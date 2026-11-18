@@ -46,7 +46,7 @@ export default function Navbar() {
   // (on the home page Next.js just scrolls to the section).
   const links = [
     { href: "/#home", label: t("home") },
-    { href: "/#about-us", label: t("about") },
+    { href: "/about", label: t("about") },
     { href: "/#services", label: t("services") },
     { href: "/projects", label: t("projects") },
     { href: "/contact", label: t("contact") },

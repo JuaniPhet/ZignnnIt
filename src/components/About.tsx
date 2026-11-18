@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -66,6 +67,14 @@ export default function About() {
               <p>{t.rich("p1", { b: (chunks) => <b className="text-foreground font-semibold">{chunks}</b> })}</p>
               <p>{t("p2")}</p>
             </div>
+            {/* Short version on the home page; the full story is on /about */}
+            <Link
+              href="/about"
+              className="invisible about-text mt-10 inline-flex items-center gap-2 rounded-xl border border-foreground/15 px-6 py-3 text-base font-semibold text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              {t("learnMore")}
+              <i className="ri-arrow-right-line" aria-hidden="true"></i>
+            </Link>
           </div>
         </div>
       </div>
