@@ -5,20 +5,11 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
+import SplitTitle from "@/components/SplitTitle";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleText = "We are a creative Agency";
-
-  // Split title text into characters, replacing spaces with non-breaking spaces
-  const characters = titleText.split("").map((char, index) => {
-    if (char === " ") return { char: "\u00A0", isSpace: true, index };
-    return { char, isSpace: false, index };
-  });
-
-  // Determine which characters are the word "creative" (indices 9-16 in the string)
-  const creativeStart = titleText.indexOf("creative");
-  const creativeEnd = creativeStart + "creative".length;
 
   useGSAP(() => {
     // Badge entrance
@@ -176,19 +167,12 @@ export default function Hero() {
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground">
-            {characters.map((item) => (
-              <span
-                key={item.index}
-                className={`captive-letter inline-block ${item.index >= creativeStart && item.index < creativeEnd
-                  ? "text-primary"
-                  : ""
-                  }`}
-              >
-                {item.char}
-              </span>
-            ))}
-          </h1>
+          <SplitTitle
+            text={titleText}
+            highlight="creative"
+            letterClassName="captive-letter"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-foreground"
+          />
 
           {/* Subtitle */}
           <p className="invisible we-help-you-to text-base sm:text-lg md:text-xl lg:text-2xl mt-6 sm:mt-8 mb-8 sm:mb-10 text-muted-foreground leading-relaxed max-w-xl">
@@ -252,14 +236,19 @@ export default function Hero() {
         </div>
 
         {/* Right column - Illustration */}
-        <div className="invisible hero-illustration hidden lg:block w-5/12 max-w-lg xl:max-w-xl flex-shrink-0">
+        {/*
+          Below the CTAs on mobile (80% wide, centered), right column from lg.
+          `relative` so the animated SVG layers (steam, clock hands…) can later be
+          positioned in % on top of the artwork and follow its resizing.
+        */}
+        <div className="invisible hero-illustration relative w-4/5 max-w-md mx-auto lg:mx-0 lg:w-5/12 lg:max-w-lg xl:max-w-xl flex-shrink-0">
           <Image
             src="/img/vector2@4x-8.png"
-            alt="computer illustration"
+            alt="Illustration of a creative workspace: computer, coffee cup, lamp and clock"
             width={600}
-            height={500}
+            height={425}
+            sizes="(max-width: 768px) 80vw, 40vw"
             className="w-full h-auto drop-shadow-2xl"
-            style={{ height: "auto" }}
             priority
           />
         </div>
