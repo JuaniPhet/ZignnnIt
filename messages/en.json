@@ -50,7 +50,13 @@
     "subtitle": "<b>Brand identity, UI/UX and web & mobile development</b> for ambitious businesses — from the first sketch to the final launch.",
     "cta": "Ready to zignnn your project?",
     "secondary": "Discover our services",
-    "illustrationTitle": "Creative desk: screen with a design app, steaming cup, lamp, clock and cactus"
+    "illustrationTitle": "Creative desk: screen with a design app, steaming cup, lamp, clock and cactus",
+    "titleStart": "We craft brands and products that",
+    "rotating": [
+      "stand out.",
+      "inspire.",
+      "convert."
+    ]
   },
   "about": {
     "title": "Bringing Your Ideas to Life with <hl>Creativity and Innovation</hl>",
@@ -301,5 +307,8 @@
     "title": "Page not found",
     "text": "The page you are looking for doesn’t exist or has moved.",
     "back": "Back to home"
+  },
+  "cursor": {
+    "view": "View"
   }
 }

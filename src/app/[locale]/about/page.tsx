@@ -72,8 +72,8 @@ export default async function AboutPage({ params }: PageProps) {
       {/* 2. Story / mission */}
       <section className="bg-cream dark:bg-amber/5 px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
         <div className="container mx-auto max-w-7xl grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
-          <h2 className={sectionTitle}>{t.rich("storyTitle", { hl })}</h2>
-          <div className="space-y-6 text-lg sm:text-xl text-muted-foreground leading-relaxed">
+          <h2 className={sectionTitle} data-reveal>{t.rich("storyTitle", { hl })}</h2>
+          <div className="space-y-6 text-lg sm:text-xl text-muted-foreground leading-relaxed" data-reveal>
             <p>{t.rich("storyP1", { b })}</p>
             <p>{t("storyP2")}</p>
           </div>
@@ -83,11 +83,11 @@ export default async function AboutPage({ params }: PageProps) {
       {/* 3. Process */}
       <section className="px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
         <div className="container mx-auto max-w-7xl">
-          <h2 className={sectionTitle}>{t.rich("processTitle", { hl })}</h2>
+          <h2 className={sectionTitle} data-reveal>{t.rich("processTitle", { hl })}</h2>
           <p className="mt-4 text-lg text-muted-foreground">{t("processSubtitle")}</p>
           <ol className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {steps.map((step, i) => (
-              <li key={step.key} className="relative rounded-3xl border border-border p-6 sm:p-8">
+              <li key={step.key} data-reveal className="relative rounded-3xl border border-border p-6 sm:p-8">
                 <div className="flex items-center justify-between">
                   <span className="font-display text-5xl font-extrabold text-amber" aria-hidden="true">
                     {String(i + 1).padStart(2, "0")}
@@ -105,10 +105,10 @@ export default async function AboutPage({ params }: PageProps) {
       {/* 4. Values */}
       <section className="bg-carbon text-white px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
         <div className="container mx-auto max-w-7xl">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl text-white">{t.rich("valuesTitle", { hl })}</h2>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl text-white" data-reveal>{t.rich("valuesTitle", { hl })}</h2>
           <ul className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {values.map((value) => (
-              <li key={value.key} className="rounded-3xl bg-white/5 border border-white/10 p-6 sm:p-8">
+              <li key={value.key} data-reveal className="rounded-3xl bg-white/5 border border-white/10 p-6 sm:p-8">
                 <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber text-carbon text-2xl" aria-hidden="true">
                   <i className={value.icon}></i>
                 </span>
@@ -123,10 +123,11 @@ export default async function AboutPage({ params }: PageProps) {
       {/* 5. Current collaborators */}
       <section className="px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
         <div className="container mx-auto max-w-7xl">
-          <h2 className={sectionTitle}>{t.rich("teamTitle", { hl })}</h2>
+          <h2 className={sectionTitle} data-reveal>{t.rich("teamTitle", { hl })}</h2>
           <p className="mt-4 text-lg text-muted-foreground">{t("teamSubtitle")}</p>
           <div className="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {team.map((member) => (
+              <div key={member.name} data-reveal>
               <TeamCard
                 key={member.name}
                 member={member}
@@ -134,6 +135,7 @@ export default async function AboutPage({ params }: PageProps) {
                 hasPhoto={hasPhoto(member.photo)}
                 linkedinLabel={t("linkedinAria", { name: member.name })}
               />
+              </div>
             ))}
           </div>
         </div>
@@ -146,6 +148,7 @@ export default async function AboutPage({ params }: PageProps) {
         <p className="mt-4 text-lg text-muted-foreground">{t("ctaText")}</p>
         <Link
           href="/contact"
+          data-magnetic
           className="mt-8 inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 font-semibold rounded-xl shadow-lg shadow-primary/25 hover:brightness-110 active:scale-[0.98] transition-all"
         >
           {t("ctaButton")}

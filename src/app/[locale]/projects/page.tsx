@@ -58,12 +58,13 @@ export default async function ProjectsPage({ params }: PageProps) {
           <div className="container mx-auto max-w-7xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12">
               {projects.map((project) => (
-                <ProjectCard
-                  key={project.slug}
-                  project={project}
-                  as="h2"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 600px"
-                />
+                <div key={project.slug} data-reveal>
+                  <ProjectCard
+                    project={project}
+                    as="h2"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 600px"
+                  />
+                </div>
               ))}
             </div>
           </div>

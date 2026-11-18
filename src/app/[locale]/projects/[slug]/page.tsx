@@ -94,7 +94,7 @@ export default async function ProjectPage({ params }: PageProps) {
           </div>
 
           {/* Summary + body */}
-          <section className="mt-12 sm:mt-16 max-w-3xl" aria-label={t("overview")}>
+          <section className="mt-12 sm:mt-16 max-w-3xl" aria-label={t("overview")} data-reveal>
             <p className="text-xl sm:text-2xl leading-relaxed text-foreground">{project.summary[locale]}</p>
             {body.map((paragraph, i) => (
               <p key={i} className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">
@@ -104,26 +104,26 @@ export default async function ProjectPage({ params }: PageProps) {
           </section>
 
           {project.youtubeId && (
-            <section className="mt-16">
+            <section className="mt-16" data-reveal>
               <h2 className={sectionTitle}>{t("video")}</h2>
               <YouTubeFacade videoId={project.youtubeId} playLabel={t("playVideo", { title: project.title })} />
             </section>
           )}
 
           {project.gallery && project.gallery.length > 0 && (
-            <section className="mt-16">
+            <section className="mt-16" data-reveal>
               <h2 className={sectionTitle}>{t("gallery")}</h2>
               <ProjectGallery title={project.title} images={project.gallery} />
             </section>
           )}
 
-          <section className="mt-16">
+          <section className="mt-16" data-reveal>
             <h2 className={sectionTitle}>{t("tools")}</h2>
             <ToolBadges ids={project.tools} className="h-9 sm:h-10 gap-4" />
           </section>
 
           {hasActions && (
-            <section className="mt-16" aria-label={t("actions")}>
+            <section className="mt-16" aria-label={t("actions")} data-reveal>
               <div className="flex flex-col md:flex-row flex-wrap gap-4">
                 {project.downloadUrl && (
                   <a href={project.downloadUrl} target="_blank" rel="noopener noreferrer" className={`${buttonBase} bg-primary text-primary-foreground shadow-lg shadow-primary/25 hover:brightness-110`}>
@@ -158,8 +158,8 @@ export default async function ProjectPage({ params }: PageProps) {
           )}
 
           {/* Next project */}
-          <nav className="mt-20 sm:mt-24 border-t border-border pt-10" aria-label={t("nextProject")}>
-            <Link href={`/projects/${next.slug}`} className="group flex flex-col md:flex-row md:items-center gap-6">
+          <nav className="mt-20 sm:mt-24 border-t border-border pt-10" aria-label={t("nextProject")} data-reveal>
+            <Link href={`/projects/${next.slug}`} className="group flex flex-col md:flex-row md:items-center gap-6" data-cursor="view">
               <div className="relative w-full md:w-64 aspect-video shrink-0 overflow-hidden rounded-2xl bg-amber/15">
                 <Image src={next.cover} alt="" fill sizes="(max-width: 540px) 100vw, 256px" className="object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>

@@ -12,6 +12,11 @@ import { Analytics } from "@vercel/analytics/next";
 import { routing } from "@/i18n/routing";
 import { pageAlternates, SITE_URL } from "@/i18n/metadata";
 import { contact } from "@/data/contact";
+import SmoothScroll from "@/components/motion/SmoothScroll";
+import PageTransition from "@/components/motion/PageTransition";
+import ScrollReveals from "@/components/motion/ScrollReveals";
+import CustomCursor from "@/components/motion/CustomCursor";
+import FirstVisitLoader, { headInitScript } from "@/components/motion/FirstVisitLoader";
 
 // Self-hosted fonts (Fontshare, ITF Free Font License — see src/fonts/LICENSE-ITF-FFL.txt).
 // next/font/local serves them from our own domain, preloads them and generates
@@ -78,6 +83,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   // Enables static rendering: tells next-intl the locale without reading headers.
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "metadata" });
+  const tFooter = await getTranslations({ locale, namespace: "footer" });
 
   // Structured data (schema.org): tells search engines who we are, what we do and
   // how to reach us — can show up as a richer result. Rendered as JSON in the page.
@@ -101,6 +107,10 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   return (
     <html lang={locale} suppressHydrationWarning className={cn(cabinetGrotesk.variable, generalSans.variable)}>
       <body className="min-h-screen bg-background text-foreground font-sans antialiased">
+        {/* First child of <body>: runs before the content below is parsed/painted
+            (loader on first visit + hero letters hidden until animated). Kept out of
+            <head>, which Next/React manage and stream into. */}
+        <script dangerouslySetInnerHTML={{ __html: headInitScript }} />
         <script
           type="application/ld+json"
           // "<" is escaped so the JSON can never close the <script> tag early.
@@ -114,6 +124,11 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
             enableSystem={false}
             disableTransitionOnChange
           >
+            <FirstVisitLoader signature={tFooter("signature")} />
+            <SmoothScroll />
+            <PageTransition />
+            <ScrollReveals />
+            <CustomCursor />
             <Navbar />
             {children}
             <Footer />

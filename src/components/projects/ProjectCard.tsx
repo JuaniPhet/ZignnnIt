@@ -27,7 +27,7 @@ export default function ProjectCard({ project, sizes, className, as: Heading = "
   return (
     <article className={cn("flex flex-col group", className)}>
       {/* The image repeats the "View project" link: hidden from keyboard/screen readers to avoid a duplicate. */}
-      <Link href={href} tabIndex={-1} aria-hidden="true" className="relative block rounded-2xl w-full aspect-[16/9]">
+      <Link href={href} tabIndex={-1} aria-hidden="true" data-cursor="view" className="relative block rounded-2xl w-full aspect-[16/9]">
         {/* Fine glowing gradient line border */}
         <div className="absolute -inset-[1px] bg-gradient-to-r from-amber/40 via-primary to-amber/40 rounded-2xl opacity-50 group-hover:opacity-100 blur-[1px] group-hover:blur-[3px] transition-all duration-500"></div>
 

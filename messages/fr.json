@@ -50,7 +50,13 @@
     "subtitle": "<b>Identité visuelle, UI/UX et développement web & mobile</b> pour les entreprises ambitieuses — du premier croquis au lancement.",
     "cta": "Prêt à zignnn votre projet ?",
     "secondary": "Découvrir nos services",
-    "illustrationTitle": "Bureau créatif : écran avec un logiciel de dessin, tasse fumante, lampe, horloge et cactus"
+    "illustrationTitle": "Bureau créatif : écran avec un logiciel de dessin, tasse fumante, lampe, horloge et cactus",
+    "titleStart": "Nous créons des marques et des produits qui",
+    "rotating": [
+      "se démarquent.",
+      "inspirent.",
+      "convertissent."
+    ]
   },
   "about": {
     "title": "Donner vie à vos idées avec <hl>créativité et innovation</hl>",
@@ -301,5 +307,8 @@
     "title": "Page introuvable",
     "text": "La page que vous cherchez n’existe pas ou a été déplacée.",
     "back": "Retour à l’accueil"
+  },
+  "cursor": {
+    "view": "Voir"
   }
 }

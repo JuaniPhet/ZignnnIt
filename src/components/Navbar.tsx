@@ -5,6 +5,7 @@ import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
+import { getLenis } from "@/lib/motion";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,12 +22,14 @@ export default function Navbar() {
     if (!isOpen) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    getLenis()?.stop(); // smooth scroll ignores body overflow: pause it explicitly
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setIsOpen(false);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.style.overflow = previousOverflow;
+      getLenis()?.start();
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [isOpen]);
@@ -102,7 +105,7 @@ export default function Navbar() {
           </button>
 
           {/* Shop button */}
-          <div className="hidden xl:flex">
+          <div className="hidden xl:flex" data-magnetic>
             <Link href="/shop" className="bg-primary text-primary-foreground px-5 py-3 font-semibold rounded-lg hover:brightness-110 active:scale-[0.97] transition-all duration-200">
               {t("shop")}
             </Link>

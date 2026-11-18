@@ -1,4 +1,5 @@
 @import "remixicon/fonts/remixicon.css";
+@import "lenis/dist/lenis.css";
 
 @import "tailwindcss";
 
@@ -163,4 +164,84 @@
   line-height: 1.75rem;
   font-weight: 600;
   transition-duration: 300ms;
+}
+
+/* ---------- Motion (step 4) ---------- */
+
+/* First-visit loader: only shown when the <head> script set <html data-loader="1">. */
+#zg-loader {
+  display: none;
+}
+html[data-loader] #zg-loader {
+  display: flex;
+  /* Fallback if JavaScript never runs: hide it after 2.5s anyway. */
+  animation: zg-loader-fallback 0s linear 2.5s forwards;
+}
+html[data-loader] body {
+  overflow: hidden;
+}
+@keyframes zg-loader-fallback {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* Hero title letters wait for their GSAP entrance (no flash of the full title).
+   Fallback: shown after 3s if JavaScript never runs. */
+html.motion [data-hero-title] [data-letter] {
+  visibility: hidden;
+  animation: zg-show 0s linear 3s forwards;
+}
+@keyframes zg-show {
+  to {
+    visibility: visible;
+  }
+}
+
+/* Custom cursor (desktop): hide the native one, except where typing happens. */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+html.has-custom-cursor input,
+html.has-custom-cursor textarea,
+html.has-custom-cursor [contenteditable="true"] {
+  cursor: text !important;
+}
+
+/* Contact form success check mark (stroke drawing) */
+@keyframes zg-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes zg-pop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.zg-success {
+  animation: zg-pop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.zg-success .zg-check {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: zg-draw 0.45s 0.25s ease-out forwards;
+}
+
+/* Reduced motion: CSS transitions/animations become (almost) instant. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
