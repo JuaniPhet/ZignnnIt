@@ -19,12 +19,13 @@ export const headInitScript = `try{if(!matchMedia("(prefers-reduced-motion: redu
 export const isLoaderActive = () => typeof document !== "undefined" && document.documentElement.dataset.loader === "1";
 
 /**
- * First-visit loader (≤ 1.2 s, once per session): the signature "Design. Code. Zignnn."
- * word by word, then the carbon panel slides up to reveal the page.
+ * First-visit loader (≤ 1.2 s, once per session): "D-zignnn. Code. Enjoy." word by
+ * word (texts in messages → loader.words, last word in amber), then the carbon panel
+ * slides up to reveal the page.
  * Hidden by CSS unless <html data-loader="1">; a CSS fallback removes it after 2.5 s
  * even if JavaScript fails.
  */
-export default function FirstVisitLoader({ signature }: { signature: string }) {
+export default function FirstVisitLoader({ words }: { words: string[] }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -47,10 +48,9 @@ export default function FirstVisitLoader({ signature }: { signature: string }) {
     };
   }, []);
 
-  const words = signature.split(" ");
   return (
     <div id="zg-loader" ref={ref} aria-hidden="true" className="fixed inset-0 z-[110] items-center justify-center bg-carbon">
-      <p className="flex gap-3 overflow-hidden font-display text-4xl sm:text-6xl font-extrabold text-white">
+      <p className="flex flex-wrap justify-center gap-x-3 gap-y-1 overflow-hidden px-6 text-center font-display text-4xl md:text-6xl font-extrabold text-white">
         {words.map((word, i) => (
           <span key={i} data-word className={i === words.length - 1 ? "text-amber" : undefined}>
             {word}

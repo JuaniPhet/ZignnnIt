@@ -83,7 +83,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   // Enables static rendering: tells next-intl the locale without reading headers.
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "metadata" });
-  const tFooter = await getTranslations({ locale, namespace: "footer" });
+  const tLoader = await getTranslations({ locale, namespace: "loader" });
 
   // Structured data (schema.org): tells search engines who we are, what we do and
   // how to reach us — can show up as a richer result. Rendered as JSON in the page.
@@ -124,7 +124,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
             enableSystem={false}
             disableTransitionOnChange
           >
-            <FirstVisitLoader signature={tFooter("signature")} />
+            <FirstVisitLoader words={tLoader.raw("words") as string[]} />
             <SmoothScroll />
             <PageTransition />
             <ScrollReveals />
