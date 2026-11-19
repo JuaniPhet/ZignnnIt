@@ -1,13 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 @import "remixicon/fonts/remixicon.css";
+@import "lenis/dist/lenis.css";
 
 @import "tailwindcss";
 
 @source "../../src/**/*.{js,ts,jsx,tsx,mdx}";
 
-@theme {
-  --font-urbanist: "Urbanist", sans-serif;
+/*
+ * Tailwind v4's `dark:` variant follows the OS (prefers-color-scheme) by default.
+ * The site has its own theme toggle (next-themes puts .dark on <html>), so make
+ * `dark:` follow that class instead — otherwise a visitor whose OS is in dark mode
+ * gets dark: styles on top of the light theme.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
 
+/*
+ * Fonts: the --font-cabinet-grotesk / --font-general-sans variables are set on <html>
+ * by next/font/local (see app/layout.tsx). `inline` makes Tailwind write the var()
+ * reference directly into each utility instead of resolving it on :root.
+ *   font-display -> Cabinet Grotesk (headings >= 24px, key figures, big CTAs)
+ *   font-sans    -> General Sans (body text, UI, buttons, navigation)
+ */
+@theme inline {
+  --font-display: var(--font-cabinet-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-general-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/*
+ * Brand tokens (single source of truth for the brand palette).
+ * Never write a raw amber hex or a Tailwind amber-500/600 class in components:
+ * use bg-amber, text-amber-deep, bg-carbon, bg-cream… instead.
+ * Accessibility: no small amber text on white (contrast too low) — use amber-deep or carbon.
+ */
+@theme inline {
+  --color-amber: var(--amber);
+  --color-amber-deep: var(--amber-deep);
+  --color-carbon: var(--carbon);
+  --color-cream: var(--cream);
+}
+
+@theme {
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
@@ -51,14 +82,20 @@
 
 @layer base {
   :root {
+    --amber: #f59e0b;      /* accents, CTAs, highlighted words */
+    --amber-deep: #d97706; /* hover, amber text on light backgrounds */
+    --carbon: #141414;     /* text, dark backgrounds */
+    --cream: #faf7f2;      /* alternate light backgrounds */
+
+    /* shadcn semantic tokens (HSL channels). primary = amber, foreground = carbon. */
     --background: 0 0% 100%;
-    --foreground: 20 14.3% 4.1%;
+    --foreground: 0 0% 7.8%;
     --card: 0 0% 100%;
-    --card-foreground: 20 14.3% 4.1%;
+    --card-foreground: 0 0% 7.8%;
     --popover: 0 0% 100%;
-    --popover-foreground: 20 14.3% 4.1%;
+    --popover-foreground: 0 0% 7.8%;
     --primary: 38 92% 50%;
-    --primary-foreground: 20 14.3% 4.1%;
+    --primary-foreground: 0 0% 7.8%;
     --secondary: 35 100% 96.5%;
     --secondary-foreground: 38 92% 20%;
     --muted: 20 5.9% 96%;
@@ -74,14 +111,14 @@
   }
 
   .dark {
-    --background: 20 14.3% 4.1%;
+    --background: 0 0% 7.8%;
     --foreground: 0 0% 98%;
-    --card: 20 14.3% 4.1%;
+    --card: 0 0% 7.8%;
     --card-foreground: 0 0% 98%;
-    --popover: 20 14.3% 4.1%;
+    --popover: 0 0% 7.8%;
     --popover-foreground: 0 0% 98%;
     --primary: 38 92% 50%;
-    --primary-foreground: 20 14.3% 4.1%;
+    --primary-foreground: 0 0% 7.8%;
     --secondary: 20 5.9% 10%;
     --secondary-foreground: 0 0% 98%;
     --muted: 20 5.9% 15%;
@@ -103,16 +140,139 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: var(--font-urbanist);
-    letter-spacing: 0.05em;
+    font-family: var(--font-sans);
     margin: 0;
     padding: 0;
+    /* Only the weights we ship exist: never let the browser fake a bold/italic. */
+    font-synthesis: none;
+  }
+
+  /* Display headings. Smaller h3 (< 24px) opt out with `font-sans font-semibold`. */
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
   }
 }
 
 .nav-link {
   font-size: 1.125rem;
   line-height: 1.75rem;
-  font-weight: 700;
+  font-weight: 600;
   transition-duration: 300ms;
+}
+
+/* ---------- Motion (step 4) ---------- */
+
+/* First-visit loader: only shown when the <head> script set <html data-loader="1">. */
+#zg-loader {
+  display: none;
+}
+html[data-loader] #zg-loader {
+  display: flex;
+  /* Fallback if JavaScript never runs: hide it after 2.5s anyway. */
+  animation: zg-loader-fallback 0s linear 2.5s forwards;
+}
+html[data-loader] body {
+  overflow: hidden;
+}
+@keyframes zg-loader-fallback {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* Hero title letters wait for their GSAP entrance (no flash of the full title).
+   Fallback: shown after 3s if JavaScript never runs. */
+html.motion [data-hero-title] [data-letter] {
+  visibility: hidden;
+  animation: zg-show 0s linear 3s forwards;
+}
+@keyframes zg-show {
+  to {
+    visibility: visible;
+  }
+}
+
+/* Custom cursor (desktop): hide the native one, except where typing happens. */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+html.has-custom-cursor input,
+html.has-custom-cursor textarea,
+html.has-custom-cursor [contenteditable="true"] {
+  cursor: text !important;
+}
+
+/* Testimonials band: the track contains the list twice and slides by -50%. */
+.zg-marquee {
+  /* Soft fade on both edges */
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.zg-marquee-track {
+  animation: zg-marquee var(--zg-marquee-duration, 40s) linear infinite;
+}
+.zg-marquee:hover .zg-marquee-track,
+.zg-marquee:focus-within .zg-marquee-track {
+  animation-play-state: paused;
+}
+@keyframes zg-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .zg-marquee {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    mask-image: none;
+  }
+  .zg-marquee-track {
+    animation: none !important;
+  }
+  .zg-marquee-track > li {
+    scroll-snap-align: start;
+  }
+}
+
+/* Contact form success check mark (stroke drawing) */
+@keyframes zg-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes zg-pop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.zg-success {
+  animation: zg-pop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.zg-success .zg-check {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: zg-draw 0.45s 0.25s ease-out forwards;
+}
+
+/* Reduced motion: CSS transitions/animations become (almost) instant. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

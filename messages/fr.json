@@ -1,0 +1,319 @@
+{
+  "metadata": {
+    "siteName": "ZignnnIt",
+    "home": {
+      "title": "ZignnnIt — Agence créative digitale",
+      "description": "Nous créons des marques et des produits qui se démarquent : identité visuelle, design UI/UX et développement web & mobile pour les entreprises ambitieuses."
+    },
+    "projects": {
+      "title": "Nos projets",
+      "description": "Une sélection de missions menées à bien — des identités visuelles aux applications web et mobiles."
+    },
+    "contact": {
+      "title": "Contactez-nous",
+      "description": "Parlez-nous de votre projet. Nous répondons sous 24 heures."
+    },
+    "shop": {
+      "title": "Boutique de templates design",
+      "description": "Des templates design premium, conçus avec passion et précision. Bientôt disponible."
+    },
+    "notFound": {
+      "title": "Page introuvable"
+    },
+    "about": {
+      "title": "À propos",
+      "description": "Découvrez ZignnnIt : un studio créatif où le design et le code ne font qu’un. Notre histoire, notre méthode, nos valeurs et notre équipe."
+    }
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "services": "Services",
+    "projects": "Projets",
+    "contact": "Contact",
+    "shop": "Boutique",
+    "homeAria": "ZignnnIt — accueil",
+    "openMenu": "Ouvrir le menu de navigation",
+    "closeMenu": "Fermer le menu de navigation",
+    "toggleTheme": "Changer de thème"
+  },
+  "language": {
+    "label": "Langue",
+    "switchTo": "Passer en {language}",
+    "en": "anglais",
+    "fr": "français"
+  },
+  "hero": {
+    "badge": "Agence créative digitale",
+    "title": "Nous créons des marques et des produits qui se démarquent.",
+    "highlight": "se démarquent.",
+    "subtitle": "<b>Identité visuelle, UI/UX et développement web & mobile</b> pour les entreprises ambitieuses — du premier croquis au lancement.",
+    "cta": "Prêt à zignnn votre projet ?",
+    "secondary": "Découvrir nos services",
+    "illustrationTitle": "Bureau créatif : écran avec un logiciel de dessin, tasse fumante, lampe, horloge et cactus",
+    "titleStart": "Nous créons des marques et des produits qui",
+    "rotating": [
+      "se démarquent.",
+      "inspirent.",
+      "convertissent."
+    ]
+  },
+  "about": {
+    "title": "Donner vie à vos idées avec <hl>créativité et innovation</hl>",
+    "imageAlt": "L’espace de travail ZignnnIt : un éditeur de code et le site ZignnnIt à l’écran",
+    "p1": "<b>ZignnnIt</b> est un acteur du design graphique, de l’UI/UX et du développement web & mobile. Nous allions créativité et expertise technique pour transformer vos idées en expériences digitales qui ont de l’impact.",
+    "p2": "De la conception au lancement, nous accompagnons nos clients avec une exigence constante de qualité et d’innovation. Ensemble, créons des produits qui inspirent et façonnent l’avenir de votre entreprise.",
+    "learnMore": "En savoir plus sur nous"
+  },
+  "aboutPage": {
+    "badge": "À propos de ZignnnIt",
+    "heroTitle": "Un studio créatif où <hl>le design et le code</hl> ne font qu’un.",
+    "heroText": "Nous aidons les entreprises ambitieuses à se démarquer et à bien fonctionner — de l’identité visuelle au produit que leurs clients utilisent chaque jour.",
+    "storyTitle": "Notre <hl>histoire</hl>",
+    "storyP1": "<b>ZignnnIt</b> repose sur une conviction simple : une marque et les produits digitaux qui la portent doivent être conçus ensemble. Basés à Douala, au Cameroun, nous travaillons avec des clients partout dans le monde et réunissons design graphique, UI/UX et développement web & mobile sous un même toit.",
+    "storyP2": "Notre mission : transformer vos idées en expériences digitales belles, utiles et durables. Du premier croquis au lancement — et après — nous restons à vos côtés avec une exigence constante de qualité, de clarté et d’innovation.",
+    "processTitle": "Notre <hl>méthode</hl>",
+    "processSubtitle": "Quatre étapes, une seule équipe, aucune rupture entre le design et le développement.",
+    "steps": {
+      "discover": {
+        "title": "Découvrir",
+        "text": "Nous écoutons, posons les bonnes questions et étudions votre marché, vos utilisateurs et vos objectifs."
+      },
+      "design": {
+        "title": "Concevoir",
+        "text": "Nous façonnons l’identité, les parcours utilisateurs et les interfaces, et les validons avec vous."
+      },
+      "build": {
+        "title": "Développer",
+        "text": "Nous développons des sites et des applications rapides, accessibles et sécurisés, testés sur de vrais appareils."
+      },
+      "launch": {
+        "title": "Lancer",
+        "text": "Nous mettons en ligne, mesurons ce qui fonctionne et continuons à l’améliorer avec vous."
+      }
+    },
+    "valuesTitle": "Ce qui nous <hl>guide</hl>",
+    "values": {
+      "craft": {
+        "title": "Exigence",
+        "text": "Chaque pixel et chaque ligne de code comptent. Nous soignons les détails pour que vous n’ayez pas à le faire."
+      },
+      "clarity": {
+        "title": "Transparence",
+        "text": "Un langage clair, des délais honnêtes, aucune mauvaise surprise. Vous savez toujours où en est votre projet."
+      },
+      "impact": {
+        "title": "Impact",
+        "text": "Le beau ne suffit pas : ce que nous créons doit servir vos objectifs et vos utilisateurs."
+      },
+      "partnership": {
+        "title": "Partenariat",
+        "text": "Nous travaillons avec vous, pas seulement pour vous — et nous restons là après le lancement."
+      }
+    },
+    "teamTitle": "Nos <hl>collaborateurs</hl>",
+    "teamSubtitle": "Les personnes derrière ZignnnIt.",
+    "linkedinAria": "{name} sur LinkedIn",
+    "ctaTitle": "Un projet en tête ?",
+    "ctaText": "Parlez-nous-en — nous répondons sous 24 heures.",
+    "ctaButton": "Parlons-en"
+  },
+  "services": {
+    "title": "Nos <hl>services</hl>",
+    "subtitle": "Développez votre activité grâce à notre expertise.",
+    "deliverables": "Livrables",
+    "timeline": "Délai indicatif : <b>{duration}</b>",
+    "items": {
+      "graphicDesign": {
+        "title": "Design graphique",
+        "quote": "« Transformer les idées en visuels captivants. »",
+        "description": "Nous donnons vie à votre marque avec des créations uniques et percutantes — du logo aux supports marketing — réalisées avec précision et souci du détail.",
+        "deliverables": [
+          "Logo & identité visuelle",
+          "Charte graphique",
+          "Supports print & marketing",
+          "Kits pour les réseaux sociaux"
+        ],
+        "timeline": "1 à 3 semaines"
+      },
+      "uiUxDesign": {
+        "title": "Design UI/UX",
+        "quote": "« Des interfaces intuitives, des expériences agréables. »",
+        "description": "Notre équipe UI/UX conçoit des interfaces belles et faciles à utiliser, qui suscitent l’engagement et la satisfaction sur chaque écran.",
+        "deliverables": [
+          "Recherche utilisateur & parcours",
+          "Wireframes",
+          "Maquettes haute fidélité",
+          "Prototype Figma interactif"
+        ],
+        "timeline": "2 à 4 semaines"
+      },
+      "webDevelopment": {
+        "title": "Développement web",
+        "quote": "« Des sites qui inspirent et qui performent. »",
+        "description": "Des sites dynamiques et responsives, adaptés à vos objectifs — conçus pour la performance, la sécurité et l’évolutivité.",
+        "deliverables": [
+          "Sites vitrines & landing pages",
+          "Applications web & tableaux de bord",
+          "Optimisation SEO & performance",
+          "Mise en ligne & hébergement"
+        ],
+        "timeline": "2 à 8 semaines"
+      },
+      "mobileDevelopment": {
+        "title": "Développement mobile",
+        "quote": "« Des solutions mobiles pour un monde connecté. »",
+        "description": "Des applications iOS et Android sur mesure, optimisées pour la performance et l’ergonomie, du concept à la publication.",
+        "deliverables": [
+          "Applications iOS & Android (Flutter)",
+          "Design de l’interface",
+          "Intégration API & back-end",
+          "Publication App Store & Play Store"
+        ],
+        "timeline": "6 à 12 semaines"
+      }
+    }
+  },
+  "projects": {
+    "title": "Nos <hl>projets</hl>",
+    "subtitle": "Des missions menées à bien.",
+    "pageSubtitle": "Une sélection de missions menées à bien — de l’identité visuelle au développement full-stack.",
+    "viewProject": "Voir le projet",
+    "seeAll": "Voir tous les projets",
+    "seeAllSubtitle": "Découvrez notre portfolio complet",
+    "categories": {
+      "graphicDesign": "Design graphique",
+      "uiUxDesign": "Design UI/UX",
+      "webDevelopment": "Développement web",
+      "mobileDevelopment": "Développement mobile"
+    }
+  },
+  "projectPage": {
+    "allProjects": "Tous les projets",
+    "category": "Catégorie",
+    "year": "Année",
+    "overview": "Aperçu",
+    "video": "Vidéo de présentation",
+    "playVideo": "Lire la vidéo : {title}",
+    "gallery": "Galerie",
+    "openImage": "Ouvrir l’image {index} sur {total}",
+    "imageAlt": "{title} — visuel {index}",
+    "close": "Fermer",
+    "previous": "Image précédente",
+    "next": "Image suivante",
+    "tools": "Outils utilisés",
+    "actions": "Liens",
+    "download": "Télécharger la charte graphique (PDF)",
+    "live": {
+      "site": "Voir le site",
+      "app": "Ouvrir l’application",
+      "prototype": "Voir le prototype Figma",
+      "post": "Voir la publication LinkedIn"
+    },
+    "playStore": "Disponible sur Google Play",
+    "appStore": "Télécharger dans l’App Store",
+    "newTab": "(s’ouvre dans un nouvel onglet)",
+    "nextProject": "Projet suivant"
+  },
+  "stats": {
+    "title": "Travaillons <hl>ensemble</hl>",
+    "subtitle": "Nous transformons les idées en expériences digitales et visuelles uniques — sites web, applications mobiles et design graphique.",
+    "backgroundAlt": "L’équipe ZignnnIt au travail",
+    "projects": "Projets livrés",
+    "clients": "Clients satisfaits",
+    "years": "Années d’expérience",
+    "creativity": "Créativité garantie"
+  },
+  "testimonials": {
+    "title": "Ce que disent nos <hl>clients</hl>",
+    "subtitle": "Avec leurs propres mots.",
+    "rating": "Noté 5 sur 5"
+  },
+  "footer": {
+    "tagline": "Des expériences digitales et visuelles créatives pour faire grandir votre entreprise.",
+    "rights": "© {year} ZignnnIt. Tous droits réservés.",
+    "signature": "D-zignnn. Code. Enjoy."
+  },
+  "contact": {
+    "badge": "Écrivez-nous",
+    "title": "Contactez-<hl>nous</hl>",
+    "subtitle": "Parlez-nous de votre projet ou posez-nous vos questions. Nous sommes prêts à créer avec vous.",
+    "form": {
+      "firstName": "Prénom",
+      "firstNamePlaceholder": "Jean",
+      "lastName": "Nom",
+      "lastNamePlaceholder": "Dupont",
+      "company": "Entreprise",
+      "companyPlaceholder": "Votre entreprise ou agence",
+      "email": "Adresse e-mail",
+      "emailPlaceholder": "jean.dupont@exemple.com",
+      "phone": "Téléphone",
+      "country": "Indicatif",
+      "phonePlaceholder": "690 000 000",
+      "message": "Message",
+      "messagePlaceholder": "Décrivez-nous votre projet…",
+      "submit": "Parlons-en",
+      "sending": "Envoi…",
+      "success": "Merci ! Votre message a bien été envoyé. Nous vous répondons sous 24 heures.",
+      "website": "Site web",
+      "optional": "facultatif",
+      "websitePlaceholder": "https://votre-entreprise.com",
+      "preferred": "Moyen de contact préféré",
+      "preferredOptions": {
+        "email": "E-mail",
+        "whatsapp": "WhatsApp",
+        "phone": "Appel"
+      }
+    },
+    "errors": {
+      "generic": "Une erreur est survenue. Veuillez réessayer.",
+      "turnstile_pending": "Veuillez attendre la fin de la vérification de sécurité, puis réessayer.",
+      "invalid_body": "Requête invalide. Rechargez la page et réessayez.",
+      "name_required": "Veuillez indiquer votre nom.",
+      "email_required": "L’adresse e-mail est obligatoire.",
+      "email_invalid": "Veuillez indiquer une adresse e-mail valide.",
+      "message_required": "Le message est obligatoire.",
+      "message_too_short": "Le message doit contenir au moins 10 caractères.",
+      "phone_invalid": "Le numéro de téléphone contient des caractères non valides.",
+      "field_too_long": "L’un des champs est trop long.",
+      "security_failed": "La vérification de sécurité a échoué. Rechargez la page et réessayez.",
+      "service_unavailable": "Le service d’e-mail est momentanément indisponible. Écrivez-nous à contact@zignnnit.com.",
+      "send_failed": "L’envoi de votre message a échoué. Veuillez réessayer plus tard.",
+      "phone_required": "Ajoutez votre numéro de téléphone pour que nous puissions vous joindre sur WhatsApp ou par téléphone.",
+      "website_invalid": "Veuillez saisir une adresse de site web valide."
+    },
+    "info": {
+      "location": "Douala, Cameroun"
+    },
+    "other": {
+      "title": "Autres moyens de nous joindre",
+      "email": "E-mail",
+      "whatsapp": "WhatsApp",
+      "whatsappText": "Discutons sur WhatsApp",
+      "linkedin": "LinkedIn",
+      "linkedinText": "Suivez nos réalisations",
+      "details": "Basés à {location} · Réponse sous 24 heures"
+    }
+  },
+  "shop": {
+    "badge": "Nouveauté",
+    "title": "Templates <hl>design</hl>",
+    "subtitle": "L’endroit idéal pour acheter des templates design premium, conçus avec passion et précision.",
+    "comingSoon": "Bientôt",
+    "description": "Nous préparons une collection de templates professionnels — des maquettes web aux kits d’identité visuelle. Restez à l’écoute, ça va être grand.",
+    "icons": {
+      "design": "Design",
+      "code": "Code",
+      "graphics": "Graphisme",
+      "mobile": "Mobile"
+    }
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "text": "La page que vous cherchez n’existe pas ou a été déplacée.",
+    "back": "Retour à l’accueil"
+  },
+  "cursor": {
+    "view": "Voir"
+  }
+}

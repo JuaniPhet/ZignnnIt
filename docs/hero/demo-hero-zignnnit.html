@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZignnnIt — Démo de l'illustration du hero</title>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=general-sans@400,500,600&display=swap">
+<style>
+  *{box-sizing:border-box}
+  :root{--bg:#FFFFFF;--bg2:#FAF7F2;--ink:#141414;--muted:#5c5551;--amber:#F59E0B}
+  body.dark{--bg:#141414;--bg2:#1C1A18;--ink:#FAF7F2;--muted:#bdb6b0}
+  body.dark #zg-hero{--zg-outline:#0E0D0C;--zg-arm:#8F8882;--zg-carbon:#2E2A26;--zg-carbon2:#45403A;--zg-steam:#6B645D}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'General Sans',system-ui,sans-serif;transition:background .3s,color .3s}
+  nav{display:flex;align-items:center;justify-content:space-between;max-width:1280px;margin:0 auto;padding:22px 28px}
+  .logo{font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:24px;position:relative;padding-top:6px}
+  .logo:before{content:"";position:absolute;left:0;top:-4px;width:22px;height:12px;background:var(--amber)}
+  .tools{display:flex;gap:10px}
+  button{font:500 14px 'General Sans',sans-serif;border:1px solid color-mix(in srgb,var(--ink) 20%,transparent);background:transparent;color:var(--ink);padding:9px 14px;border-radius:10px;cursor:pointer}
+  .hero{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;max-width:1280px;margin:0 auto;padding:30px 28px 70px;background:radial-gradient(ellipse at 20% 30%,color-mix(in srgb,var(--amber) 10%,transparent),transparent 60%)}
+  .pill{display:inline-flex;gap:8px;align-items:center;font-size:13px;padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--amber) 14%,transparent)}
+  .pill:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--amber)}
+  h1{font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:clamp(40px,5.6vw,80px);line-height:1.02;letter-spacing:-.025em;margin:18px 0 18px}
+  h1 span{color:var(--amber)}
+  .lead{font-size:19px;line-height:1.6;color:var(--muted);max-width:520px;margin:0 0 28px}
+  .cta{display:inline-block;background:var(--amber);color:#141414;font-weight:600;padding:15px 24px;border-radius:12px;text-decoration:none}
+  .ghost{margin-left:20px;color:var(--ink);text-decoration:none;font-size:15px}
+  .art svg{width:100%;height:auto;display:block}
+  .notes{max-width:1280px;margin:0 auto;padding:0 28px 50px;color:var(--muted);font-size:14px;line-height:1.7}
+  .notes b{color:var(--ink)}
+  @media (max-width:860px){.hero{grid-template-columns:1fr;gap:10px;padding-top:10px}.art{order:2;max-width:520px;margin:0 auto}}
+/* ZignnnIt — animations de l'illustration du hero
+   À charger avec hero-illustration.svg intégré EN LIGNE (inline) dans la page.
+   Le JS (hero-animations.js) gère : horloge, plume, fusée, lampe qui suit la souris, parallaxe. */
+
+/* ---------- Vapeur ---------- */
+#zg-hero .steam-path {
+  stroke-dasharray: 120 240;
+  animation: zg-steam 3.6s linear infinite;
+}
+#zg-hero #steam-2 { animation-duration: 4.2s; animation-delay: -2s; }
+#zg-hero #steam-sway { animation: zg-sway 5s ease-in-out infinite; }
+@keyframes zg-steam { from { stroke-dashoffset: 360; } to { stroke-dashoffset: 0; } }
+@keyframes zg-sway { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(10px); } }
+
+/* ---------- Reflet qui balaie l'écran ---------- */
+#zg-hero #screen-glare .band { animation: zg-glare 8s cubic-bezier(.6,0,.3,1) infinite; }
+@keyframes zg-glare {
+  0%   { transform: translateX(-760px); }
+  30%  { transform: translateX(900px); }
+  100% { transform: translateX(900px); }
+}
+
+/* ---------- Nuancier qui pulse ---------- */
+#zg-hero .swatch {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: zg-swatch 4.5s ease-in-out infinite;
+}
+@keyframes zg-swatch { 0%, 60%, 100% { transform: scale(1); } 70% { transform: scale(1.16); } }
+
+/* ---------- Flamme de la fusée ---------- */
+#zg-hero .flame {
+  transform-box: fill-box;
+  transform-origin: 100% 50%;
+  animation: zg-flame .16s ease-in-out infinite alternate;
+}
+@keyframes zg-flame { from { transform: scaleX(.65); } to { transform: scaleX(1.15); } }
+
+/* ---------- Cactus qui oscille ---------- */
+#zg-hero #cactus {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: zg-cactus 5.5s ease-in-out infinite;
+}
+@keyframes zg-cactus { 0%, 100% { transform: rotate(-1.6deg); } 50% { transform: rotate(1.6deg); } }
+
+/* ---------- Lampe qui s'allume ---------- */
+#zg-hero #lamp-light { opacity: 0; }
+#zg-hero #lamp-bulb { transition: fill .4s; }
+#zg-hero:not(.zg-on) #lamp-bulb { fill: var(--zg-light); }
+#zg-hero.zg-on #lamp-light {
+  animation: zg-lamp-on 1.5s linear .5s forwards, zg-lamp-breathe 5s ease-in-out 2s infinite;
+}
+@keyframes zg-lamp-on {
+  0% { opacity: 0; } 10% { opacity: .75; } 16% { opacity: .1; } 30% { opacity: .9; }
+  38% { opacity: .25; } 60% { opacity: 1; } 100% { opacity: 1; }
+}
+@keyframes zg-lamp-breathe { 0%, 100% { opacity: 1; } 50% { opacity: .82; } }
+
+/* ---------- Accessibilité : animations réduites ---------- */
+@media (prefers-reduced-motion: reduce) {
+  #zg-hero *, #zg-hero *::before, #zg-hero *::after { animation: none !important; }
+  #zg-hero .steam-path { stroke-dasharray: none; opacity: .6; }
+  #zg-hero #lamp-light { opacity: 1; }
+  #zg-hero #screen-glare .band { transform: translateX(0); }
+}
+
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">ZignnnIt</div>
+  <div class="tools"><button id="theme">Mode sombre</button><button id="replay">Rejouer</button></div>
+</nav>
+<section class="hero">
+  <div>
+    <span class="pill">Creative Digital Agency</span>
+    <h1>We craft brands and products that <span>stand out.</span></h1>
+    <p class="lead">Brand identity, UI/UX and web &amp; mobile development for ambitious businesses — from the first sketch to the final launch.</p>
+    <a class="cta" href="#">Ready to zignnn your project?</a><a class="ghost" href="#">Discover our services →</a>
+  </div>
+  <div class="art">
+<svg id="zg-hero" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1720 1220" role="img" aria-labelledby="zg-hero-title">
+  <title id="zg-hero-title">Bureau créatif : écran avec logiciel de dessin, tasse fumante, lampe, horloge et cactus</title>
+  <style>
+    #zg-hero{--zg-outline:#2A2623;--zg-carbon:#1C1A18;--zg-carbon2:#3A3430;--zg-amber:#F59E0B;--zg-amber-l:#FCD34D;--zg-amber-d:#D97706;--zg-cream:#FAF7F2;--zg-light:#ECE6DC;--zg-gray:#8F8882;--zg-sage:#8AA37B;--zg-sage-d:#5E7A52;--zg-steam:#D9D2C7;--zg-bulb:#FFF6DC;--zg-arm:#2A2623;--zg-editor:#121110;overflow:visible}
+    #zg-hero .ol{stroke:var(--zg-outline);stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
+    #zg-hero .ol-thin{stroke:var(--zg-outline);stroke-width:3.5;stroke-linejoin:round;stroke-linecap:round}
+    #zg-hero .f-carbon{fill:var(--zg-carbon)}
+    #zg-hero .f-carbon2{fill:var(--zg-carbon2)}
+    #zg-hero .f-amber{fill:var(--zg-amber)}
+    #zg-hero .f-amber-l{fill:var(--zg-amber-l)}
+    #zg-hero .f-amber-d{fill:var(--zg-amber-d)}
+    #zg-hero .f-cream{fill:var(--zg-cream)}
+    #zg-hero .f-light{fill:var(--zg-light)}
+    #zg-hero .f-gray{fill:var(--zg-gray)}
+    #zg-hero .f-sage{fill:var(--zg-sage)}
+    #zg-hero .f-bulb{fill:var(--zg-bulb)}
+    #zg-hero .f-editor{fill:var(--zg-editor)}
+    #zg-hero .s-outline{stroke:var(--zg-outline)}
+    #zg-hero .s-arm{stroke:var(--zg-arm)}
+    #zg-hero .s-gray{stroke:var(--zg-gray)}
+    #zg-hero .s-sage-d{stroke:var(--zg-sage-d)}
+    #zg-hero .s-amber{stroke:var(--zg-amber)}
+    #zg-hero .steam-path{fill:none;stroke:var(--zg-steam);stroke-width:20;stroke-linecap:round}
+  </style>
+
+  <defs>
+    <clipPath id="zg-clip-clock"><rect x="767" y="42" width="236" height="236" rx="10"/></clipPath>
+    <clipPath id="zg-clip-screen"><rect x="525" y="525" width="760" height="380" rx="12"/></clipPath>
+    <clipPath id="zg-clip-canvas"><rect x="605" y="605" width="475" height="282" rx="6"/></clipPath>
+    <radialGradient id="zg-light-grad" cx="400" cy="667" r="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FCD34D" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#F59E0B" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#F59E0B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="zg-steam-fade" x1="0" y1="830" x2="0" y2="470" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#000"/>
+      <stop offset=".12" stop-color="#fff"/>
+      <stop offset=".6" stop-color="#fff" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <mask id="zg-steam-mask" maskUnits="userSpaceOnUse" x="1380" y="440" width="220" height="400">
+      <rect x="1380" y="440" width="220" height="400" fill="url(#zg-steam-fade)"/>
+    </mask>
+  </defs>
+
+  <!-- ============ HORLOGE ============ -->
+  <g id="layer-clock">
+    <g id="clock">
+      <rect id="clock-frame" x="745" y="20" width="280" height="280" rx="22" class="f-carbon ol"/>
+      <rect id="clock-face" x="767" y="42" width="236" height="236" rx="10" class="f-cream ol-thin"/>
+      <g clip-path="url(#zg-clip-clock)" opacity=".55">
+        <polygon points="767,200 925,42 965,42 767,240" fill="#fff"/>
+        <polygon points="800,278 1003,75 1003,110 835,278" fill="#fff"/>
+      </g>
+      <g id="clock-ticks">
+        <rect x="879" y="56" width="12" height="26" rx="6" class="f-amber"/>
+        <rect x="879" y="238" width="12" height="26" rx="6" class="f-amber"/>
+        <rect x="781" y="154" width="26" height="12" rx="6" class="f-amber"/>
+        <rect x="963" y="154" width="26" height="12" rx="6" class="f-amber"/>
+        <g class="f-gray">
+          <circle cx="937" cy="70" r="5"/><circle cx="975" cy="108" r="5"/>
+          <circle cx="975" cy="212" r="5"/><circle cx="937" cy="250" r="5"/>
+          <circle cx="833" cy="250" r="5"/><circle cx="795" cy="212" r="5"/>
+          <circle cx="795" cy="108" r="5"/><circle cx="833" cy="70" r="5"/>
+        </g>
+      </g>
+      <line id="clock-hand-hour" x1="885" y1="172" x2="885" y2="102" stroke-width="13" stroke-linecap="round" class="s-outline" transform="rotate(300 885 160)"/>
+      <line id="clock-hand-minute" x1="885" y1="176" x2="885" y2="72" stroke-width="8" stroke-linecap="round" class="s-outline" transform="rotate(60 885 160)"/>
+      <line id="clock-hand-second" x1="885" y1="185" x2="885" y2="66" stroke-width="4" stroke-linecap="round" class="s-amber" transform="rotate(180 885 160)"/>
+      <circle id="clock-center" cx="885" cy="160" r="10" class="f-amber ol-thin"/>
+    </g>
+  </g>
+
+  <!-- ============ LAMPE ============ -->
+  <g id="layer-lamp">
+    <path id="lamp-base" d="M24 1108 L300 1150 L300 1172 L24 1196 Q2 1152 24 1108 Z" class="f-amber ol"/>
+    <g id="lamp-arm">
+      <line x1="56" y1="1150" x2="98" y2="800" stroke-width="15" class="s-arm" stroke-linecap="round"/>
+      <line x1="86" y1="1150" x2="128" y2="800" stroke-width="15" class="s-arm" stroke-linecap="round"/>
+      <circle cx="72" cy="1150" r="42" class="f-amber ol"/>
+      <circle cx="72" cy="1150" r="15" class="f-carbon"/>
+      <line x1="98" y1="796" x2="240" y2="534" stroke-width="15" class="s-arm" stroke-linecap="round"/>
+      <line x1="126" y1="810" x2="268" y2="550" stroke-width="15" class="s-arm" stroke-linecap="round"/>
+      <circle cx="112" cy="802" r="44" class="f-amber ol"/>
+      <circle cx="112" cy="802" r="16" class="f-carbon"/>
+    </g>
+    <g id="lamp-head">
+      <polygon id="lamp-light" points="468,587 1010,1190 400,1190 333,748" fill="url(#zg-light-grad)"/>
+      <circle cx="255" cy="545" r="34" class="f-amber ol"/>
+      <circle cx="255" cy="545" r="12" class="f-carbon"/>
+      <circle cx="281" cy="566" r="30" class="f-amber-d ol"/>
+      <polygon id="lamp-shade" points="300,537 468,587 333,748 256,591" class="f-amber ol"/>
+      <polygon points="300,537 468,587 452,606 292,552" class="f-amber-l" opacity=".8"/>
+      <ellipse cx="400" cy="667" rx="105" ry="30" transform="rotate(-50 400 667)" class="f-amber-d ol"/>
+      <ellipse id="lamp-bulb" cx="404" cy="664" rx="70" ry="18" transform="rotate(-50 404 664)" class="f-bulb"/>
+    </g>
+  </g>
+
+  <!-- ============ ÉCRAN ============ -->
+  <g id="layer-monitor">
+    <g id="monitor">
+      <path d="M790 1020 L1020 1020 L1042 1100 L768 1100 Z" class="f-light ol"/>
+      <rect x="740" y="1096" width="330" height="26" rx="7" class="f-light ol"/>
+      <rect x="505" y="505" width="800" height="520" rx="26" class="f-light ol"/>
+      <rect x="525" y="525" width="760" height="380" rx="12" class="f-carbon"/>
+      <rect id="monitor-brand" x="887" y="952" width="36" height="24" rx="3" class="f-amber ol-thin"/>
+    </g>
+
+    <g id="screen-ui" clip-path="url(#zg-clip-screen)">
+      <rect x="545" y="545" width="720" height="46" rx="8" class="f-carbon2"/>
+      <circle cx="572" cy="568" r="8" class="f-gray"/>
+      <circle cx="600" cy="568" r="8" class="f-gray"/>
+      <circle cx="628" cy="568" r="8" class="f-gray"/>
+      <rect x="652" y="560" width="26" height="16" rx="2" class="f-amber"/>
+      <rect x="1140" y="562" width="110" height="12" rx="6" class="f-gray" opacity=".5"/>
+
+      <g id="scene-design">
+      <rect x="545" y="605" width="46" height="282" rx="6" class="f-carbon2"/>
+      <rect x="556" y="618" width="24" height="24" rx="4" class="f-amber"/>
+      <rect x="556" y="662" width="24" height="24" rx="4" class="f-gray" opacity=".7"/>
+      <rect x="556" y="706" width="24" height="24" rx="4" class="f-gray" opacity=".7"/>
+      <rect x="556" y="750" width="24" height="24" rx="4" class="f-gray" opacity=".7"/>
+      <rect x="556" y="794" width="24" height="24" rx="4" class="f-gray" opacity=".7"/>
+      <rect x="556" y="838" width="24" height="24" rx="4" class="f-gray" opacity=".7"/>
+
+      <rect x="1094" y="605" width="171" height="126" rx="6" class="f-carbon2"/>
+      <rect x="1110" y="625" width="130" height="8" rx="4" class="f-gray" opacity=".6"/>
+      <rect x="1110" y="649" width="100" height="8" rx="4" class="f-gray" opacity=".6"/>
+      <rect x="1110" y="673" width="120" height="8" rx="4" class="f-amber" opacity=".9"/>
+      <rect x="1110" y="697" width="80" height="8" rx="4" class="f-gray" opacity=".6"/>
+
+      <rect x="1094" y="742" width="171" height="145" rx="6" class="f-carbon2"/>
+      <g id="palette-swatches">
+        <rect class="swatch f-amber" x="1110" y="756" width="40" height="36" rx="5" style="animation-delay:0s"/>
+        <rect class="swatch f-amber-l" x="1158" y="756" width="40" height="36" rx="5" style="animation-delay:.25s"/>
+        <rect class="swatch f-amber-d" x="1206" y="756" width="40" height="36" rx="5" style="animation-delay:.5s"/>
+        <rect class="swatch" fill="#C2410C" x="1110" y="798" width="40" height="36" rx="5" style="animation-delay:.75s"/>
+        <rect class="swatch f-cream" x="1158" y="798" width="40" height="36" rx="5" style="animation-delay:1s"/>
+        <rect class="swatch f-gray" x="1206" y="798" width="40" height="36" rx="5" style="animation-delay:1.25s"/>
+        <rect class="swatch f-sage" x="1110" y="840" width="40" height="36" rx="5" style="animation-delay:1.5s"/>
+        <rect class="swatch f-light" x="1158" y="840" width="40" height="36" rx="5" style="animation-delay:1.75s"/>
+        <rect class="swatch f-carbon s-gray" stroke-width="2" x="1206" y="840" width="40" height="36" rx="5" style="animation-delay:2s"/>
+      </g>
+
+      <rect id="screen-canvas" x="605" y="605" width="475" height="282" rx="6" class="f-cream"/>
+      <g clip-path="url(#zg-clip-canvas)">
+        <g id="art-circle">
+          <circle id="art-circle-fill" cx="745" cy="760" r="88" class="f-amber-l"/>
+          <path id="art-circle-stroke" d="M745 672 A88 88 0 1 1 745 848 A88 88 0 1 1 745 672" fill="none" class="s-outline" stroke-width="5" stroke-linecap="round"/>
+          <g id="art-handles">
+            <line x1="688" y1="672" x2="802" y2="672" class="s-gray" stroke-width="3"/>
+            <rect x="680" y="664" width="16" height="16" class="f-cream ol-thin"/>
+            <rect x="794" y="664" width="16" height="16" class="f-cream ol-thin"/>
+            <circle cx="745" cy="672" r="8" class="f-cream ol-thin"/>
+          </g>
+          <g id="art-pen" transform="translate(745 672) rotate(-20)">
+            <rect x="-13" y="-104" width="26" height="44" rx="5" class="f-carbon2 ol-thin"/>
+            <polygon points="0,0 -17,-38 -11,-62 11,-62 17,-38" class="f-light ol-thin"/>
+            <line x1="0" y1="-2" x2="0" y2="-30" class="s-outline" stroke-width="3"/>
+            <circle cx="0" cy="-32" r="4.5" class="f-carbon"/>
+          </g>
+        </g>
+        <g id="art-rocket" transform="translate(885 790) rotate(-25)">
+          <path class="flame f-amber" d="M4 -9 Q-46 0 4 9 Z"/>
+          <polygon points="22,-13 2,-36 -8,-31 10,-7" class="f-amber-d ol-thin"/>
+          <polygon points="22,13 2,36 -8,31 10,7" class="f-amber-d ol-thin"/>
+          <path d="M0 0 C30 -24 92 -24 122 0 C92 24 30 24 0 0 Z" class="f-light ol-thin"/>
+          <path d="M40 -17 L58 -17 L58 17 L40 17 Z" class="f-amber"/>
+          <circle cx="86" cy="0" r="9" class="f-carbon2 ol-thin"/>
+        </g>
+      </g>
+
+      </g>
+      <g id="scene-code" visibility="hidden">
+        <rect x="545" y="605" width="120" height="282" rx="6" class="f-carbon2"/>
+        <rect x="558" y="622" width="12" height="10" rx="2" class="f-amber"/>
+        <rect x="576" y="623" width="70" height="8" rx="4" class="f-gray" opacity="0.6"/>
+        <rect x="572" y="646" width="12" height="10" rx="2" class="f-amber"/>
+        <rect x="590" y="647" width="56" height="8" rx="4" class="f-gray" opacity="0.6"/>
+        <rect x="549" y="664" width="112" height="22" rx="4" class="f-amber" opacity=".18"/>
+        <rect x="572" y="670" width="10" height="11" rx="2" class="f-gray" opacity=".7"/>
+        <rect x="590" y="671" width="64" height="8" rx="4" class="f-cream" opacity="1"/>
+        <rect x="572" y="694" width="10" height="11" rx="2" class="f-gray" opacity=".7"/>
+        <rect x="590" y="695" width="48" height="8" rx="4" class="f-gray" opacity="0.6"/>
+        <rect x="558" y="718" width="12" height="10" rx="2" class="f-amber"/>
+        <rect x="576" y="719" width="60" height="8" rx="4" class="f-gray" opacity="0.6"/>
+        <rect x="572" y="742" width="10" height="11" rx="2" class="f-gray" opacity=".7"/>
+        <rect x="590" y="743" width="52" height="8" rx="4" class="f-gray" opacity="0.6"/>
+        <rect x="572" y="766" width="10" height="11" rx="2" class="f-gray" opacity=".7"/>
+        <rect x="590" y="767" width="70" height="8" rx="4" class="f-gray" opacity="0.6"/>
+        <rect x="558" y="790" width="10" height="11" rx="2" class="f-gray" opacity=".7"/>
+        <rect x="576" y="791" width="58" height="8" rx="4" class="f-gray" opacity="0.6"/>
+        <rect x="675" y="605" width="590" height="200" rx="6" class="f-editor"/>
+        <rect x="675" y="605" width="590" height="26" rx="6" class="f-carbon2"/>
+        <rect x="675" y="605" width="118" height="26" class="f-editor"/>
+        <rect x="675" y="605" width="118" height="3" class="f-amber"/>
+        <rect x="690" y="614" width="70" height="8" rx="4" class="f-cream" opacity=".85"/>
+        <rect x="808" y="614" width="62" height="8" rx="4" class="f-gray" opacity=".6"/>
+        <rect x="886" y="614" width="54" height="8" rx="4" class="f-gray" opacity=".6"/>
+        <g id="code-lines">
+          <rect x="686" y="644" width="10" height="7" rx="3" class="f-gray" opacity=".45"/>
+          <g class="code-line" data-x="712" data-y="644">
+            <rect class="f-amber" x="712" y="643" width="46" height="9" rx="4.5" data-w="46"/>
+            <rect class="f-cream" x="767" y="643" width="70" height="9" rx="4.5" data-w="70"/>
+            <rect class="f-amber" x="846" y="643" width="34" height="9" rx="4.5" data-w="34"/>
+            <rect class="f-sage" x="889" y="643" width="92" height="9" rx="4.5" data-w="92"/>
+          </g>
+          <rect x="686" y="660" width="10" height="7" rx="3" class="f-gray" opacity=".45"/>
+          <g class="code-line" data-x="712" data-y="660">
+            <rect class="f-amber" x="712" y="659" width="46" height="9" rx="4.5" data-w="46"/>
+            <rect class="f-cream" x="767" y="659" width="54" height="9" rx="4.5" data-w="54"/>
+            <rect class="f-amber" x="830" y="659" width="34" height="9" rx="4.5" data-w="34"/>
+            <rect class="f-sage" x="873" y="659" width="112" height="9" rx="4.5" data-w="112"/>
+          </g>
+          <rect x="686" y="676" width="10" height="7" rx="3" class="f-gray" opacity=".45"/>
+          <g class="code-line" data-x="712" data-y="676">
+          </g>
+          <rect x="686" y="692" width="10" height="7" rx="3" class="f-gray" opacity=".45"/>
+          <g class="code-line" data-x="712" data-y="692">
+            <rect class="f-amber" x="712" y="691" width="58" height="9" rx="4.5" data-w="58"/>
+            <rect class="f-amber" x="779" y="691" width="66" height="9" rx="4.5" data-w="66"/>
+            <rect class="f-cream" x="854" y="691" width="84" height="9" rx="4.5" data-w="84"/>
+            <rect class="f-gray" x="947" y="691" width="18" height="9" rx="4.5" data-w="18"/>
+          </g>
+          <rect x="686" y="708" width="10" height="7" rx="3" class="f-gray" opacity=".45"/>
+          <g class="code-line" data-x="734" data-y="708">
+            <rect class="f-amber" x="734" y="707" width="50" height="9" rx="4.5" data-w="50"/>
+            <rect class="f-gray" x="793" y="707" width="14" height="9" rx="4.5" data-w="14"/>
+          </g>
+          <rect x="686" y="724" width="10" height="7" rx="3" class="f-gray" opacity=".45"/>
+          <g class="code-line" data-x="756" data-y="724">
+            <rect class="f-amber-l" x="756" y="723" width="72" height="9" rx="4.5" data-w="72"/>
+            <rect class="f-cream" x="837" y="723" width="64" height="9" rx="4.5" data-w="64"/>
+            <rect class="f-sage" x="910" y="723" width="98" height="9" rx="4.5" data-w="98"/>
+          </g>
+          <rect x="686" y="740" width="10" height="7" rx="3" class="f-gray" opacity=".45"/>
+          <g class="code-line" data-x="778" data-y="740">
+            <rect class="f-amber-l" x="778" y="739" width="40" height="9" rx="4.5" data-w="40"/>
+            <rect class="f-cream" x="827" y="739" width="128" height="9" rx="4.5" data-w="128"/>
+            <rect class="f-amber-l" x="964" y="739" width="40" height="9" rx="4.5" data-w="40"/>
+          </g>
+          <rect x="686" y="756" width="10" height="7" rx="3" class="f-gray" opacity=".45"/>
+          <g class="code-line" data-x="778" data-y="756">
+            <rect class="f-gray" x="778" y="755" width="150" height="9" rx="4.5" data-w="150"/>
+          </g>
+          <rect x="686" y="772" width="10" height="7" rx="3" class="f-gray" opacity=".45"/>
+          <g class="code-line" data-x="756" data-y="772">
+            <rect class="f-amber-l" x="756" y="771" width="86" height="9" rx="4.5" data-w="86"/>
+          </g>
+          <rect x="686" y="788" width="10" height="7" rx="3" class="f-gray" opacity=".45"/>
+          <g class="code-line" data-x="734" data-y="788">
+            <rect class="f-gray" x="734" y="787" width="14" height="9" rx="4.5" data-w="14"/>
+          </g>
+        </g>
+        <rect id="code-cursor" x="712" y="641" width="3" height="14" class="f-amber"/>
+        <rect x="675" y="814" width="590" height="73" rx="6" class="f-carbon2"/>
+        <polygon points="690,830 698,835 690,840" class="f-amber"/>
+        <rect id="code-cmd" x="706" y="831" width="150" height="8" rx="4" class="f-gray" opacity=".8"/>
+        <g id="code-build" opacity="0">
+          <circle cx="694" cy="860" r="8" class="f-sage"/>
+          <path d="M690 860 l3 3 l6 -6" fill="none" stroke="#FAF7F2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="710" y="856" width="128" height="8" rx="4" class="f-cream"/>
+          <rect x="846" y="856" width="52" height="8" rx="4" class="f-amber"/>
+        </g>
+      </g>
+      <g id="screen-wipe" visibility="hidden">
+        <rect x="525" y="525" width="760" height="380" class="f-amber"/>
+        <rect x="1045" y="525" width="60" height="380" class="f-amber-l"/>
+      </g>
+
+      <g id="screen-glare">
+        <polygon class="band" points="640,525 790,525 610,905 460,905" fill="#fff" opacity=".09"/>
+        <polygon class="band" points="820,525 860,525 680,905 640,905" fill="#fff" opacity=".07"/>
+      </g>
+    </g>
+
+    <g id="keyboard">
+      <rect x="380" y="1100" width="520" height="36" rx="7" class="f-light ol"/>
+      <rect x="398" y="1112" width="484" height="8" rx="4" class="f-gray" opacity=".45"/>
+    </g>
+  </g>
+
+  <!-- ============ CACTUS ============ -->
+  <g id="layer-cactus">
+    <g id="cactus">
+      <path d="M296 992 Q250 992 250 952 L250 938 Q250 916 268 916 Q286 916 286 938 L286 954 Q286 964 296 964 Z" class="f-sage ol"/>
+      <path d="M348 1012 Q400 1012 400 968 L400 952 Q400 930 382 930 Q364 930 364 952 L364 976 Q364 986 348 986 Z" class="f-sage ol"/>
+      <rect x="292" y="878" width="60" height="172" rx="30" class="f-sage ol"/>
+      <g class="s-sage-d" stroke-width="4" stroke-linecap="round" fill="none">
+        <path d="M310 912 l6 6 M334 940 l-6 6 M308 978 l6 6 M334 1010 l-6 6 M262 940 l6 4 M386 956 l-6 4"/>
+      </g>
+      <circle cx="322" cy="874" r="11" class="f-amber ol-thin"/>
+    </g>
+    <g id="pot">
+      <polygon points="250,1052 394,1052 380,1140 264,1140" class="f-cream ol"/>
+      <rect x="240" y="1036" width="164" height="20" rx="6" class="f-light ol"/>
+      <g class="s-gray" stroke-width="3" opacity=".6">
+        <line x1="286" y1="1064" x2="290" y2="1130"/><line x1="322" y1="1064" x2="322" y2="1130"/><line x1="358" y1="1064" x2="354" y2="1130"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- ============ DROITE : CARNET, FEUTRE, TASSE, VAPEUR, SOURIS ============ -->
+  <g id="layer-right">
+    <g id="notebook">
+      <rect x="1105" y="1112" width="420" height="26" rx="5" class="f-carbon2 ol"/>
+      <rect x="1160" y="1119" width="90" height="12" rx="3" class="f-light"/>
+      <rect x="1370" y="1119" width="90" height="12" rx="3" class="f-light"/>
+    </g>
+    <g id="marker">
+      <polygon points="1202,1068 1168,1080 1202,1092" class="f-gray ol-thin"/>
+      <rect x="1198" y="1060" width="214" height="40" rx="18" class="f-carbon2 ol"/>
+      <rect x="1240" y="1070" width="62" height="20" rx="4" class="f-amber"/>
+      <rect x="1366" y="1057" width="72" height="46" rx="20" class="f-cream ol"/>
+    </g>
+    <g id="steam" mask="url(#zg-steam-mask)">
+      <g id="steam-sway">
+        <path id="steam-1" class="steam-path" d="M1470 805 C1430 745 1520 705 1480 645 S1440 565 1490 505"/>
+        <path id="steam-2" class="steam-path" d="M1516 812 C1478 752 1566 712 1528 652 S1490 572 1538 512"/>
+      </g>
+    </g>
+    <g id="cup">
+      <polygon points="1396,880 1580,880 1560,1136 1416,1136" class="f-carbon ol"/>
+      <polygon points="1402,955 1574,955 1566,1060 1410,1060" class="f-amber ol"/>
+      <rect x="1468" y="990" width="40" height="27" rx="3" class="f-carbon"/>
+      <rect x="1378" y="845" width="220" height="40" rx="9" class="f-cream ol"/>
+      <polygon points="1406,845 1418,814 1558,814 1570,845" class="f-light ol"/>
+    </g>
+    <g id="mouse">
+      <path d="M1526 1138 Q1526 1046 1612 1040 Q1698 1046 1698 1138 Z" class="f-cream ol"/>
+      <line x1="1534" y1="1104" x2="1690" y2="1104" class="s-gray" stroke-width="3"/>
+    </g>
+  </g>
+</svg>
+
+  </div>
+</section>
+<div class="notes">
+  <b>À tester :</b> bouge la souris sur la page (la lampe suit le curseur et les éléments bougent légèrement en profondeur) · l'horloge affiche ton heure réelle · la plume trace le cercle toutes les 8 s · la fusée décolle toutes les 6 s · la vapeur monte en continu · un reflet balaie l'écran · la lampe s'allume au chargement (bouton « Rejouer »).<br>
+  Sur mobile, la parallaxe et la lampe qui suit la souris sont désactivées. Si ton système est réglé sur « réduire les animations », tout s'arrête sauf l'horloge.
+</div>
+<script>
+/* ZignnnIt — animations JS de l'illustration du hero (aucune dépendance).
+   Usage : intégrer hero-illustration.svg en ligne (id="zg-hero"), charger hero-animations.css,
+   puis appeler initZgHero() une fois le SVG dans le DOM. Retourne une fonction de nettoyage
+   (utile dans un useEffect React/Next.js). */
+function initZgHero(root = document) {
+  // Accepte le document, un conteneur, ou directement l'élément <svg id="zg-hero">
+  const svg = root && root.id === 'zg-hero' ? root : root.querySelector('#zg-hero');
+  if (!svg) return () => {};
+  const $ = (id) => svg.querySelector('#' + id);
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  /* ---------- Horloge à l'heure réelle du visiteur ---------- */
+  const hHour = $('clock-hand-hour'), hMin = $('clock-hand-minute'), hSec = $('clock-hand-second');
+  const CX = 885, CY = 160;
+  const setClock = (smooth) => {
+    const d = new Date();
+    const s = d.getSeconds() + (smooth ? d.getMilliseconds() / 1000 : 0);
+    const m = d.getMinutes() + s / 60;
+    const h = (d.getHours() % 12) + m / 60;
+    hHour.setAttribute('transform', `rotate(${h * 30} ${CX} ${CY})`);
+    hMin.setAttribute('transform', `rotate(${m * 6} ${CX} ${CY})`);
+    hSec.setAttribute('transform', `rotate(${s * 6} ${CX} ${CY})`);
+  };
+  setClock(false);
+
+  /* ---------- Lampe : allumage au chargement ---------- */
+  requestAnimationFrame(() => svg.classList.add('zg-on'));
+
+  /* ---------- Éléments de l'écran ---------- */
+  const stroke = $('art-circle-stroke'), fill = $('art-circle-fill');
+  const pen = $('art-pen'), handles = $('art-handles'), art = $('art-circle');
+  const rocket = $('art-rocket');
+  const sceneDesign = $('scene-design'), sceneCode = $('scene-code'), wipe = $('screen-wipe');
+  const codeLines = [...svg.querySelectorAll('#code-lines .code-line')].map((g) => {
+    const segs = [...g.querySelectorAll('rect')].map((r) => ({ el: r, w: +r.dataset.w }));
+    return { x: +g.dataset.x, y: +g.dataset.y, segs, total: segs.reduce((a, s) => a + s.w + 9, 0) };
+  });
+  const cursor = $('code-cursor'), build = $('code-build'), cmd = $('code-cmd');
+  const L = stroke.getTotalLength();
+  stroke.style.strokeDasharray = `${L}`;
+
+  // Mode réduit : scène design finale, statique ; horloge à la seconde.
+  if (reduce) {
+    stroke.style.strokeDashoffset = '0';
+    fill.style.opacity = '1';
+    handles.style.opacity = '0';
+    const iv = setInterval(() => setClock(false), 1000);
+    return () => clearInterval(iv);
+  }
+
+  const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+
+  /* ---------- Parallaxe + lampe qui suit la souris (ordinateur uniquement) ---------- */
+  const layers = [
+    ['layer-clock', 0.35], ['layer-lamp', 0.7], ['layer-monitor', 0.25],
+    ['layer-cactus', 0.9], ['layer-right', 0.6],
+  ].map(([id, depth]) => ({ el: $(id), depth, x: 0, y: 0 }));
+  const lampHead = $('lamp-head');
+  const PIVOT = { x: 255, y: 545 }, BASE_ANGLE = 40, MAX_TILT = 14;
+  let mx = 0, my = 0, headTarget = 0, head = 0;
+
+  const onMove = (e) => {
+    const r = svg.getBoundingClientRect();
+    mx = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - 0.5) * 2));
+    my = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height - 0.5) * 2));
+    const ctm = svg.getScreenCTM();
+    if (!ctm) return;
+    const pt = new DOMPoint(e.clientX, e.clientY).matrixTransform(ctm.inverse());
+    const a = (Math.atan2(pt.y - PIVOT.y, pt.x - PIVOT.x) * 180) / Math.PI;
+    headTarget = Math.max(-MAX_TILT, Math.min(MAX_TILT, a - BASE_ANGLE));
+  };
+  if (finePointer) window.addEventListener('pointermove', onMove, { passive: true });
+
+  /* ---------- Timeline écran : design → décollage → code → retour ---------- */
+  const T = {
+    cycle: 14000,
+    drawEnd: 1800, fillEnd: 2400,          // la plume trace puis le cercle se remplit
+    launch: 4400, launchEnd: 5600,         // la fusée décolle
+    wipe1: 5700, wipeDur: 700,             // balayage ambre vers la scène code
+    type: 6300, perLine: 360,              // les lignes de code s'écrivent
+    build: 10300,                          // terminal : build réussi
+    wipe2: 11800,                          // balayage ambre retour à la scène design
+    rocketBack: 12300, rocketBackEnd: 13000,
+  };
+  const setVis = (el, v) => el.setAttribute('visibility', v ? 'visible' : 'hidden');
+  const clamp01 = (v) => Math.max(0, Math.min(1, v));
+
+  function wipeAt(c, start) {
+    // Retourne la progression du balayage (0→1) ou -1 hors balayage
+    if (c < start || c >= start + T.wipeDur) return -1;
+    return (c - start) / T.wipeDur;
+  }
+
+  function timeline(c, t) {
+    // --- Quelle scène est visible ? (bascule au milieu de chaque balayage)
+    const mid1 = T.wipe1 + T.wipeDur / 2, mid2 = T.wipe2 + T.wipeDur / 2;
+    const codeOn = c >= mid1 && c < mid2;
+    setVis(sceneDesign, !codeOn);
+    setVis(sceneCode, codeOn);
+
+    // --- Balayage ambre (de gauche à droite)
+    const w = Math.max(wipeAt(c, T.wipe1), wipeAt(c, T.wipe2));
+    if (w >= 0) {
+      setVis(wipe, true);
+      const e = ease(w);
+      wipe.setAttribute('transform', `translate(${(-820 + e * 1640).toFixed(1)} 0)`);
+    } else setVis(wipe, false);
+
+    // --- Scène design : plume et cercle
+    let p;
+    if (c < T.drawEnd) p = ease(c / T.drawEnd);
+    else if (c < mid2) p = 1;
+    else p = 0; // de retour sur la scène design : toile vierge, prête à dessiner
+    stroke.style.strokeDashoffset = `${L * (1 - p)}`;
+    fill.style.opacity = `${c < T.drawEnd || c >= mid2 ? 0 : clamp01((c - T.drawEnd) / (T.fillEnd - T.drawEnd))}`;
+    art.style.opacity = '1';
+    const pt = stroke.getPointAtLength((L * p) % L);
+    pen.setAttribute('transform', `translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)}) rotate(-20)`);
+    handles.style.opacity = `${c < T.drawEnd || c >= mid2 ? 1 : clamp01(1 - (c - T.drawEnd) / 400)}`;
+
+    // --- Fusée : flotte, décolle, revient sur la toile vierge
+    const bob = Math.sin(t / 350) * 4;
+    let rx = 0, ry = bob, ro = 1;
+    if (c >= T.launch && c < T.launchEnd) {
+      const k = (c - T.launch) / (T.launchEnd - T.launch), e = k * k * k;
+      rx = e * 440; ry = -e * 210 + bob;
+    } else if (c >= T.launchEnd && c < T.rocketBack) {
+      ro = 0;
+    } else if (c >= T.rocketBack && c < T.rocketBackEnd) {
+      const k = (c - T.rocketBack) / (T.rocketBackEnd - T.rocketBack);
+      rx = -60 * (1 - k); ry = 40 * (1 - k) + bob; ro = k;
+    }
+    rocket.setAttribute('transform', `translate(${(885 + rx).toFixed(1)} ${(790 + ry).toFixed(1)}) rotate(-25)`);
+    rocket.style.opacity = `${ro}`;
+
+    // --- Scène code : lignes qui s'écrivent, curseur, terminal
+    if (codeOn) {
+      const typed = Math.max(0, c - T.type);
+      let cx = codeLines[0].x, cy = codeLines[0].y;
+      codeLines.forEach((line, i) => {
+        const k = clamp01((typed - i * T.perLine) / T.perLine);
+        let budget = k * line.total, x = line.x;
+        for (const sg of line.segs) {
+          const w = Math.max(0, Math.min(sg.w, budget));
+          sg.el.setAttribute('width', w.toFixed(1));
+          sg.el.style.opacity = w > 0.5 ? '1' : '0';
+          budget -= sg.w + 9;
+          if (w > 0) x = +sg.el.getAttribute('x') + w;
+        }
+        if (k > 0) { cx = k < 1 || line.segs.length ? x + 3 : line.x; cy = line.y; }
+      });
+      const doneTyping = typed >= codeLines.length * T.perLine;
+      cursor.setAttribute('x', cx.toFixed(1));
+      cursor.setAttribute('y', (cy - 3).toFixed(1));
+      cursor.style.opacity = doneTyping ? (Math.floor(t / 450) % 2 ? '0' : '1') : '1';
+      cmd.style.opacity = c >= T.build - 600 ? '.8' : '0';
+      build.style.opacity = `${clamp01((c - T.build) / 400)}`;
+    }
+  }
+
+  /* ---------- Boucle d'animation ---------- */
+  const t0 = performance.now();
+  let raf = null, visible = true;
+
+  const frame = (now) => {
+    const t = now - t0;
+    setClock(true);
+
+    // Timeline unique de 14 s : on dessine → la fusée décolle → l'écran passe au code → retour
+    const c = t % T.cycle;
+    timeline(c, t);
+
+    // Parallaxe et tête de lampe (lissées)
+    if (finePointer) {
+      for (const l of layers) {
+        l.x += (mx * l.depth * 14 - l.x) * 0.08;
+        l.y += (my * l.depth * 9 - l.y) * 0.08;
+        l.el.setAttribute('transform', `translate(${l.x.toFixed(2)} ${l.y.toFixed(2)})`);
+      }
+      head += (headTarget - head) * 0.08;
+      lampHead.setAttribute('transform', `rotate(${head.toFixed(2)} ${PIVOT.x} ${PIVOT.y})`);
+    }
+
+    raf = visible ? requestAnimationFrame(frame) : null;
+  };
+  raf = requestAnimationFrame(frame);
+
+  // Pause quand l'illustration sort de l'écran (économie de batterie)
+  const io = new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting;
+    if (visible && !raf) raf = requestAnimationFrame(frame);
+  });
+  io.observe(svg);
+
+  return () => {
+    if (raf) cancelAnimationFrame(raf);
+    io.disconnect();
+    window.removeEventListener('pointermove', onMove);
+  };
+}
+
+let cleanup = initZgHero();
+document.getElementById('theme').onclick = (e) => {
+  document.body.classList.toggle('dark');
+  e.target.textContent = document.body.classList.contains('dark') ? 'Mode clair' : 'Mode sombre';
+};
+document.getElementById('replay').onclick = () => {
+  const svg = document.getElementById('zg-hero');
+  cleanup(); svg.classList.remove('zg-on');
+  const l = svg.querySelector('#lamp-light'); l.style.animation = 'none'; void l.getBoundingClientRect(); l.style.animation = '';
+  setTimeout(() => { cleanup = initZgHero(); }, 400);
+};
+</script>
+</body>
+</html>

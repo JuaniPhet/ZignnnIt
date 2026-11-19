@@ -14,8 +14,16 @@ const LIMITS = {
   email: 254,
   country: 50,
   phone: 30,
+  website: 200,
   message: 5000,
 } as const;
+
+const PREFERRED_CONTACT = {
+  email: "Email",
+  whatsapp: "WhatsApp",
+  phone: "Phone call",
+} as const;
+type PreferredContact = keyof typeof PREFERRED_CONTACT;
 
 type ContactPayload = {
   firstName: string;
@@ -24,11 +32,46 @@ type ContactPayload = {
   email: string;
   country: string;
   phone: string;
+  website: string;
+  preferredContact: PreferredContact;
   message: string;
 };
 
+/**
+ * Stable error codes: the client translates them (messages/*.json → contact.errors.<code>).
+ * The English `error` text is kept for logs and API consumers.
+ */
+type ErrorCode =
+  | "invalid_body"
+  | "name_required"
+  | "email_required"
+  | "email_invalid"
+  | "message_required"
+  | "message_too_short"
+  | "phone_invalid"
+  | "phone_required"
+  | "website_invalid"
+  | "field_too_long"
+  | "security_failed"
+  | "service_unavailable"
+  | "send_failed";
+
+function fail(code: ErrorCode, error: string, status: number) {
+  return NextResponse.json({ code, error }, { status });
+}
+
 function str(value: unknown): string {
   return typeof value === "string" ? value.trim() : "";
+}
+
+/** Accepts "example.com" or "https://example.com" (http/https only). */
+function isWebsite(value: string): boolean {
+  try {
+    const url = new URL(/^https?:\/\//i.test(value) ? value : `https://${value}`);
+    return (url.protocol === "http:" || url.protocol === "https:") && url.hostname.includes(".");
+  } catch {
+    return false;
+  }
 }
 
 function escapeHtml(value: string): string {
@@ -40,7 +83,7 @@ function escapeHtml(value: string): string {
     .replace(/'/g, "&#39;");
 }
 
-function validate(body: Record<string, unknown>): { data?: ContactPayload; error?: string } {
+function validate(body: Record<string, unknown>): { data?: ContactPayload; code?: ErrorCode; error?: string } {
   const data: ContactPayload = {
     firstName: str(body.firstName),
     lastName: str(body.lastName),
@@ -48,21 +91,31 @@ function validate(body: Record<string, unknown>): { data?: ContactPayload; error
     email: str(body.email),
     country: str(body.country),
     phone: str(body.phone),
+    website: str(body.website),
+    preferredContact: (str(body.preferredContact) in PREFERRED_CONTACT
+      ? str(body.preferredContact)
+      : "email") as PreferredContact,
     message: str(body.message),
   };
 
-  if (!data.firstName && !data.lastName) return { error: "Please provide your name." };
-  if (!data.email) return { error: "Email address is required." };
-  if (!EMAIL_REGEX.test(data.email)) return { error: "Please provide a valid email address." };
-  if (!data.message) return { error: "Message is required." };
-  if (data.message.length < 10) return { error: "Message must be at least 10 characters long." };
+  if (!data.firstName && !data.lastName) return { code: "name_required", error: "Please provide your name." };
+  if (!data.email) return { code: "email_required", error: "Email address is required." };
+  if (!EMAIL_REGEX.test(data.email)) return { code: "email_invalid", error: "Please provide a valid email address." };
+  if (!data.message) return { code: "message_required", error: "Message is required." };
+  if (data.message.length < 10) return { code: "message_too_short", error: "Message must be at least 10 characters long." };
   if (data.phone && !/^[0-9+()\-.\s]+$/.test(data.phone)) {
-    return { error: "Phone number contains invalid characters." };
+    return { code: "phone_invalid", error: "Phone number contains invalid characters." };
+  }
+  if (data.preferredContact !== "email" && !data.phone) {
+    return { code: "phone_required", error: "A phone number is required for WhatsApp or phone contact." };
+  }
+  if (data.website && !isWebsite(data.website)) {
+    return { code: "website_invalid", error: "Please provide a valid website address." };
   }
 
   for (const [field, max] of Object.entries(LIMITS)) {
-    if (data[field as keyof ContactPayload].length > max) {
-      return { error: `Field "${field}" is too long (max ${max} characters).` };
+    if (data[field as keyof typeof LIMITS].length > max) {
+      return { code: "field_too_long", error: `Field "${field}" is too long (max ${max} characters).` };
     }
   }
 
@@ -111,12 +164,12 @@ export async function POST(request: Request) {
     if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error();
     body = parsed as Record<string, unknown>;
   } catch {
-    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+    return fail("invalid_body", "Invalid request body.", 400);
   }
 
-  // Champ piège anti-spam : invisible pour un humain, rempli par les bots.
+  // Champ piège anti-spam ("fax") : invisible pour un humain, rempli par les bots.
   // On répond « succès » sans rien envoyer pour ne pas renseigner le bot.
-  if (str(body.website)) {
+  if (str(body.fax)) {
     return NextResponse.json({ success: true }, { status: 200 });
   }
 
@@ -125,21 +178,18 @@ export async function POST(request: Request) {
   const clientIp = request.headers.get("x-forwarded-for")?.split(",")[0].trim() || request.headers.get("x-real-ip");
   const isHuman = await verifyTurnstileToken(turnstileToken, clientIp);
   if (!isHuman) {
-    return NextResponse.json(
-      { error: "Security check failed. Please refresh and try again." },
-      { status: 400 }
-    );
+    return fail("security_failed", "Security check failed. Please refresh and try again.", 400);
   }
 
-  const { data, error } = validate(body);
+  const { data, code, error } = validate(body);
   if (!data) {
-    return NextResponse.json({ error }, { status: 400 });
+    return fail(code ?? "invalid_body", error ?? "Invalid request.", 400);
   }
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.error("[api/send] RESEND_API_KEY is not set.");
-    return NextResponse.json({ error: "Email service is not configured." }, { status: 500 });
+    return fail("service_unavailable", "Email service is not configured.", 500);
   }
 
   const fullName = [data.firstName, data.lastName].filter(Boolean).join(" ");
@@ -149,7 +199,9 @@ export async function POST(request: Request) {
     ["Name", fullName],
     ["Email", data.email],
     ["Company", data.company],
+    ["Website", data.website],
     ["Phone", phone],
+    ["Preferred contact", PREFERRED_CONTACT[data.preferredContact]],
   ];
 
   const text = [
@@ -189,12 +241,12 @@ export async function POST(request: Request) {
 
     if (sendError) {
       console.error("[api/send] Resend error:", sendError);
-      return NextResponse.json({ error: "Failed to send your message. Please try again later." }, { status: 500 });
+      return fail("send_failed", "Failed to send your message. Please try again later.", 500);
     }
 
     return NextResponse.json({ success: true, id: sent?.id }, { status: 200 });
   } catch (err) {
     console.error("[api/send] Unexpected error:", err);
-    return NextResponse.json({ error: "Failed to send your message. Please try again later." }, { status: 500 });
+    return fail("send_failed", "Failed to send your message. Please try again later.", 500);
   }
 }
