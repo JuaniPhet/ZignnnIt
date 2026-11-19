@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { routing, type Locale } from "./routing";
 
-export const SITE_URL = "https://zignnnit.com";
+// Primary domain as configured on Vercel (zignnnit.com redirects to www): canonical,
+// hreflang, sitemap and share URLs must point to the final address, not a redirect.
+export const SITE_URL = "https://www.zignnnit.com";
 
 /**
  * hreflang + canonical for a page, e.g. pageAlternates("en", "/contact") →

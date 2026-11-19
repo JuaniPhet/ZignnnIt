@@ -148,7 +148,7 @@ export const projects: Project[] = [
       fr: "Notre propre vitrine digitale — créativité, innovation et technologies de pointe réunies sur une seule plateforme.",
     },
     cover: "/projects/zignnnit/cover.webp",
-    live: { url: "https://zignnnit.com", kind: "site" },
+    live: { url: "https://www.zignnnit.com", kind: "site" },
     tools: ["nextjs", "gsap", "typescript", "tailwind", "vscode"],
   },
   {
