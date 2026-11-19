@@ -39,7 +39,7 @@ export const testimonials: Testimonial[] = [
     placeholder: true,
   },
   {
-    name: "Paul Ekambi",
+    name: "M. Eric",
     role: { en: "CEO, NovaSup", fr: "Directeur général, NovaSup" },
     quote: {
       en: "ZignnnIt gave NovaSup an identity that matches our ambitions. The brand guidelines are clear and our whole team now communicates with one consistent voice.",

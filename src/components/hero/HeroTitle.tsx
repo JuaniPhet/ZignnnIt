@@ -81,10 +81,10 @@ export default function HeroTitle({ start, words, className }: HeroTitleProps) {
       groups.forEach((group, i) => {
         const next = groups[(i + 1) % groups.length];
         loop
-          .to(lettersOf(group), { yPercent: -60, autoAlpha: 0, duration: 0.35, stagger: 0.02, ease: "power2.in" }, "+=2.2")
+          .to(lettersOf(group), { yPercent: -110, autoAlpha: 0, duration: 0.4, stagger: 0.02, ease: "power2.in" }, "+=2.2")
           .fromTo(
             lettersOf(next),
-            { yPercent: 60, autoAlpha: 0 },
+            { yPercent: 110, autoAlpha: 0 },
             { yPercent: 0, autoAlpha: 1, duration: 0.45, stagger: 0.02, ease: "power3.out" },
             "-=0.1"
           );
@@ -119,7 +119,9 @@ export default function HeroTitle({ start, words, className }: HeroTitleProps) {
       <span aria-hidden="true" data-start>
         <Letters text={start} />
       </span>{" "}
-      <span aria-hidden="true" className="inline-grid align-top text-primary">
+      {/* overflow-hidden keeps the leaving/arriving word inside its own line; the padding
+          (cancelled by a negative margin) leaves room for accents and descenders. */}
+      <span aria-hidden="true" className="inline-grid align-top text-primary overflow-hidden py-[0.15em] -my-[0.15em]">
         {words.map((word, i) => (
           <span
             key={word}

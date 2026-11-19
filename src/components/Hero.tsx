@@ -69,7 +69,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="flex min-h-screen items-center relative overflow-hidden pt-24 pb-16 sm:pt-28 lg:pt-20 lg:pb-0 isolate"
+      className="flex min-h-screen items-center relative overflow-hidden pt-28 pb-16 sm:pt-32 lg:pt-36 lg:pb-16 isolate"
       id="home"
     >
       {/* Background gradient blob - top */}
