@@ -19,10 +19,10 @@ gsap.registerPlugin(ScrollTrigger);
 // Texts (title, quote, description, deliverables, timeline) are in messages/{en,fr}.json
 // under services.items.<key>. Adding a service = one entry here + one block per language.
 const services = [
-  { key: "graphicDesign", image: "/img/services/graphic_design.jpg" },
-  { key: "uiUxDesign", image: "/img/services/ui_ux_design.jpg" },
-  { key: "webDevelopment", image: "/img/services/web_dev.jpg" },
-  { key: "mobileDevelopment", image: "/img/services/mobile_dev.jpg" },
+  { key: "graphicDesign", image: "/img/services/graphic-design.webp" },
+  { key: "uiUxDesign", image: "/img/services/ui-ux-design.webp" },
+  { key: "webDevelopment", image: "/img/services/web-development.webp" },
+  { key: "mobileDevelopment", image: "/img/services/mobile-development.webp" },
 ] as const;
 
 export default function Services() {
@@ -110,7 +110,7 @@ export default function Services() {
                       {t(`${item}.description`)}
                     </p>
                     <p className="text-sm font-semibold uppercase tracking-wider text-foreground !mb-2">{t("deliverables")}</p>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 mb-5">
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 mb-5">
                       {(t.raw(`${item}.deliverables`) as string[]).map((deliverable) => (
                         <li key={deliverable} className="flex items-start gap-2 text-base text-muted-foreground">
                           <i className="ri-check-line text-amber-deep dark:text-amber text-lg leading-6" aria-hidden="true"></i>
