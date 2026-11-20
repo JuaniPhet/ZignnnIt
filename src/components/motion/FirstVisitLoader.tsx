@@ -19,7 +19,7 @@ export const headInitScript = `try{if(!matchMedia("(prefers-reduced-motion: redu
 export const isLoaderActive = () => typeof document !== "undefined" && document.documentElement.dataset.loader === "1";
 
 /**
- * First-visit loader (≤ 1.2 s, once per session): "D-zignnn. Code. Enjoy." word by
+ * First-visit loader (≤ 1.2 s, once per session): "Design. Code. Launch." word by
  * word (the brand signature, messages → footer.signature; last word in amber), then the carbon panel
  * slides up to reveal the page.
  * Hidden by CSS unless <html data-loader="1">; a CSS fallback removes it after 2.5 s
