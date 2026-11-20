@@ -29,11 +29,15 @@
  * Brand tokens (single source of truth for the brand palette).
  * Never write a raw amber hex or a Tailwind amber-500/600 class in components:
  * use bg-amber, text-amber-deep, bg-carbon, bg-cream… instead.
- * Accessibility: no small amber text on white (contrast too low) — use amber-deep or carbon.
+ * Accessibility: never small text in amber / amber-deep on a light background
+ * (contrast 2:1 and 3:1). Use text-amber-text: #B45309 (4.7:1) in light mode, and it
+ * switches to the bright amber in dark mode (amber on carbon = 8.6:1), so one class
+ * covers both themes.
  */
 @theme inline {
   --color-amber: var(--amber);
   --color-amber-deep: var(--amber-deep);
+  --color-amber-text: var(--amber-text);
   --color-carbon: var(--carbon);
   --color-cream: var(--cream);
 }
@@ -83,7 +87,8 @@
 @layer base {
   :root {
     --amber: #f59e0b;      /* accents, CTAs, highlighted words */
-    --amber-deep: #d97706; /* hover, amber text on light backgrounds */
+    --amber-deep: #d97706; /* hover of amber buttons */
+    --amber-text: #b45309; /* small amber text on light backgrounds (4.7:1) */
     --carbon: #141414;     /* text, dark backgrounds */
     --cream: #faf7f2;      /* alternate light backgrounds */
 
@@ -111,6 +116,7 @@
   }
 
   .dark {
+    --amber-text: var(--amber);
     --background: 0 0% 7.8%;
     --foreground: 0 0% 98%;
     --card: 0 0% 7.8%;
@@ -156,6 +162,9 @@
     font-weight: 700;
     letter-spacing: -0.025em;
     line-height: 1.05;
+    /* Single-storey g, the one in the logo (Cabinet Grotesk stylistic set 5).
+       Harmless on General Sans (h3 that opt out), which has no ss05. */
+    font-feature-settings: "ss05";
   }
 }
 

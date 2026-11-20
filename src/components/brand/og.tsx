@@ -20,6 +20,8 @@ type OgProps = {
 /**
  * Shared renderer for the branded share images (Open Graph).
  * Satori (next/og) reads TTF/OTF/WOFF only, hence the static OTF copies in src/fonts/og.
+ * Satori also ignores font-feature-settings, so the Cabinet Grotesk copy has its cmap
+ * remapped to the single-storey g (the ss05 glyph, as in the logo) by default.
  */
 export async function renderOgImage({ eyebrow, headline, highlight, footer }: OgProps) {
   const cut = highlight ? headline.lastIndexOf(highlight) : -1;
