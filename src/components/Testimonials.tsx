@@ -49,7 +49,7 @@ function Card({ item, hidden }: { item: Testimonial; hidden?: boolean }) {
         <Link
           href={`/projects/${project.slug}`}
           tabIndex={hidden ? -1 : undefined}
-          className="mt-5 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-amber-deep dark:text-amber hover:underline underline-offset-4"
+          className="mt-5 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-amber-text hover:underline underline-offset-4"
         >
           {tp("viewProject")} — {project.title}
           <i className="ri-arrow-right-line" aria-hidden="true"></i>

@@ -308,7 +308,7 @@ export default function ContactContent() {
                     {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     className="group flex h-full flex-col items-center rounded-2xl border border-border/50 bg-secondary/40 p-5 sm:p-6 text-center transition-colors hover:border-primary"
                   >
-                    <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-2xl text-amber-deep dark:text-amber transition-colors group-hover:bg-primary group-hover:text-primary-foreground" aria-hidden="true">
+                    <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-2xl text-amber-text transition-colors group-hover:bg-primary group-hover:text-primary-foreground" aria-hidden="true">
                       <i className={item.icon}></i>
                     </span>
                     <span className="font-semibold text-foreground">{item.title}</span>

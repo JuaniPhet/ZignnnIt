@@ -113,7 +113,7 @@ export default function Services() {
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 mb-5">
                       {(t.raw(`${item}.deliverables`) as string[]).map((deliverable) => (
                         <li key={deliverable} className="flex items-start gap-2 text-base text-muted-foreground">
-                          <i className="ri-check-line text-amber-deep dark:text-amber text-lg leading-6" aria-hidden="true"></i>
+                          <i className="ri-check-line text-amber-text text-lg leading-6" aria-hidden="true"></i>
                           <span>{deliverable}</span>
                         </li>
                       ))}

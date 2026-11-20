@@ -41,7 +41,7 @@ public/team/              Photos de l'équipe
 
 ## 2. Ce qui a changé, étape par étape
 
-1. **Corrections et identité.** Mots coupés dans le titre, menu mobile opaque, contrastes, espacements. Urbanist remplacée par Cabinet Grotesk et General Sans (auto-hébergées). Tokens de couleur `amber`, `amber-deep`, `carbon` et `cream`. Défilé de logos allégé.
+1. **Corrections et identité.** Mots coupés dans le titre, menu mobile opaque, contrastes, espacements. Urbanist remplacée par Cabinet Grotesk et General Sans (auto-hébergées). Tokens de couleur `amber`, `amber-deep`, `amber-text`, `carbon` et `cream`. Nouveau logo (header, footer, favicon, image OG, JSON-LD, loader). Défilé de logos allégé.
 2. **Hero animé.** Illustration SVG inline animée, en clair et en sombre.
 3. **Bilingue EN / FR.** Routes préfixées, sélecteur de langue, nouveau slogan, métadonnées traduites.
 4. **Contenu.** Page About, pages projets sans base de données, formulaire enrichi (site web, moyen de contact préféré, WhatsApp), SEO (sitemap, robots, images de partage, JSON-LD).
@@ -238,4 +238,6 @@ Visiteur → zignnnit.com/contact
 - Compléter les projets existants : `body` (contexte, défi, démarche), `gallery`, `youtubeId`.
 - Déposer les photos `public/team/japhet-seumo.webp` et `public/team/jordan-tchakounte.webp`, et ajouter le LinkedIn de Jordan dans `src/data/team.ts`.
 - Mesurer Lighthouse mobile sur l'aperçu Vercel (objectif : 90 ou plus en Performance et en Accessibilité).
-- Logo : la refonte est prévue. Ses tracés actuels sont dans `Navbar.tsx`, `Footer.tsx` et `components/brand/logo-paths.ts` (images de partage).
+- Logo : fichiers sources dans `docs/logo/`. Les versions positive et négative ont les mêmes tracés, seule la couleur du texte change : ils sont donc stockés une seule fois dans `components/brand/logo-paths.ts`, et `components/brand/Logo.tsx` les dessine en `currentColor` (`text-foreground` dans le header, qui suit le thème ; `text-cream` dans le footer). Favicon, `icon.svg` et `apple-icon.png` sont dans `src/app/` (conventions de fichiers Next.js) ; `public/brand/zignnnit-logo.png` sert au JSON-LD. Pour régénérer les icônes après un changement de logo, repartir du symbole sur un carré carbone arrondi.
+- Couleur `amber-text` (`#B45309`) : petit texte ambre sur fond clair ; elle redevient l'ambre vif en mode sombre, une seule classe suffit.
+- « g » du logo : jeu `ss05` de Cabinet Grotesk, activé sur les titres dans `globals.css`. Les images de partage (Satori) ignorent ce réglage : la copie `src/fonts/og/CabinetGrotesk-Extrabold.otf` a été modifiée pour que « g » utilise ce glyphe par défaut.

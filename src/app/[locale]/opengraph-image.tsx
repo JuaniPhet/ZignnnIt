@@ -8,7 +8,7 @@ import { OG_SIZE, renderOgImage } from "@/components/brand/og";
  * Next.js file convention: applies to every page under /[locale] unless a deeper
  * folder has its own opengraph-image (project pages do).
  */
-export const alt = "ZignnnIt — D-zignnn. Code. Enjoy.";
+export const alt = "ZignnnIt — Design. Code. Launch.";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 

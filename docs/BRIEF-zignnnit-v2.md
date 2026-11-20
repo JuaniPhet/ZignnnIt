@@ -1,6 +1,6 @@
 # Brief — Évolution de zignnnit.com (v2)
 
-> **À lire en premier.** Ce site plaît beaucoup aux personnes qui l'ont testé. Il ne s'agit **pas** de le recréer, mais de l'**améliorer** : corriger les défauts, changer la typographie, ajouter le bilingue, créer la page About, et surtout faire monter l'effet « waouh » avec des animations soignées. Garder la structure, l'esprit, les couleurs et le logo actuels.
+> **À lire en premier.** Ce site plaît beaucoup aux personnes qui l'ont testé. Il ne s'agit **pas** de le recréer, mais de l'**améliorer** : corriger les défauts, changer la typographie, intégrer le nouveau logo, ajouter le bilingue, créer la page About, et surtout faire monter l'effet « waouh » avec des animations soignées. Garder la structure, l'esprit et les couleurs actuels.
 
 ---
 
@@ -9,7 +9,7 @@
 - **Marque :** ZignnnIt, agence créative digitale : design graphique, UI/UX, développement web et mobile.
 - **Cible :** internationale (pas seulement le Cameroun).
 - **Stack détectée :** Next.js (`_next/image`), Tailwind CSS, shadcn/ui, animations (GSAP probable, à confirmer dans le code), mode sombre déjà présent.
-- **Logo :** **ne pas toucher** pour l'instant (une refonte est prévue plus tard, séparément).
+- **Logo :** **nouveau logo validé** (voir §2 bis) : logotype en Cabinet Grotesk ExtraBold avec le g alternatif, et le bloc ambre au-dessus du Z. Il remplace l'ancien logo partout (header, footer, menu mobile, favicon, image OG).
 - **Couleurs :** ambre + noir carbone (voir §3).
 
 Avant de coder : lis l'arborescence, repère les composants (Hero, LogoMarquee, About, Services, Projects, Stats, Footer, Contact, Shop) et propose un plan court avant d'attaquer.
@@ -29,8 +29,8 @@ Avant de coder : lis l'arborescence, repère les composants (Hero, LogoMarquee, 
 | 7 | **Pied de page mobile** : « Crafted with passion by ZignnnIt » se coupe mal sur 2 lignes. | Footer | Empiler le copyright et la signature, centrés, sur mobile. |
 | 8 | **Placeholder du téléphone tronqué** sur mobile (« 690-000-0… »). | Contact | Placeholder plus court, ou sélecteur d'indicatif plus étroit. |
 | 9 | **Mélange de langues** : boutons « Voir plus » en français sur un site en anglais. | Cartes projets | Réglé par l'i18n (§4). |
-| 10 | **Deux ambres différents** : `#F7B700` (logo SVG) vs `#F59E0B` (site). | Global | Garder `#F59E0B` partout (§3). |
-| 11 | **Orthographe de la marque** : alterne entre « ZignnnIt » et « Zignnnit ». | Textes | Utiliser une seule graphie partout : **ZignnnIt** (comme le logo actuel). |
+| 10 | **Deux ambres différents** : `#F7B700` (ancien logo SVG) vs `#F59E0B` (site). | Global | Garder `#F59E0B` partout (§3). Le nouveau logo l'utilise déjà. |
+| 11 | **Orthographe de la marque** : alterne entre « ZignnnIt » et « Zignnnit ». | Textes | Utiliser une seule graphie partout : **ZignnnIt** (comme le logo). |
 
 ---
 
@@ -50,9 +50,25 @@ Avant de coder : lis l'arborescence, repère les composants (Hero, LogoMarquee, 
 
 - Implémentation : télécharger les fichiers `.woff2` depuis Fontshare et les **auto-héberger** avec **`next/font/local`** dans `/src/fonts/` (pas d'appel au CDN de Fontshare en production). Ajouter le fichier de licence ITF, et utiliser `display: 'swap'`.
 - Variables CSS : `--font-display` (Cabinet Grotesk) et `--font-sans` (General Sans), mappées dans Tailwind (`font-display`, `font-sans`).
+- **g alternatif obligatoire sur Cabinet Grotesk** : c'est le g du logo (jeu stylistique `ss05`, un g à une seule boucle). L'activer sur tout ce qui utilise la police des titres :
+  ```css
+  .font-display { font-feature-settings: "ss05"; }
+  ```
+  Vérifier que le fichier `.woff2` auto-hébergé conserve bien cette fonctionnalité (ne pas le sous-ensembler en supprimant les `ss0x`).
 - Cabinet Grotesk seulement pour les titres (≥ 24 px) ; en dessous, General Sans 600.
 - Titres : `letter-spacing` −0,025 em, `line-height` 1,0–1,05.
 - Supprimer **toutes** les références à Urbanist.
+
+---
+
+## 2 bis. Logo
+
+- **Fichiers fournis :** `zignnnit-logo.svg` (positif), `zignnnit-logo-negatif.svg` (fond sombre, mode sombre, footer), `zignnnit-symbole.svg` (symbole seul : Z + bloc ambre).
+- Le logotype est **vectorisé** : toujours utiliser ces fichiers, **ne jamais retaper « ZignnnIt » en texte** à la place du logo (les espacements ont été réglés à la main).
+- **Header :** logo positif ; en mode sombre, version négative. Hauteur conseillée 28–32 px desktop, 24–28 px mobile. Taille minimum : 120 px de large.
+- **Favicon et icône d'app :** symbole crème et ambre sur un carré carbone aux coins arrondis (générer `favicon.ico`, `icon.svg`, `apple-touch-icon.png` 180×180).
+- **Zone de protection :** autour du logo, garder un espace vide égal à la hauteur du bloc ambre.
+- Le bloc ambre est la signature visuelle de la marque : il justifie les clins d'œil de §7 (balayage ambre, transition entre pages).
 
 ---
 
@@ -60,12 +76,16 @@ Avant de coder : lis l'arborescence, repère les composants (Hero, LogoMarquee, 
 
 | Token | Valeur | Usage |
 |---|---|---|
-| `--amber` | `#F59E0B` | Accents, CTA, mots mis en avant |
-| `--amber-deep` | `#D97706` | Survol, texte ambre sur fond clair (meilleur contraste) |
+| `--amber` | `#F59E0B` | Accents, CTA, mots mis en avant, bloc du logo |
+| `--amber-deep` | `#D97706` | Survol des boutons ambre |
+| `--amber-text` | `#B45309` | Petit texte ambre sur fond clair (liens, labels) — contraste 4,7:1 |
 | `--carbon` | `#141414` | Texte, fonds sombres, footer |
 | `--cream` | `#FAF7F2` | Fonds clairs alternatifs (remplace le gris/beige actuel de la section About si besoin) |
 
-Règle d'accessibilité : **jamais de petit texte ambre sur fond blanc** (contraste insuffisant). Texte carbone sur ambre = OK.
+Règles d'accessibilité :
+- **Jamais de petit texte en `--amber` ou `--amber-deep` sur fond clair** (contraste 2:1 et 3:1, insuffisant). Utiliser `--amber-text`.
+- Ambre sur carbone (8,6:1) et carbone sur ambre : OK à toutes les tailles.
+- Dosage indicatif : 60 % crème/blanc, 30 % carbone, 10 % ambre.
 
 ---
 
@@ -82,7 +102,8 @@ Règle d'accessibilité : **jamais de petit texte ambre sur fond blanc** (contra
 
 **Validé :**
 - **h1 :** EN « We craft brands and products that **stand out.** » — FR « Nous créons des marques et des produits qui **se démarquent.** » (le mot en gras en ambre).
-- **Signature** (footer, image OG, loader) : « Design. Code. Zignnn. » (identique en EN et en FR ; s'appuie sur le verbe de marque du CTA « Ready to zignnn your project? »).
+- **Signature** (footer, image OG, loader) : « **Design. Code. Launch.** » — identique en EN et en FR. Elle remplace « D-Zignnn. Code. Enjoy. » et toute autre ancienne signature.
+- Le verbe de marque « zignnn » reste seulement dans le CTA « Ready to zignnn your project? ».
 
 ---
 
@@ -157,7 +178,7 @@ L'ancienne illustration (`/img/vector2@4x-8.png`, PNG d'une banque d'images aux 
 |---|---|
 | Vapeur | Volutes qui montent en continu, légère ondulation |
 | Horloge | Heure réelle du visiteur, trotteuse ambre |
-| Écran — histoire en boucle de 14 s : **« on design, puis on code »** | 1. **Design** : la plume trace le cercle, qui se remplit ; le nuancier pulse ; la fusée flotte. 2. **Décollage** : la fusée part hors de la toile. 3. **Balayage ambre** (clin d'œil au carré du logo) : l'écran bascule sur un **IDE de code**. 4. **Code** : explorateur de fichiers, onglets, lignes de code colorées qui s'écrivent avec un curseur ambre, puis le terminal affiche un build réussi (coche verte). 5. **Retour** : second balayage ambre, toile vierge, la fusée revient, et le cycle recommence. Un reflet balaie l'écran en continu. |
+| Écran — histoire en boucle de 14 s : **« on design, puis on code »** | 1. **Design** : la plume trace le cercle, qui se remplit ; le nuancier pulse ; la fusée flotte. 2. **Décollage** : la fusée part hors de la toile. 3. **Balayage ambre** (clin d'œil au bloc du logo) : l'écran bascule sur un **IDE de code**. 4. **Code** : explorateur de fichiers, onglets, lignes de code colorées qui s'écrivent avec un curseur ambre, puis le terminal affiche un build réussi (coche verte). 5. **Retour** : second balayage ambre, toile vierge, la fusée revient, et le cycle recommence. Un reflet balaie l'écran en continu. |
 | Lampe | S'allume avec un petit grésillement au chargement, halo qui respire, la tête suit la souris |
 | Cactus | Légère oscillation |
 | Ensemble | Parallaxe en profondeur selon la souris |
@@ -165,13 +186,13 @@ L'ancienne illustration (`/img/vector2@4x-8.png`, PNG d'une banque d'images aux 
 ### 7.2 Autres animations
 
 - **Titre du hero :** apparition lettre par lettre conservée (après le correctif P0 n°1), puis le mot ambre qui défile en boucle (EN : stand out → inspire → convert ; FR : se démarquent → inspirent → convertissent).
-- **Transition entre pages :** un bloc ambre (clin d'œil au carré du logo) qui balaie l'écran à chaque navigation.
+- **Transition entre pages :** un bloc ambre (clin d'œil au bloc du logo) qui balaie l'écran à chaque navigation.
 - **Défilement fluide :** Lenis + GSAP ScrollTrigger pour les apparitions au scroll (sections, titres, cartes).
 - **Curseur personnalisé** (desktop uniquement) : point ambre qui grossit sur les éléments cliquables et affiche « View » sur les cartes projets ; **boutons magnétiques** sur les CTA principaux.
 - **Section photo (bureau) :** parallaxe douce au scroll.
 - **Projets (scroll horizontal) :** à garder, avec zoom de l'image au survol et curseur « View ».
 - **Chiffres clés :** compteur animé au scroll (vérifier qu'il existe déjà).
-- **Loader de première visite** (≤ 1,2 s, une seule fois par session) : signature « Design. Code. Zignnn. ».
+- **Loader de première visite** (≤ 1,2 s, une seule fois par session) : le symbole (Z + bloc ambre) puis la signature « Design. Code. Launch. ».
 
 ### 7.3 Garde-fous
 
@@ -257,15 +278,14 @@ La page « Coming soon » n'offre aucune action. Ajouter un champ e-mail « Noti
 
 ## 11. SEO et métadonnées
 
-- Image OG par langue (1200×630), aux couleurs ambre/carbone, avec le slogan.
+- Image OG par langue (1200×630), aux couleurs ambre/carbone, avec le nouveau logo, le slogan et la signature.
 - `metadata` Next.js par page et par langue, `sitemap.xml`, `robots.txt`.
-- Données structurées JSON-LD `Organization` / `ProfessionalService`.
+- Données structurées JSON-LD `Organization` / `ProfessionalService` (avec le nouveau logo en `logo`).
 
 ---
 
 ## 12. Ce qu'il ne faut PAS changer
 
-- Le logo (refonte prévue plus tard, séparément).
 - La structure générale de la home et l'ordre des sections.
 - Le scroll horizontal des projets, le défilé des logos, le mode sombre.
 - L'esprit visuel (clair, ambre, aéré).
@@ -275,8 +295,12 @@ La page « Coming soon » n'offre aucune action. Ajouter un champ e-mail « Noti
 ## 13. Checklist de validation
 
 - [ ] Plus aucun mot coupé dans les titres, à toutes les largeurs (320 → 1920 px).
+- [ ] Nouveau logo intégré partout (header, menu mobile, footer, favicon, image OG), version négative en mode sombre.
+- [ ] g alternatif (`ss05`) actif sur tous les titres en Cabinet Grotesk.
+- [ ] Signature « Design. Code. Launch. » partout ; plus aucune trace de « D-Zignnn. Code. Enjoy. » ni de « Design. Code. Zignnn. ».
 - [ ] Nouvelle illustration intégrée en SVG inline, identique à `demo-hero-zignnnit.html`, visible et animée sur mobile, correcte en mode sombre.
 - [ ] Urbanist entièrement retirée ; Cabinet Grotesk et General Sans auto-hébergées.
+- [ ] Pas de petit texte ambre clair sur fond clair (`--amber-text` à la place).
 - [ ] Pages projets : les 3 types s'affichent correctement ; la vidéo YouTube ne se charge qu'au clic.
 - [ ] Bascule EN/FR fonctionnelle sur toutes les pages, `hreflang` en place.
 - [ ] Page About avec les 2 collaborateurs (photos et LinkedIn modifiables dans `team.ts`).
