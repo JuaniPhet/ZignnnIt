@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { LOGO_SQUARE, LOGO_VIEWBOX, LOGO_WORDMARK_PATHS } from "@/components/brand/logo-paths";
+import { logoSvg } from "@/components/brand/logo-paths";
 
 export const OG_SIZE = { width: 1200, height: 630 };
 
@@ -33,8 +33,8 @@ export async function renderOgImage({ eyebrow, headline, highlight, footer }: Og
     readFile(join(process.cwd(), "src/fonts/og/GeneralSans-Medium.otf")),
   ]);
 
-  // The current logo, as-is: amber square + white wordmark on carbon.
-  const logo = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${LOGO_VIEWBOX}"><path d="${LOGO_SQUARE}" fill="#F7B700"/>${LOGO_WORDMARK_PATHS.map((d) => `<path d="${d}" fill="#FFFFFF"/>`).join("")}</svg>`;
+  // Negative logo (cream wordmark) on the carbon background.
+  const logo = logoSvg("#FAF7F2");
 
   return new ImageResponse(
     (
@@ -51,7 +51,7 @@ export async function renderOgImage({ eyebrow, headline, highlight, footer }: Og
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element -- Satori renders <img> only */}
-        <img src={`data:image/svg+xml;utf8,${encodeURIComponent(logo)}`} width={220} height={85} alt="" />
+        <img src={`data:image/svg+xml;utf8,${encodeURIComponent(logo)}`} width={240} height={72} alt="" />
         <div style={{ display: "flex", flexDirection: "column" }}>
           {eyebrow && (
             <div style={{ display: "flex", fontFamily: "General Sans", fontSize: 30, color: AMBER, marginBottom: 16 }}>{eyebrow}</div>

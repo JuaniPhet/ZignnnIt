@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
       type: "website",
     },
     twitter: { card: "summary_large_image" },
-    icons: { icon: "/img/ZignnnIt-favicon.svg" },
+    // Icons: src/app/favicon.ico, icon.svg and apple-icon.png (Next.js file conventions).
   };
 }
 
@@ -95,7 +95,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
     "@id": `${SITE_URL}/#organization`,
     name: "ZignnnIt",
     url: `${SITE_URL}/${locale}`,
-    logo: `${SITE_URL}/img/ZignnnIt-favicon.svg`,
+    logo: `${SITE_URL}/brand/zignnnit-logo.png`,
     image: `${SITE_URL}/${locale}/opengraph-image`,
     description: t("home.description"),
     slogan: signature,
