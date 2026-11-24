@@ -28,8 +28,8 @@ export const testimonials: Testimonial[] = [
     project: "gaelle-joel",
   },
   {
-    name: "Clara Mensah",
-    role: { en: "Content creator, Pasteefy user", fr: "Créatrice de contenu, utilisatrice de Pasteefy" },
+    name: "Gemmimah Noutat",
+    role: { en: "Content Creator", fr: "Créatrice de contenu" },
     quote: {
       en: "Pasteefy saves me time on every post. I format my text in seconds and it looks exactly right on LinkedIn — I can’t go back.",
       fr: "Pasteefy me fait gagner du temps à chaque publication. Je mets mon texte en forme en quelques secondes et le rendu est parfait sur LinkedIn — je ne peux plus m’en passer.",
