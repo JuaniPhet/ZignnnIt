@@ -217,6 +217,15 @@ html.has-custom-cursor textarea,
 html.has-custom-cursor [contenteditable="true"] {
   cursor: text !important;
 }
+/* Modal dialogs (gallery lightbox) live in the browser's top layer, above the
+   custom cursor whatever its z-index: use the native cursor inside them. */
+html.has-custom-cursor dialog[open],
+html.has-custom-cursor dialog[open] * {
+  cursor: auto !important;
+}
+html.has-custom-cursor dialog[open] button {
+  cursor: pointer !important;
+}
 
 /* Testimonials band: the track contains the list twice and slides by -50%. */
 .zg-marquee {
