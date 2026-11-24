@@ -35,7 +35,6 @@ export const testimonials: Testimonial[] = [
       fr: "Pasteefy me fait gagner du temps à chaque publication. Je mets mon texte en forme en quelques secondes et le rendu est parfait sur LinkedIn — je ne peux plus m’en passer.",
     },
     project: "pasteefy",
-    placeholder: true,
   },
   {
     name: "M. Eric Tchagop",
