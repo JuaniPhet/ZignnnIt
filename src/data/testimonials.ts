@@ -26,27 +26,24 @@ export const testimonials: Testimonial[] = [
       fr: "Nos invités parlent encore de l’invitation. Le site était magnifique, simple à utiliser sur n’importe quel téléphone, et les e-billets ont rendu l’accueil du grand jour très fluide.",
     },
     project: "gaelle-joel",
-    placeholder: true,
   },
   {
-    name: "Clara Mensah",
-    role: { en: "Content creator, Pasteefy user", fr: "Créatrice de contenu, utilisatrice de Pasteefy" },
+    name: "Gemmimah Noutat",
+    role: { en: "Content Creator", fr: "Créatrice de contenu" },
     quote: {
       en: "Pasteefy saves me time on every post. I format my text in seconds and it looks exactly right on LinkedIn — I can’t go back.",
       fr: "Pasteefy me fait gagner du temps à chaque publication. Je mets mon texte en forme en quelques secondes et le rendu est parfait sur LinkedIn — je ne peux plus m’en passer.",
     },
     project: "pasteefy",
-    placeholder: true,
   },
   {
-    name: "M. Eric",
-    role: { en: "CEO, NovaSup", fr: "Directeur général, NovaSup" },
+    name: "M. Eric Tchagop",
+    role: { en: "CEO, Kaylang Group", fr: "CEO de Kaylang Group" },
     quote: {
       en: "ZignnnIt gave NovaSup an identity that matches our ambitions. The brand guidelines are clear and our whole team now communicates with one consistent voice.",
       fr: "ZignnnIt a donné à NovaSup une identité à la hauteur de nos ambitions. La charte est claire et toute notre équipe communique désormais d’une seule voix.",
     },
     project: "novasup",
-    placeholder: true,
   },
 ];
 

@@ -10,6 +10,9 @@ type ProjectGalleryProps = { title: string; images: string[] };
  * Image grid + lightbox.
  * The lightbox is a native <dialog> opened with showModal(): the browser handles
  * the backdrop, Escape to close, focus trapping and inert background for free.
+ * Note: a modal dialog sits in the browser's "top layer", above every z-index, so
+ * the custom cursor can't be drawn over it: globals.css gives the native cursor
+ * back inside open dialogs.
  */
 export default function ProjectGallery({ title, images }: ProjectGalleryProps) {
   const t = useTranslations("projectPage");
@@ -49,6 +52,7 @@ export default function ProjectGallery({ title, images }: ProjectGalleryProps) {
               type="button"
               onClick={() => open(i)}
               aria-label={t("openImage", { index: i + 1, total: images.length })}
+              data-cursor="view"
               className="group relative block w-full aspect-[4/3] overflow-hidden rounded-2xl bg-muted cursor-zoom-in focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring"
             >
               <Image
