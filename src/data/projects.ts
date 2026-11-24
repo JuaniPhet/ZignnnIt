@@ -107,6 +107,9 @@ export const projects: Project[] = [
       ],
     },
     cover: "/projects/pasteefy/cover.webp",
+    gallery: [
+      "/projects/pasteefy/01.webp",
+    ],
     live: { url: "https://pasteefy.zignnnit.com", kind: "app" },
     tools: ["nextjs", "typescript", "vercel", "illustrator", "antigravity"],
   },
@@ -167,6 +170,11 @@ export const projects: Project[] = [
       ],
     },
     cover: "/projects/gaelle-joel/cover.webp",
+    gallery: [
+      "/projects/gaelle-joel/01.webp",
+      "/projects/gaelle-joel/02.webp",
+      "/projects/gaelle-joel/03.webp",
+    ],
     live: { url: "https://gaelle-joel.vercel.app", kind: "site" },
     tools: ["nextjs", "shadcn", "gsap", "framer", "antigravity"],
   },
