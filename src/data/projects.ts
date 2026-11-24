@@ -42,6 +42,11 @@ export type Project = {
   live?: { url: string; kind: "site" | "app" | "prototype" | "post" };
   stores?: { playStore?: string; appStore?: string };
   tools: ToolId[];
+  /**
+   * Hidden from the site (lists, home, sitemap, next-project links) without deleting
+   * it: its page is not generated. Remove the flag to show it again.
+   */
+  hidden?: boolean;
 };
 
 /** Google Drive "view" links open a preview; this form downloads the file directly. */
@@ -49,7 +54,7 @@ const driveDownload = (fileId: string) => `https://drive.google.com/uc?export=do
 
 // Order = display order. The first FEATURED_COUNT appear on the home page.
 // Add a project: add an object here + its images in public/projects/<slug>/.
-export const projects: Project[] = [
+const allProjects: Project[] = [
   {
     slug: "kasastay",
     type: "branding",
@@ -278,6 +283,8 @@ export const projects: Project[] = [
     cover: "/projects/lumax/cover.webp",
     downloadUrl: driveDownload("1qWO4bgiAeg4e2IQuQLAvj-CxLUGkoTez"),
     tools: ["illustrator", "photoshop"],
+    // Hidden for now: the PDF is a catalogue of one-off visuals, not a brand identity.
+    hidden: true,
   },
   {
     slug: "bmi-calculator",
@@ -309,6 +316,9 @@ export const projects: Project[] = [
     tools: ["flutter", "vscode"],
   },
 ];
+
+/** Visible projects: everything on the site reads this list, never allProjects. */
+export const projects = allProjects.filter((p) => !p.hidden);
 
 export const FEATURED_COUNT = 4;
 export const featuredProjects = projects.slice(0, FEATURED_COUNT);
